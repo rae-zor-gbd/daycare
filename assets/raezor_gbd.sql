@@ -5,74 +5,7 @@ SET FOREIGN_KEY_CHECKS=0;
 SET NAMES utf8;
 SET character_set_client=utf8mb4;
 
-CREATE TABLE daycareOwners (
-  ownerID INT(11) NOT NULL AUTO_INCREMENT,
-  primaryLastName VARCHAR(255) NOT NULL,
-  primaryFirstName VARCHAR(255) NOT NULL,
-  secondaryFirstName VARCHAR(255),
-  primaryEmail VARCHAR(255),
-  secondaryEmail VARCHAR(255),
-  PRIMARY KEY (ownerID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE daycareDogs (
-  dogID INT(11) NOT NULL AUTO_INCREMENT,
-  dogName VARCHAR(255) NOT NULL,
-  ownerID INT(11) NOT NULL,
-  daycareContract ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
-  bordetella DATE NOT NULL,
-  distemper DATE NOT NULL,
-  fecal DATE,
-  flu DATE,
-  fluWaiver ENUM('Signed', 'Not Signed') NOT NULL DEFAULT 'Not Signed',
-  heartworm DATE,
-  rabies DATE NOT NULL,
-  PRIMARY KEY (dogID),
-  FOREIGN KEY (ownerID) REFERENCES daycareOwners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE daycarePackages (
-  packageID INT(11) NOT NULL AUTO_INCREMENT,
-  packageTitle VARCHAR(50) NOT NULL,
-  totalDays INT(11) NOT NULL,
-  duration INT(11) NOT NULL,
-  informOwnerAt INT(11) NOT NULL,
-  PRIMARY KEY (packageID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE daycareOwners_daycarePackages (
-  ownerPackageID INT(11) NOT NULL AUTO_INCREMENT,
-  ownerID INT(11) NOT NULL,
-  packageID INT(11) NOT NULL,
-  status ENUM('Active', 'Not Started', 'Expired', 'Out of Days') NOT NULL DEFAULT 'Active',
-  daysLeft INT(11),
-  startDate DATE,
-  expirationDate DATE,
-  notes TEXT,
-  PRIMARY KEY (ownerPackageID),
-  FOREIGN KEY (ownerID) REFERENCES daycareOwners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (packageID) REFERENCES daycarePackages(packageID) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE grooming (
-  groomingID INT(11) NOT NULL AUTO_INCREMENT,
-  ownerName VARCHAR(255) NOT NULL,
-  dogName VARCHAR(255) NOT NULL,
-  appointmentDate DATE NOT NULL,
-  vaccineCheck ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
-  notes TEXT,
-  PRIMARY KEY (groomingID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE whiteboardGrooming (
-  whiteboardGroomingID INT(11) NOT NULL AUTO_INCREMENT,
-  ownerName VARCHAR(255) NOT NULL,
-  dogName VARCHAR(255) NOT NULL,
-  appointmentDate DATE NOT NULL,
-  PRIMARY KEY (whiteboardGroomingID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE boarding (
+CREATE TABLE boarding_check (
   boardingID INT(11) NOT NULL AUTO_INCREMENT,
   ownerName VARCHAR(255) NOT NULL,
   dogName VARCHAR(255) NOT NULL,
@@ -91,7 +24,7 @@ CREATE TABLE boarding (
   PRIMARY KEY (boardingID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE whiteboardBoarding (
+CREATE TABLE boarding_whiteboard (
   whiteboardBoardingID INT(11) NOT NULL AUTO_INCREMENT,
   ownerName VARCHAR(255) NOT NULL,
   dogName VARCHAR(255) NOT NULL,
@@ -103,12 +36,80 @@ CREATE TABLE whiteboardBoarding (
   PRIMARY KEY (whiteboardBoardingID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE followUps (
+CREATE TABLE daycare_owners (
+  ownerID INT(11) NOT NULL AUTO_INCREMENT,
+  lastName VARCHAR(255) NOT NULL,
+  primaryOwner VARCHAR(255) NOT NULL,
+  secondaryOwner VARCHAR(255),
+  primaryEmail VARCHAR(255),
+  secondaryEmail VARCHAR(255),
+  tertiaryEmail VARCHAR(255),
+  PRIMARY KEY (ownerID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE daycare_dogs (
+  dogID INT(11) NOT NULL AUTO_INCREMENT,
+  dogName VARCHAR(255) NOT NULL,
+  ownerID INT(11) NOT NULL,
+  daycareContract ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
+  bordetella DATE NOT NULL,
+  distemper DATE NOT NULL,
+  fecal DATE,
+  flu DATE,
+  fluWaiver ENUM('Signed', 'Not Signed') NOT NULL DEFAULT 'Not Signed',
+  heartworm DATE,
+  rabies DATE NOT NULL,
+  PRIMARY KEY (dogID),
+  FOREIGN KEY (ownerID) REFERENCES daycare_owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE daycare_packages (
+  packageID INT(11) NOT NULL AUTO_INCREMENT,
+  packageTitle VARCHAR(50) NOT NULL,
+  totalDays INT(11) NOT NULL,
+  duration INT(11) NOT NULL,
+  informOwnerAt INT(11) NOT NULL,
+  PRIMARY KEY (packageID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE daycare_owners_packages (
+  ownerPackageID INT(11) NOT NULL AUTO_INCREMENT,
+  ownerID INT(11) NOT NULL,
+  packageID INT(11) NOT NULL,
+  status ENUM('Active', 'Not Started', 'Expired', 'Out of Days') NOT NULL DEFAULT 'Not Started',
+  daysLeft INT(11),
+  startDate DATE,
+  expirationDate DATE,
+  notes TEXT,
+  PRIMARY KEY (ownerPackageID),
+  FOREIGN KEY (ownerID) REFERENCES daycare_owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (packageID) REFERENCES daycare_packages(packageID) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE follow_ups (
   followUpID INT(11) NOT NULL AUTO_INCREMENT,
   service ENUM('Boarding', 'Daycare', 'Grooming', 'Training') NOT NULL,
   requirementsDueIn INT(11) NOT NULL,
   followUpDueIn INT(11) NOT NULL,
   PRIMARY KEY (followUpID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE grooming_check (
+  groomingID INT(11) NOT NULL AUTO_INCREMENT,
+  ownerName VARCHAR(255) NOT NULL,
+  dogName VARCHAR(255) NOT NULL,
+  appointmentDate DATE NOT NULL,
+  vaccineCheck ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
+  notes TEXT,
+  PRIMARY KEY (groomingID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE grooming_whiteboard (
+  whiteboardGroomingID INT(11) NOT NULL AUTO_INCREMENT,
+  ownerName VARCHAR(255) NOT NULL,
+  dogName VARCHAR(255) NOT NULL,
+  appointmentDate DATE NOT NULL,
+  PRIMARY KEY (whiteboardGroomingID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS=1;
