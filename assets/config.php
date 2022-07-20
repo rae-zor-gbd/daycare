@@ -2,7 +2,7 @@
 $servername='localhost';
 $server_username='root';
 $server_password='root';
-$dbname='raezor_gbd';
+$dbname='daycare';
 $conn=new mysqli($servername, $server_username, $server_password, $dbname);
 $conn->set_charset('utf8mb4');
 if ($conn->connect_error) {
