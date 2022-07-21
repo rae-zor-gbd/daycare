@@ -17,8 +17,8 @@ CREATE TABLE owners (
   ownerID INT(11) NOT NULL AUTO_INCREMENT,
   lastName VARCHAR(255) NOT NULL,
   primaryOwner VARCHAR(255) NOT NULL,
-  secondaryOwner VARCHAR(255),
-  notes TEXT,
+  secondaryOwner VARCHAR(255) DEFAULT NULL,
+  notes TEXT DEFAULT NULL,
   PRIMARY KEY (ownerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -35,14 +35,7 @@ CREATE TABLE dogs (
   dogName VARCHAR(255) NOT NULL,
   ownerID INT(11) NOT NULL,
   daycareContract ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
-  bordetella DATE,
-  distemper DATE,
-  fecal DATE,
-  flu DATE,
-  fluWaiver ENUM('Signed', 'Not Signed') NOT NULL DEFAULT 'Not Signed',
-  heartworm DATE,
-  rabies DATE,
-  notes TEXT,
+  notes TEXT DEFAULT NULL,
   PRIMARY KEY (dogID),
   FOREIGN KEY (ownerID) REFERENCES owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -52,8 +45,8 @@ CREATE TABLE packages (
   packageTitle VARCHAR(50) NOT NULL,
   totalDays INT(11) NOT NULL,
   duration INT(11) NOT NULL,
-  informOwnerAt INT(11) NOT NULL,
-  expirationWarningAt INT(11) NOT NULL,
+  daysLeftWarning INT(11) NOT NULL,
+  expirationWarning INT(11) NOT NULL,
   PRIMARY KEY (packageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -62,13 +55,32 @@ CREATE TABLE owners_packages (
   ownerID INT(11) NOT NULL,
   packageID INT(11) NOT NULL,
   status ENUM('Active', 'Not Started', 'Expired', 'Out of Days') NOT NULL DEFAULT 'Not Started',
-  daysLeft INT(11),
-  startDate DATE,
-  expirationDate DATE,
-  notes TEXT,
+  daysLeft INT(11) DEFAULT NULL,
+  startDate DATE DEFAULT NULL,
+  expirationDate DATE DEFAULT NULL,
+  informedDays DATETIME DEFAULT NULL,
+  informedExpiration DATETIME DEFAULT NULL,
+  notes TEXT DEFAULT NULL,
   PRIMARY KEY (ownerPackageID),
   FOREIGN KEY (ownerID) REFERENCES owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (packageID) REFERENCES packages(packageID) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE vaccines (
+  vaccineID INT(11) NOT NULL AUTO_INCREMENT,
+  vaccineTitle VARCHAR(255) NOT NULL,
+  requirementStatus ENUM('Required', 'Not Required') NOT NULL DEFAULT 'Required',
+  PRIMARY KEY (vaccineID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE dogs_vaccines (
+  dogID INT(11) NOT NULL,
+  vaccineID INT(11) NOT NULL,
+  dueDate DATE NOT NULL,
+  informedVaccines DATETIME DEFAULT NULL,
+  PRIMARY KEY (dogID, vaccineID),
+  FOREIGN KEY (dogID) REFERENCES dogs(dogID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (vaccineID) REFERENCES vaccines(vaccineID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS=1;
