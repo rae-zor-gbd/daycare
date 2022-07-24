@@ -10,6 +10,12 @@
   font-weight:700;
   src:url(/fonts/HelveticaNeue-Bold.woff2) format('woff2');
 }
+@font-face {
+  font-family:'Icons';
+  font-style:normal;
+  font-weight:400;
+  src:url(/fonts/Icons-Regular.woff) format('woff');
+}
 :root {
   --base-color:240;
   --color-01:hsl(var(--base-color), 7%, 20%);
@@ -24,6 +30,92 @@
   --font-size:17px;
   --font-weight-bold:700;
   --font-weight-regular:400;
+  --icon-archive:'\e900';
+  --icon-arrow-bottom-left:'\e901';
+  --icon-arrow-bottom-right:'\e902';
+  --icon-arrow-down:'\e903';
+  --icon-arrow-left:'\e904';
+  --icon-arrow-right:'\e905';
+  --icon-arrow-up:'\e906';
+  --icon-at:'\e907';
+  --icon-bars:'\e908';
+  --icon-bell:'\e909';
+  --icon-bone:'\e90a';
+  --icon-box:'\e90b';
+  --icon-bullhorn:'\e90c';
+  --icon-calendar:'\e910';
+  --icon-calendar-day:'\e90d';
+  --icon-calendar-days:'\e90e';
+  --icon-calendar-plus:'\e90f';
+  --icon-check:'\e911';
+  --icon-chevron-down-01:'\e912';
+  --icon-chevron-down-02:'\e913';
+  --icon-chevron-down-03:'\e914';
+  --icon-chevron-left-01:'\e915';
+  --icon-chevron-left-02:'\e916';
+  --icon-chevron-right-01:'\e917';
+  --icon-chevron-right-02:'\e918';
+  --icon-chevron-up-01:'\e919';
+  --icon-chevron-up-02:'\e91a';
+  --icon-circle-arrow-down:'\e91b';
+  --icon-circle-arrow-up:'\e91c';
+  --icon-circle-check:'\e91d';
+  --icon-circle-minus:'\e91e';
+  --icon-circle-plus:'\e91f';
+  --icon-circle-user:'\e920';
+  --icon-circle-warning:'\e921';
+  --icon-circle-x:'\e922';
+  --icon-clipboard:'\e924';
+  --icon-clipboard-list:'\e923';
+  --icon-clock:'\e925';
+  --icon-comment:'\e926';
+  --icon-contract:'\e931';
+  --icon-dog:'\e927';
+  --icon-dollar:'\e928';
+  --icon-edit:'\e929';
+  --icon-envelope:'\e92a';
+  --icon-expand-01:'\e92b';
+  --icon-expand-02:'\e92c';
+  --icon-expand-03:'\e92d';
+  --icon-expand-04:'\e92e';
+  --icon-expand-05:'\e92f';
+  --icon-eye:'\e930';
+  --icon-folder:'\e933';
+  --icon-folders:'\e934';
+  --icon-font-family:'Icons';
+  --icon-history:'\e935';
+  --icon-info:'\e936';
+  --icon-inventory:'\e937';
+  --icon-list-01:'\e93a';
+  --icon-list-02:'\e939';
+  --icon-list-03:'\e938';
+  --icon-manage:'\e93b';
+  --icon-meds-01:'\e944';
+  --icon-meds-02:'\e947';
+  --icon-minus:'\e93c';
+  --icon-money-01:'\e93d';
+  --icon-money-02:'\e93e';
+  --icon-money-03:'\e93f';
+  --icon-new:'\e940';
+  --icon-open:'\e941';
+  --icon-paperclip:'\e942';
+  --icon-paw:'\e943';
+  --icon-play:'\e945';
+  --icon-plus:'\e946';
+  --icon-print:'\e948';
+  --icon-save:'\e932';
+  --icon-scissors:'\e949';
+  --icon-search:'\e94a';
+  --icon-select-all:'\e94b';
+  --icon-select-none:'\e94c';
+  --icon-separator:'\e94e';
+  --icon-signature:'\e94d';
+  --icon-thumbtack:'\e950';
+  --icon-trash:'\e951';
+  --icon-user:'\e952';
+  --icon-vaccine:'\e94f';
+  --icon-warning:'\e953';
+  --icon-x:'\e954';
   --spacer:30px;
 }
 body {
@@ -34,6 +126,7 @@ body {
   font-size:var(--font-size);
   font-variant-numeric:tabular-nums;
   font-weight:var(--font-weight-regular);
+  -webkit-font-smoothing:antialiased;
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight:var(--font-weight-bold);
@@ -54,6 +147,9 @@ button {
   border:0;
   position:relative;
 }
+button:first-of-type {
+  padding-left:0;
+}
 button, .nav-link {
   transform:translateZ(0);
   transition-duration:.3s;
@@ -67,6 +163,31 @@ input[type=checkbox]:hover {
 }
 textarea {
   resize:none;
+}
+.button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-notes::before, .button-package::before {
+  font-family:var(--icon-font-family);
+  font-weight:var(--font-weight-regular);
+}
+.button-email::before {
+  content:var(--icon-at);
+}
+.button-decrease::before {
+  content:var(--icon-arrow-down);
+}
+.button-delete::before {
+  content:var(--icon-trash);
+}
+.button-dog::before {
+  content:var(--icon-dog);
+}
+.button-edit::before {
+  content:var(--icon-edit);
+}
+.button-notes::before {
+  content:var(--icon-comment);
+}
+.button-package::before {
+  content:var(--icon-calendar-days);
 }
 .container, .container-fluid {
   padding:0;
@@ -129,7 +250,7 @@ textarea {
   display:table-cell;
   vertical-align:middle;
 }
-nav, .panel-group .panel {
+nav, .panel-group .panel-owner {
   box-shadow:rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
 nav {
@@ -146,8 +267,17 @@ nav {
   padding-left:25px;
   padding-right:25px;
 }
-.nav-links, .panel-body {
-  border-top:1.5px solid var(--color-06);
+.nav-link#contracts::before {
+  content:var(--icon-contract);
+}
+.nav-link#packages::before {
+  content:var(--icon-calendar-days);
+}
+.nav-link#reminders::before {
+  content:var(--icon-bullhorn);
+}
+.nav-links, .panel-body, .panel-footer {
+  border-top:1.5px solid var(--color-06)!important;
 }
 .nav-links a .nav-link::before {
   color:var(--color-01);
@@ -187,16 +317,118 @@ nav {
   text-align:center;
   text-transform:uppercase;
 }
-.panel-body {
-  padding:calc(var(--spacer)/1.5) var(--spacer);
+.collapsed .panel-heading .panel-arrow {
+  top:-1px;
+  transform:rotate(0deg);
 }
-.panel-group .panel {
-  border:0;
+.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before {
+  display:inline-block;
+  font-family:var(--icon-font-family);
+  font-weight:var(--font-weight-regular);
+  text-align:left;
 }
-.panel-group .panel+.panel {
+.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before {
+  position:relative;
+  top:1px;
+}
+.dog-daycare-contract-status .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before {
+  width:calc(var(--spacer)/1.5);
+}
+.dog-daycare-contract-status .label::before {
+  content:var(--icon-contract);
+}
+.dog-heading::before, .owner-heading::before, .package-heading::before {
+  width:var(--spacer);
+}
+.dog-heading::before {
+  content:var(--icon-dog);
+}
+.dog-notes .label, .package-notes .label {
+  padding-left:calc(.6em + (var(--spacer)/1.5));
+}
+.dog-notes .label::before, .package-notes .label::before {
+  content:var(--icon-thumbtack);
+  right:calc(var(--spacer)/1.5);
+  width:0;
+}
+.dog-notes .label, .package-notes .label {
+  display:inline-table;
+  line-height:1.15;
+  text-align:left;
+  white-space:unset;
+}
+.dog-notes, .dog-vaccine-status, .package-expiration-date, .package-notes {
+  margin-top:5px;
+}
+.dog-vaccine-status .label::before {
+  content:var(--icon-vaccine);
+}
+.owner-heading::before {
+  content:var(--icon-user);
+}
+.package-days-left .label::before {
+  content:var(--icon-calendar-day);
+}
+.package-expiration-date .label::before {
+  content:var(--icon-clock);
+}
+.package-heading::before {
+  content:var(--icon-calendar-days);
+}
+.package-status {
+  float:right;
+  font-size:75%;
+  position:relative;
+  text-transform:uppercase;
+  top:5px;
+}
+.panel-arrow {
+  float:right;
+  position:relative;
+}
+.panel-arrow::before {
+  color:var(--color-03);
+  content:var(--icon-chevron-down-01);
+  font-family:var(--icon-font-family);
+  font-size:10px;
+}
+.panel-body:empty {
+  display:none;
+}
+.panel-collapse>.panel-body>.panel>.panel-body {
+  flex:1 1 auto;
+}
+.panel-collapse>.panel-body {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:left;
+}
+.panel-footer {
+  background-color:var(--color-08);
+}
+.panel-group .panel-owner+.panel-owner {
   margin-top:calc(var(--spacer)/2);
 }
-.panel-heading {
+.panel-group .panel-owner {
+  border:0;
+}
+.panel-heading .panel-arrow {
+  top:1px;
+  transform:rotate(180deg);
+}
+.panel-owner .panel-body .panel:not(:nth-of-type(4n-3)) {
+  margin-left:calc(var(--spacer)/2);
+}
+.panel-owner .panel-body .panel {
+  display:flex;
+  flex-direction:column;
+  margin-top:0;
+  width:calc((100%/3) - 10px);
+}
+.panel-owner>a>.panel-heading {
+  padding:calc(var(--spacer)/1.5) var(--spacer);
+}
+.panel-owner>.panel-collapse>.panel-body, .panel-owner>.panel-collapse>.panel-footer {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
 .panel-owner {

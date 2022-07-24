@@ -8,9 +8,8 @@
     <div class='nav-links'>
       <a href='/'>
         <div class='nav-link' id='packages'>Packages</div>
-        <div class='nav-link' id='reports'>Package Reminders</div>
-        <div class='nav-link' id='vaccines'>Vaccine Reminders</div>
-        <div class='nav-link' id='reports'>Daycare Contract Reminders</div>
+        <div class='nav-link' id='reminders'>Reminders</div>
+        <div class='nav-link' id='contracts'>Contracts</div>
       </a>
     </div>
   </div>
