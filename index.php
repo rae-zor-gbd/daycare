@@ -14,6 +14,18 @@ $result_owners=$conn->query($sql_owners);
   <title>Daycare</title>
   <?php include 'assets/header.php'; ?>
   <script type='text/javascript'>
+  function loadPackageOwners(search) {
+    $.ajax({
+      url:'assets/load-package-owners.php',
+      type:'POST',
+      cache:false,
+      data:{search:search},
+      success:function(response){
+        $('#panel-owners').empty();
+        $('#panel-owners').append(response);
+      }
+    });
+  }
   $(document).ready(function(){
     $('#packages').addClass('active');
   });
@@ -49,7 +61,7 @@ $result_owners=$conn->query($sql_owners);
         $result_packages=$conn->query($sql_packages);
         while ($row_packages=$result_packages->fetch_assoc()) {
           echo "<div class='panel panel-";
-          if ($row_packages['status']==='Expired' OR $row_packages['status']==='Out of Days' OR (isset($row_packages['expirationDate']) AND $row_packages['expirationDate']!='' AND strtotime($row_packages['expirationDate'])<=strtotime(today)) OR (isset($row_packages['daysLeft']) AND $row_packages['daysLeft']!='' AND $row_packages['daysLeft']==0)) {
+          if ($row_packages['status']==='Expired' OR $row_packages['status']==='Out of Days' OR (isset($row_packages['expirationDate']) AND $row_packages['expirationDate']!='' AND strtotime($row_packages['expirationDate'])<=strtotime(date('Y-m-d'))) OR (isset($row_packages['daysLeft']) AND $row_packages['daysLeft']!='' AND $row_packages['daysLeft']==0)) {
             echo "danger";
           } elseif ((isset($row_packages['expirationDate']) AND $row_packages['expirationDate']!='' AND $row_packages['expirationDate']<=$row_packages['expirationWarning']) OR (isset($row_packages['daysLeft']) AND $row_packages['daysLeft']!='' AND $row_packages['daysLeft']<=$row_packages['daysLeftWarning'])) {
             echo "warning";
@@ -81,17 +93,17 @@ $result_owners=$conn->query($sql_owners);
           if (isset($row_packages['expirationDate']) AND $row_packages['expirationDate']!=='') {
             echo "<div class='package-expiration-date'>
             <span class='label label-";
-            if (strtotime($row_packages['expirationDate'])<strtotime(today)) {
+            if (strtotime($row_packages['expirationDate'])<strtotime(date('Y-m-d'))) {
               echo "danger";
-            } elseif (strtotime(today)>=strtotime($row_packages['expirationWarning'])) {
+            } elseif (strtotime(date('Y-m-d'))>=strtotime($row_packages['expirationWarning'])) {
               echo "warning";
             } else {
               echo "success";
             }
             echo "'>Expire";
-            if (strtotime($row_packages['expirationDate'])>=strtotime(today)) {
+            if (strtotime($row_packages['expirationDate'])>=strtotime(date('Y-m-d'))) {
               echo "s ";
-            } elseif (strtotime($row_packages['expirationDate'])<strtotime(today)) {
+            } elseif (strtotime($row_packages['expirationDate'])<strtotime(date('Y-m-d'))) {
               echo "d ";
             }
             echo date('D, M j, Y', strtotime($row_packages['expirationDate'])) . "</span>
@@ -163,9 +175,9 @@ $result_owners=$conn->query($sql_owners);
             while ($row_vaccines=$result_vaccines->fetch_assoc()) {
               echo "<div class='dog-vaccine-status'>
               <span class='label label-";
-              if (strtotime($row_vaccines['dueDate'])<strtotime(today)) {
+              if (strtotime($row_vaccines['dueDate'])<strtotime(date('Y-m-d'))) {
                 echo "danger";
-              } elseif (strtotime($row_vaccines['dueDate'])>=strtotime(today)) {
+              } elseif (strtotime($row_vaccines['dueDate'])>=strtotime(date('Y-m-d'))) {
                 echo "warning";
               }
               echo "'>" . $row_vaccines['vaccineTitle'] . " due " . date('D, M j, Y', strtotime($row_vaccines['dueDate'])) . "</span>
