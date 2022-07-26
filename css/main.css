@@ -147,7 +147,7 @@ button {
   border:0;
   position:relative;
 }
-button:first-of-type {
+button:first-of-type:not(.load-more) {
   padding-left:0;
 }
 button, .nav-link {
@@ -163,6 +163,11 @@ input[type=checkbox]:hover {
 }
 textarea {
   resize:none;
+}
+.btn {
+  transform:translateZ(0);
+  transition-duration:.3s;
+  transition-property:background;
 }
 .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-notes::before, .button-package::before {
   font-family:var(--icon-font-family);
@@ -363,6 +368,12 @@ nav {
 .dog-vaccine-status .label::before {
   content:var(--icon-vaccine);
 }
+.load-more, .panel-group .panel-owner+.panel-owner {
+  margin-top:calc(var(--spacer)/2);
+}
+.load-more {
+  width:100%;
+}
 .owner-heading::before {
   content:var(--icon-user);
 }
@@ -405,9 +416,6 @@ nav {
 }
 .panel-footer {
   background-color:var(--color-08);
-}
-.panel-group .panel-owner+.panel-owner {
-  margin-top:calc(var(--spacer)/2);
 }
 .panel-group .panel-owner {
   border:0;

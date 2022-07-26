@@ -8,7 +8,11 @@
     <div class='nav-links'>
       <a href='/'>
         <div class='nav-link' id='packages'>Packages</div>
+      </a>
+      <a href='/'>
         <div class='nav-link' id='reminders'>Reminders</div>
+      </a>
+      <a href='/'>
         <div class='nav-link' id='contracts'>Contracts</div>
       </a>
     </div>
