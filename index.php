@@ -39,10 +39,44 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
 </head>
 <body>
   <?php include 'assets/navbar.php'; ?>
+  <form action='' method='post' spellcheck='false' id='addNewOwnerForm'>
+    <div class='modal fade' id='addNewOwnerModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Add New Owner</h4>
+          </div>
+          <div class='modal-body'>
+            <div class='input-group'>
+              <span class='input-group-addon owner'></span>
+              <input type='text' class='form-control' name='last-name' maxlength='255' id='newLastName' placeholder='Last Name' required>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon owner'></span>
+              <input type='text' class='form-control' name='primary-owner' maxlength='255' id='newPrimaryOwner' placeholder='Primary Owner' required>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon owner'></span>
+              <input type='text' class='form-control' name='secondary-owner' maxlength='255' placeholder='Secondary Owner' id='newSecondaryOwner'>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon email'></span>
+              <input type='email' class='form-control' name='email' maxlength='255' placeholder='Email Address' id='newEmail'>
+            </div>
+          </div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='addNewOwner'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <button type='button' class='btn btn-default add-new-owner' data-toggle='modal' data-target='#addNewOwnerModal'>Add New Owner</button>
   <div class='container-fluid'>
     <form action='' spellcheck='false'>
       <div class='form-group'>
-        <input type='text' name='search' class='form-control' placeholder='Search'>
+        <input type='text' name='search' class='form-control search-panel' placeholder='Search'>
       </div>
     </form>
     <div class='panel-group' id='panel-owners'></div>

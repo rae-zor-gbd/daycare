@@ -147,9 +147,6 @@ button {
   border:0;
   position:relative;
 }
-button:first-of-type:not(.load-more) {
-  padding-left:0;
-}
 button, .nav-link {
   transform:translateZ(0);
   transition-duration:.3s;
@@ -202,8 +199,21 @@ textarea {
   margin:calc(var(--spacer)*(2/3)) calc(var(--spacer)*(5/3));
   width:75%;
 }
-.form-control {
-  padding:calc(var(--spacer)/2) var(--spacer);
+.input-group:not(:last-child) {
+  margin-bottom:calc(var(--spacer)/2);
+}
+.input-group-addon.email::before, .input-group-addon.owner::before {
+  display:inline-block;
+  font-family:var(--icon-font-family);
+  font-weight:var(--font-weight-regular);
+  text-align:center;
+  width:var(--spacer);
+}
+.input-group-addon.email::before {
+  content:var(--icon-at);
+}
+.input-group-addon.owner::before {
+  content:var(--icon-user);
 }
 .loading-ring {
   display:inline-block;
@@ -231,6 +241,12 @@ textarea {
 }
 .loading-ring div:nth-child(3) {
   animation-delay: -0.15s;
+}
+.modal-header {
+  text-align:center;
+}
+.search-panel {
+  padding:calc(var(--spacer)/2) var(--spacer);
 }
 @keyframes loading-ring {
   0% {
@@ -304,7 +320,7 @@ nav {
   color:var(--color-03);
   font-weight:var(--font-weight-bold);
   margin:calc(var(--spacer)/1.5) 0;
-  padding:calc(var(--spacer)/2.5) var(--spacer);
+  padding:calc(var(--spacer)/2.5) var(--spacer) calc(var(--spacer)/2);
   text-transform:uppercase;
   -webkit-font-smoothing:antialiased;
 }
@@ -321,6 +337,17 @@ nav {
   margin-bottom:calc(var(--spacer)/1.5);
   text-align:center;
   text-transform:uppercase;
+}
+.add-new-owner {
+  bottom:calc(var(--spacer)*(4/3));
+  left:var(--spacer);
+  position:fixed;
+}
+.add-new-owner::before {
+  content:var(--icon-plus);
+  font-family:var(--icon-font-family);
+  font-weight:var(--font-weight-regular);
+  padding-right:calc(var(--spacer)/3);
 }
 .collapsed .panel-heading .panel-arrow {
   top:-1px;
@@ -416,6 +443,9 @@ nav {
 }
 .panel-footer {
   background-color:var(--color-08);
+}
+.panel-footer button:first-of-type {
+  padding-left:0;
 }
 .panel-group .panel-owner {
   border:0;
