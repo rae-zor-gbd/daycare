@@ -338,6 +338,10 @@ nav {
   text-align:center;
   text-transform:uppercase;
 }
+.nav-logo svg {
+  height:100%;
+  width:80%;
+}
 .add-new-owner {
   bottom:calc(var(--spacer)*(4/3));
   left:var(--spacer);
