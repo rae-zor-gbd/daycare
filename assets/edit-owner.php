@@ -16,8 +16,8 @@ if (isset($_POST['id']) AND isset($_POST['lastName']) AND isset($_POST['primaryO
     $sql_add_primary_email="INSERT INTO emails (ownerID, email) VALUES ('$id', '$primaryEmail')";
     $conn->query($sql_add_primary_email);
   }
-  if (isset($secondaryOwner) AND $secondaryOwner!='') {
-    $sql_add_secondary_email="INSERT INTO emails (ownerID, email) VALUES ('$id', '$secondaryOwner')";
+  if (isset($secondaryEmail) AND $secondaryEmail!='') {
+    $sql_add_secondary_email="INSERT INTO emails (ownerID, email) VALUES ('$id', '$secondaryEmail')";
     $conn->query($sql_add_secondary_email);
   }
   if (isset($tertiaryEmail) AND $tertiaryEmail!='') {

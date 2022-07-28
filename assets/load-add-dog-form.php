@@ -15,19 +15,14 @@ if (isset($_POST['id'])) {
   <option value='Completed'>Completed</option>
   </select>
   </div>";
-  $sql_vaccines="SELECT vaccineID, vaccineTitle, requirementStatus FROM vaccines ORDER BY vaccineTitle";
+  $sql_vaccines="SELECT vaccineID, vaccineTitle FROM vaccines ORDER BY vaccineTitle";
   $result_vaccines=$conn->query($sql_vaccines);
   while ($row_vaccines=$result_vaccines->fetch_assoc()) {
     $vaccineID=$row_vaccines['vaccineID'];
     $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccines['vaccineTitle']);
-    $requirementStatus=mysqli_real_escape_string($conn, $row_vaccines['requirementStatus']);
     echo "<div class='input-group'>
     <span class='input-group-addon vaccine'>$vaccineTitle</span>
-    <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID'";
-    if ($requirementStatus==='Required') {
-      echo " required";
-    }
-    echo ">
+    <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID'>
     </div>";
   }
 }

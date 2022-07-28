@@ -9,7 +9,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <title>Daycare</title>
+  <title>Daycare Packages</title>
   <?php include 'assets/header.php'; ?>
   <script type='text/javascript'>
   function loadPackageOwners(page, search='<?php echo $search; ?>'){
@@ -135,15 +135,15 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     });
     $('#addDog').click(function (e) {
       e.preventDefault();
-      var id=document.getElementById('addDogID').value;
+      var id=document.getElementById('addToOwnerID').value;
       var dogName=document.getElementById('addDogName').value;
       var daycareContract=document.getElementById('addDaycareContract').value;
       <?php
       $sql_all_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineTitle";
       $result_all_vaccines=$conn->query($sql_all_vaccines);
+      $vaccines=array();
       while ($row_all_vaccines=$result_all_vaccines->fetch_assoc()) {
         $vaccineID=$row_all_vaccines['vaccineID'];
-        $vaccines=array();
         array_push($vaccines, 'vaccine' . $vaccineID);
         echo "var vaccine$vaccineID=document.getElementById('addVaccine$vaccineID').value;";
       }
@@ -152,7 +152,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/add-new-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines as $value) { echo ", $value:$value"; }?>},
+        data:{id:id, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
         success:function(response){
           $('#addDogModal').modal('hide');
           $('#addDogModalBody').empty();
