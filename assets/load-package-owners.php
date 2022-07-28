@@ -11,8 +11,8 @@ $previous=$page-1;
 $next=$page+1;
 if (isset($_POST['search']) AND $_POST['search']!=='') {
   $search=mysqli_real_escape_string($conn, $_POST['search']);
-  $sql_total_owners="SELECT COUNT(ownerID) AS totalResults FROM (SELECT o.ownerID, lastName, primaryOwner, secondaryOwner FROM owners o JOIN dogs d USING (ownerID) WHERE dogName LIKE '%$search%' OR lastName LIKE '%$search%' OR primaryOwner LIKE '%$search%' OR secondaryOwner LIKE '%$search%' GROUP BY o.ownerID, lastName, primaryOwner, secondaryOwner) r";
-  $sql_owners="SELECT o.ownerID, lastName, primaryOwner, secondaryOwner FROM owners o JOIN dogs d USING (ownerID) WHERE dogName LIKE '%$search%' OR lastName LIKE '%$search%' OR primaryOwner LIKE '%$search%' OR secondaryOwner LIKE '%$search%' GROUP BY o.ownerID, lastName, primaryOwner, secondaryOwner ORDER BY lastName, primaryOwner LIMIT $page, $limit";
+  $sql_total_owners="SELECT COUNT(ownerID) AS totalResults FROM ((SELECT ownerID, lastName, primaryOwner, secondaryOwner FROM owners WHERE lastName LIKE '%$search%' OR primaryOwner LIKE '%$search%' OR secondaryOwner LIKE '%$search%') UNION (SELECT o.ownerID, lastName, primaryOwner, secondaryOwner FROM owners o JOIN dogs d USING (ownerID) WHERE dogName LIKE '%$search%' OR lastName LIKE '%$search%' OR primaryOwner LIKE '%$search%' OR secondaryOwner LIKE '%$search%' GROUP BY o.ownerID, lastName, primaryOwner, secondaryOwner)) r";
+  $sql_owners="(SELECT ownerID, lastName, primaryOwner, secondaryOwner FROM owners WHERE lastName LIKE '%$search%' OR primaryOwner LIKE '%$search%' OR secondaryOwner LIKE '%$search%') UNION (SELECT o.ownerID, lastName, primaryOwner, secondaryOwner FROM owners o JOIN dogs d USING (ownerID) WHERE dogName LIKE '%$search%' OR lastName LIKE '%$search%' OR primaryOwner LIKE '%$search%' OR secondaryOwner LIKE '%$search%' GROUP BY o.ownerID, lastName, primaryOwner, secondaryOwner) ORDER BY lastName, primaryOwner LIMIT $page, $limit";
 } else {
   $sql_total_owners="SELECT COUNT(ownerID) AS totalResults FROM owners";
   $sql_owners="SELECT ownerID, lastName, primaryOwner, secondaryOwner FROM owners ORDER BY lastName, primaryOwner LIMIT $page, $limit";
@@ -24,13 +24,12 @@ $result_owners=$conn->query($sql_owners);
 if ($result_owners->num_rows>0) {
   while ($row_owners=$result_owners->fetch_assoc()) {
     $page++;
-    $output.="";
     $ownerID=$row_owners['ownerID'];
     $lastName=mysqli_real_escape_string($conn, $row_owners['lastName']);
     $primaryOwner=mysqli_real_escape_string($conn, $row_owners['primaryOwner']);
     $secondaryOwner=mysqli_real_escape_string($conn, $row_owners['secondaryOwner']);
-    echo "<div class='panel panel-default panel-owner'>
-    <a class='collapsed' data-toggle='collapse' data-parent='#panel-owners' data-target='#owner-" . $ownerID . "'>
+    echo "<div class='panel panel-default panel-owner' id='panel-owner-$ownerID'>
+    <a class='collapsed' data-toggle='collapse' data-parent='#panel-owners' data-target='#owner-$ownerID'>
     <div class='panel-heading'>
     <div class='panel-title owner-heading'>
     <strong>" . stripslashes($lastName) . "</strong>, " . stripslashes($primaryOwner);
@@ -41,7 +40,7 @@ if ($result_owners->num_rows>0) {
     </div>
     </div>
     </a>
-    <div id='owner-" . $ownerID . "' class='panel-collapse collapse'>
+    <div id='owner-$ownerID' class='panel-collapse collapse'>
     <div class='panel-body'>";
     $sql_packages="SELECT packageTitle, status, daysLeft, daysLeftWarning, startDate, expirationDate, DATE_SUB(expirationDate, INTERVAL expirationWarning DAY) AS expirationWarning, notes FROM owners_packages op JOIN packages p USING (packageID) WHERE ownerID='$ownerID' ORDER BY FIELD(status, 'Expired', 'Out of Days', 'Active', 'Not Started');";
     $result_packages=$conn->query($sql_packages);
@@ -81,7 +80,7 @@ if ($result_owners->num_rows>0) {
         } else {
           echo "success";
         }
-        echo "'>" . $daysLeft . " day";
+        echo "'>$daysLeft day";
         if ($daysLeft!=1) {
           echo "s";
         }
@@ -202,10 +201,9 @@ if ($result_owners->num_rows>0) {
     }
     echo "</div>
     <div class='panel-footer'>
-    <button type='button' class='button-delete' title='Delete Owner'></button>
-    <button type='button' class='button-edit' title='Edit Owner'></button>
-    <button type='button' class='button-dog' title='Add New Dog'></button>
-    <button type='button' class='button-email' title='View Owner Email Addresses'></button>
+    <button type='button' class='button-delete' id='delete-owner-button' data-toggle='modal' data-target='#deleteOwnerModal' data-id='$ownerID' title='Delete Owner'></button>
+    <button type='button' class='button-edit' id='edit-owner-button' data-toggle='modal' data-target='#editOwnerModal' data-id='$ownerID' title='Edit Owner'></button>
+    <button type='button' class='button-dog' id='add-dog-button' data-toggle='modal' data-target='#addDogModal' data-id='$ownerID' title='Add New Dog'></button>
     <button type='button' class='button-package' title='Add New Package'></button>
     </div>
     </div>
