@@ -9,4 +9,5 @@ if ($conn->connect_error) {
   die('Connection failed: ' . $conn->connect_error);
 }
 date_default_timezone_set('America/New_York');
+$today=strtotime(date('Y-m-d'));
 ?>
