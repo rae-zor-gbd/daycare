@@ -114,13 +114,6 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         }
       });
     });
-    $('.modal').on('hidden.bs.modal', function(){
-      $('#addDogModalBody').empty();
-      $('#deleteDogModalBody').empty();
-      $('#deleteOwnerModalBody').empty();
-      $('#editDogModalBody').empty();
-      $('#editOwnerModalBody').empty();
-    });
     $(document).on('click', '#delete-dog-button', function() {
       var id=$(this).data('id');
       $.ajax({
@@ -282,7 +275,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/edit-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
+        data:{id:id, owner:owner, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
         success:function(response){
           $('#editDogModal').modal('hide');
           $('#editDogModalBody').empty();
@@ -290,6 +283,14 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           $('#dogs-'+owner).append(loadDogs(owner));
         }
       });
+    });
+    $('.modal').on('hidden.bs.modal', function(){
+      $('#addDogModalBody').empty();
+      $('#addDogNotesModalBody').empty();
+      $('#deleteDogModalBody').empty();
+      $('#deleteOwnerModalBody').empty();
+      $('#editDogModalBody').empty();
+      $('#editOwnerModalBody').empty();
     });
   });
   </script>

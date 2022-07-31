@@ -1,10 +1,10 @@
 <?php
 include 'config.php';
-if (isset($_POST['id']) AND isset($_POST['editDogForOwnerID']) AND isset($_POST['editDogName']) AND isset($_POST['editDaycareContract'])) {
+if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['dogName']) AND isset($_POST['daycareContract'])) {
   $dogID=$_POST['id'];
-  $ownerID=$_POST['editDogForOwnerID'];
-  $dogName=mysqli_real_escape_string($conn, $_POST['editDogName']);
-  $daycareContract=mysqli_real_escape_string($conn, $_POST['editDaycareContract']);
+  $ownerID=$_POST['owner'];
+  $dogName=mysqli_real_escape_string($conn, $_POST['dogName']);
+  $daycareContract=mysqli_real_escape_string($conn, $_POST['daycareContract']);
   $sql_edit_dog="UPDATE dogs SET dogName='$dogName', daycareContract='$daycareContract' WHERE dogID='$dogID'";
   $conn->query($sql_edit_dog);
   $sql_remove_vaccines="DELETE FROM dogs_vaccines WHERE dogID='$dogID'";

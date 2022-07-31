@@ -16,7 +16,7 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   </div>
   <div class='input-group'>
   <span class='input-group-addon contract'>Daycare Contract</span>
-  <select class='form-control' id='editDaycareContract' name='editDaycareContract' required>
+  <select class='form-control' name='editDaycareContract' id='editDaycareContract' required>
   <option value='' disabled>Select Status</option>
   <option value='Incomplete'";
   if ($editDaycareContract==='Incomplete') {
