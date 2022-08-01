@@ -2,9 +2,10 @@
 include 'config.php';
 if (isset($_POST['owner']) AND $_POST['owner']!='') {
   $ownerID=$_POST['owner'];
-  $sql_packages="SELECT packageTitle, status, daysLeft, daysLeftWarning, startDate, expirationDate, DATE_SUB(expirationDate, INTERVAL expirationWarning DAY) AS expirationWarning, notes FROM owners_packages op JOIN packages p USING (packageID) WHERE ownerID='$ownerID' ORDER BY FIELD(status, 'Expired', 'Out of Days', 'Active', 'Not Started');";
+  $sql_packages="SELECT ownerPackageID, packageTitle, status, daysLeft, daysLeftWarning, startDate, expirationDate, DATE_SUB(expirationDate, INTERVAL expirationWarning DAY) AS expirationWarning, notes FROM owners_packages op JOIN packages p USING (packageID) WHERE ownerID='$ownerID' ORDER BY FIELD(status, 'Expired', 'Out of Days', 'Active', 'Not Started')";
   $result_packages=$conn->query($sql_packages);
   while ($row_packages=$result_packages->fetch_assoc()) {
+    $packageID=$row_packages['ownerPackageID'];
     $packageTitle=mysqli_real_escape_string($conn, $row_packages['packageTitle']);
     $status=mysqli_real_escape_string($conn, $row_packages['status']);
     if(isset($row_packages['expirationDate']) AND $row_packages['expirationDate']!='') {
@@ -26,8 +27,8 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     } elseif (stripslashes($status)==='Not Started') {
       echo "info";
     }
-    echo "'>
-    <div class='panel-heading package-heading'>" . stripslashes($packageTitle) . "<span class='package-status'>" . stripslashes($status) . "</span></div>
+    echo "' id='panel-package-$packageID'>
+    <div class='panel-heading package-heading'>" . stripslashes($packageTitle) . "<span class='package-status' id='package-status-$packageID'>" . stripslashes($status) . "</span></div>
     <div class='panel-body'>";
     if (isset($daysLeft) AND $daysLeft!=='') {
       echo "<div class='package-days-left'>
@@ -39,9 +40,9 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       } else {
         echo "success";
       }
-      echo "'>$daysLeft day";
+      echo "' id='days-left-label-$packageID'><span id='days-left-count-$packageID'>$daysLeft</span> day";
       if ($daysLeft!=1) {
-        echo "s";
+        echo "<span id='days-left-plural-$packageID'>s</span>";
       }
       echo " left</span>
       </div>";
@@ -72,11 +73,11 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     }
     echo "</div>
     <div class='panel-footer'>
-    <button type='button' class='button-delete' title='Delete Package'></button>
-    <button type='button' class='button-edit' title='Edit Package'></button>
-    <button type='button' class='button-notes' title='Add Note'></button>";
+    <button type='button' class='button-delete' id='delete-package-button' data-toggle='modal' data-target='#deletePackageModal' data-id='$packageID' title='Delete Package'></button>
+    <button type='button' class='button-edit' id='edit-package-button' data-toggle='modal' data-target='#editPackageModal' data-id='$packageID' data-owner='$ownerID' title='Edit Package'></button>
+    <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Note'></button>";
     if (stripslashes($status)==='Active' AND $daysLeft>0) {
-      echo "<button type='button' class='button-decrease' title='Decrease Package Days'></button>";
+      echo "<button type='button' class='button-decrease' id='decrease-package-days-button-$packageID' data-toggle='modal' data-target='#decreasePackageDaysModal' data-id='$packageID' data-days='$daysLeft' data-warning='$daysLeftWarning' title='Decrease Package Days'></button>";
     }
     echo "</div>
     </div>";

@@ -21,7 +21,7 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   </div>
   <div class='input-group'>
   <span class='input-group-addon notes'>Dog Notes</span>
-  <textarea class='form-control' name='dogNotes' id='addDogNotesBox' rows='15'>$editDogNotes</textarea>
+  <textarea class='form-control' name='dogNotes' id='addDogNotesBox' rows='10'>$editDogNotes</textarea>
   </div>";
 }
 ?>

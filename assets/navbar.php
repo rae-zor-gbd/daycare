@@ -43,10 +43,10 @@
       <a href='/'>
         <div class='nav-link' id='packages'>Packages</div>
       </a>
-      <a href='/'>
+      <a href='/reminders'>
         <div class='nav-link' id='reminders'>Reminders</div>
       </a>
-      <a href='/'>
+      <a href='/contracts'>
         <div class='nav-link' id='contracts'>Contracts</div>
       </a>
     </div>

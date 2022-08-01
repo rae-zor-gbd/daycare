@@ -6,6 +6,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteCond %{REQUEST_FILENAME}\.php -f
 
+RewriteRule ^contracts contracts.php [NC,L]
+
+RewriteRule ^reminders reminders.php [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)(\.gz)?$">

@@ -53,7 +53,7 @@ if ($result_owners->num_rows>0) {
     <button type='button' class='button-delete' id='delete-owner-button' data-toggle='modal' data-target='#deleteOwnerModal' data-id='$ownerID' title='Delete Owner'></button>
     <button type='button' class='button-edit' id='edit-owner-button' data-toggle='modal' data-target='#editOwnerModal' data-id='$ownerID' title='Edit Owner'></button>
     <button type='button' class='button-dog' id='add-dog-button' data-toggle='modal' data-target='#addDogModal' data-id='$ownerID' title='Add New Dog'></button>
-    <button type='button' class='button-package' title='Add New Package'></button>
+    <button type='button' class='button-package' id='add-package-button' data-toggle='modal' data-target='#addPackageModal' data-id='$ownerID' title='Add New Package'></button>
     </div>
     </div>
     </div>";

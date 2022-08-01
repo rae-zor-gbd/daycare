@@ -62,6 +62,46 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var pId=$(this).data('id');
       loadOwners(pId);
     });
+    $(document).on('click', '#add-dog-button', function() {
+      var id=$(this).data('id');
+      $.ajax({
+        url:'assets/load-add-dog-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id},
+        success:function(response){
+          $('#addDogModalBody').append(response);
+        }
+      });
+    });
+    $('#addDog').click(function (e) {
+      e.preventDefault();
+      var id=document.getElementById('addToOwnerID').value;
+      var dogName=document.getElementById('addDogName').value;
+      var daycareContract=document.getElementById('addDaycareContract').value;
+      <?php
+      $sql_all_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
+      $result_all_vaccines=$conn->query($sql_all_vaccines);
+      $vaccines=array();
+      while ($row_all_vaccines=$result_all_vaccines->fetch_assoc()) {
+        $vaccineID=$row_all_vaccines['vaccineID'];
+        array_push($vaccines, 'vaccine' . $vaccineID);
+        echo "var vaccine$vaccineID=document.getElementById('addVaccine$vaccineID').value;";
+      }
+      ?>
+      $.ajax({
+        url:'assets/add-new-dog.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
+        success:function(response){
+          $('#addDogModal').modal('hide');
+          $('#addDogModalBody').empty();
+          $('#dogs-'+id).empty();
+          $('#dogs-'+id).append(loadDogs(id));
+        }
+      });
+    });
     $(document).on('click', '#add-dog-notes-button', function() {
       var id=$(this).data('id');
       var owner=$(this).data('owner');
@@ -111,6 +151,97 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           loadOwners();
           $('#addNewOwnerModal').modal('hide');
           document.getElementById('addNewOwnerForm').reset();
+        }
+      });
+    });
+    $(document).on('click', '#add-package-button', function() {
+      var id=$(this).data('id');
+      $.ajax({
+        url:'assets/load-add-package-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id},
+        success:function(response){
+          $('#addPackageModalBody').append(response);
+        }
+      });
+    });
+    $('#addPackage').click(function (e) {
+      e.preventDefault();
+      var ownerID=document.getElementById('addPackageToOwnerID').value;
+      var packageID=document.getElementById('addDaycarePackage').value;
+      var startDate=document.getElementById('addPackageStartDate').value;
+      $.ajax({
+        url:'assets/add-new-package.php',
+        type:'POST',
+        cache:false,
+        data:{ownerID:ownerID, packageID:packageID, startDate:startDate},
+        success:function(response){
+          $('#addPackageModal').modal('hide');
+          $('#addPackageModalBody').empty();
+          $('#packages-'+ownerID).empty();
+          $('#packages-'+ownerID).append(loadPackages(ownerID));
+        }
+      });
+    });
+    $(document).on('click', '#add-package-notes-button', function() {
+      var id=$(this).data('id');
+      var owner=$(this).data('owner');
+      $.ajax({
+        url:'assets/load-add-package-notes-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, owner:owner},
+        success:function(response){
+          $('#addPackageNotesModalBody').append(response);
+        }
+      });
+    });
+    $('#addPackageNotes').click(function (e) {
+      e.preventDefault();
+      var packageID=document.getElementById('addPackageNotesID').value;
+      var ownerID=document.getElementById('addPackageNotesForOwnerID').value;
+      var packageNotes=document.getElementById('addPackageNotesBox').value;
+      $.ajax({
+        url:'assets/add-package-notes.php',
+        type:'POST',
+        cache:false,
+        data:{packageID:packageID, ownerID:ownerID, packageNotes:packageNotes},
+        success:function(response){
+          $('#addPackageNotesModal').modal('hide');
+          $('#addPackageNotesModalBody').empty();
+          $('#packages-'+ownerID).empty();
+          $('#packages-'+ownerID).append(loadPackages(ownerID));
+        }
+      });
+    });
+    $(document).on('click', '.button-decrease', function() {
+      var id=$(this).data('id');
+      var daysLeft=$(this).data('days');
+      var decreaseDays=daysLeft-1;
+      var daysLeftWarning=$(this).data('warning');
+      $.ajax({
+        url:'assets/decrease-package-days.php',
+        type:'POST',
+        cache:false,
+        data:{id:id},
+        success:function(response){
+          $('#days-left-count-'+id).empty();
+          $('#days-left-count-'+id).append(decreaseDays);
+          $('#decrease-package-days-button-'+id).data('days', decreaseDays);
+          if (decreaseDays==0) {
+            $('#decrease-package-days-button-'+id).hide();
+            $('#package-status-'+id).empty();
+            $('#package-status-'+id).append('Out of Days');
+            $('#days-left-label-'+id).removeClass('label-warning').addClass('label-danger');
+            $('#panel-package-'+id).removeClass('panel-warning').addClass('panel-danger');
+          } else if (decreaseDays<=daysLeftWarning) {
+            $('#days-left-label-'+id).removeClass('label-success').addClass('label-warning');
+            $('#panel-package-'+id).removeClass('panel-success').addClass('panel-warning');
+            if (decreaseDays==1) {
+              $('#days-left-plural-'+id).hide();
+            }
+          }
         }
       });
     });
@@ -168,77 +299,30 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         }
       });
     });
-    $(document).on('click', '#edit-owner-button', function() {
+    $(document).on('click', '#delete-package-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-edit-owner-form.php',
+        url:'assets/load-delete-package-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
         success:function(response){
-          $('#editOwnerModalBody').append(response);
+          $('#deletePackageModalBody').append(response);
         }
       });
     });
-    $('#editOwner').click(function (e) {
+    $('#deletePackage').click(function (e) {
       e.preventDefault();
-      var id=document.getElementById('editID').value;
-      var lastName=document.getElementById('editLastName').value;
-      var primaryOwner=document.getElementById('editPrimaryOwner').value;
-      var secondaryOwner=document.getElementById('editSecondaryOwner').value;
-      var primaryEmail=document.getElementById('editPrimaryEmail').value;
-      var secondaryEmail=document.getElementById('editSecondaryEmail').value;
-      var tertiaryEmail=document.getElementById('editTertiaryEmail').value;
+      var id=document.getElementById('deletePackageID').value;
       $.ajax({
-        url:'assets/edit-owner.php',
-        type:'POST',
-        cache:false,
-        data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
-        success:function(response){
-          $('#editOwnerModal').modal('hide');
-          $('#editOwnerModalBody').empty();
-          $('#panel-owners').empty();
-          loadOwners();
-        }
-      });
-    });
-    $(document).on('click', '#add-dog-button', function() {
-      var id=$(this).data('id');
-      $.ajax({
-        url:'assets/load-add-dog-form.php',
+        url:'assets/delete-package.php',
         type:'POST',
         cache:false,
         data:{id:id},
         success:function(response){
-          $('#addDogModalBody').append(response);
-        }
-      });
-    });
-    $('#addDog').click(function (e) {
-      e.preventDefault();
-      var id=document.getElementById('addToOwnerID').value;
-      var dogName=document.getElementById('addDogName').value;
-      var daycareContract=document.getElementById('addDaycareContract').value;
-      <?php
-      $sql_all_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
-      $result_all_vaccines=$conn->query($sql_all_vaccines);
-      $vaccines=array();
-      while ($row_all_vaccines=$result_all_vaccines->fetch_assoc()) {
-        $vaccineID=$row_all_vaccines['vaccineID'];
-        array_push($vaccines, 'vaccine' . $vaccineID);
-        echo "var vaccine$vaccineID=document.getElementById('addVaccine$vaccineID').value;";
-      }
-      ?>
-      $.ajax({
-        url:'assets/add-new-dog.php',
-        type:'POST',
-        cache:false,
-        data:{id:id, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
-        success:function(response){
-          $('#addDogModal').modal('hide');
-          $('#addDogModalBody').empty();
-          $('#dogs-'+id).empty();
-          $('#dogs-'+id).append(loadDogs(id));
+          $('#panel-package-'+id).remove();
+          $('#deletePackageModal').modal('hide');
+          $('#deletePackageModalBody').empty();
         }
       });
     });
@@ -284,13 +368,85 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         }
       });
     });
+    $(document).on('click', '#edit-owner-button', function() {
+      var id=$(this).data('id');
+      $.ajax({
+        url:'assets/load-edit-owner-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id},
+        success:function(response){
+          $('#editOwnerModalBody').append(response);
+        }
+      });
+    });
+    $('#editOwner').click(function (e) {
+      e.preventDefault();
+      var id=document.getElementById('editID').value;
+      var lastName=document.getElementById('editLastName').value;
+      var primaryOwner=document.getElementById('editPrimaryOwner').value;
+      var secondaryOwner=document.getElementById('editSecondaryOwner').value;
+      var primaryEmail=document.getElementById('editPrimaryEmail').value;
+      var secondaryEmail=document.getElementById('editSecondaryEmail').value;
+      var tertiaryEmail=document.getElementById('editTertiaryEmail').value;
+      $.ajax({
+        url:'assets/edit-owner.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
+        success:function(response){
+          $('#editOwnerModal').modal('hide');
+          $('#editOwnerModalBody').empty();
+          $('#panel-owners').empty();
+          loadOwners();
+        }
+      });
+    });
+    $(document).on('click', '#edit-package-button', function() {
+      var id=$(this).data('id');
+      var owner=$(this).data('owner');
+      $.ajax({
+        url:'assets/load-edit-package-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, owner:owner},
+        success:function(response){
+          $('#editPackageModalBody').append(response);
+        }
+      });
+    });
+    $('#editPackage').click(function (e) {
+      e.preventDefault();
+      var id=document.getElementById('editPackageID').value;
+      var owner=document.getElementById('editPackageForOwnerID').value;
+      var status=document.getElementById('editPackageStatus').value;
+      var daysLeft=document.getElementById('editPackageDaysLeft').value;
+      var startDate=document.getElementById('editPackageStartDate').value;
+      var expirationDate=document.getElementById('editPackageExpirationDate').value;
+      $.ajax({
+        url:'assets/edit-package.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, owner:owner, status:status, daysLeft:daysLeft, startDate:startDate, expirationDate:expirationDate},
+        success:function(response){
+          $('#editPackageModal').modal('hide');
+          $('#editPackageModalBody').empty();
+          $('#packages-'+owner).empty();
+          $('#packages-'+owner).append(loadPackages(owner));
+        }
+      });
+    });
     $('.modal').on('hidden.bs.modal', function(){
       $('#addDogModalBody').empty();
       $('#addDogNotesModalBody').empty();
+      $('#addPackageModalBody').empty();
+      $('#addPackageNotesModalBody').empty();
       $('#deleteDogModalBody').empty();
       $('#deleteOwnerModalBody').empty();
+      $('#deletePackageModalBody').empty();
       $('#editDogModalBody').empty();
       $('#editOwnerModalBody').empty();
+      $('#editPackageModalBody').empty();
     });
   });
   </script>
@@ -379,6 +535,38 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
+  <form action='' method='post' spellcheck='false' id='addPackageForm'>
+    <div class='modal fade' id='addPackageModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Add New Package</h4>
+          </div>
+          <div class='modal-body' id='addPackageModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='addPackage'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form action='' method='post' spellcheck='false' id='addPackageNotesForm'>
+    <div class='modal fade' id='addPackageNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Add Package Notes</h4>
+          </div>
+          <div class='modal-body' id='addPackageNotesModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='addPackageNotes'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
   <form action='' method='post' spellcheck='false' id='deleteDogForm'>
     <div class='modal fade' id='deleteDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
@@ -411,6 +599,22 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
+  <form action='' method='post' id='deletePackageForm'>
+    <div class='modal fade' id='deletePackageModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Delete Package</h4>
+          </div>
+          <div class='modal-body' id='deletePackageModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-danger' id='deletePackage'>Delete</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
   <form action='' method='post' spellcheck='false' id='editDogForm'>
     <div class='modal fade' id='editDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
@@ -437,6 +641,22 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           <div class='modal-body' id='editOwnerModalBody'></div>
           <div class='modal-footer'>
             <button type='submit' class='btn btn-primary' id='editOwner'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form action='' method='post' spellcheck='false' id='editPackageForm'>
+    <div class='modal fade' id='editPackageModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Edit Package</h4>
+          </div>
+          <div class='modal-body' id='editPackageModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='editPackage'>Submit</button>
             <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
           </div>
         </div>

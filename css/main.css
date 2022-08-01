@@ -206,20 +206,32 @@ textarea {
   min-width:calc(var(--spacer)*6);
   text-align:left;
 }
-.input-group-addon.contract::before, .input-group-addon.dog::before, .input-group-addon.email::before, .input-group-addon.notes::before, .input-group-addon.owner::before, .input-group-addon.vaccine::before {
+.input-group-addon.clock::before, .input-group-addon.contract::before, .input-group-addon.day::before, .input-group-addon.days::before, .input-group-addon.dog::before, .input-group-addon.email::before, .input-group-addon.info::before, .input-group-addon.notes::before, .input-group-addon.owner::before, .input-group-addon.vaccine::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
   width:var(--spacer);
 }
+.input-group-addon.clock::before {
+  content:var(--icon-clock);
+}
 .input-group-addon.contract::before {
   content:var(--icon-contract);
+}
+.input-group-addon.day::before {
+  content:var(--icon-calendar-day);
+}
+.input-group-addon.days::before {
+  content:var(--icon-calendar-days);
 }
 .input-group-addon.dog::before {
   content:var(--icon-dog);
 }
 .input-group-addon.email::before {
   content:var(--icon-at);
+}
+.input-group-addon.info::before {
+  content:var(--icon-info);
 }
 .input-group-addon.notes::before {
   content:var(--icon-comment);
@@ -438,6 +450,9 @@ nav {
   position:relative;
   text-transform:uppercase;
   top:5px;
+}
+.panel {
+  border-width:2px;
 }
 .panel-arrow {
   float:right;
