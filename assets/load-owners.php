@@ -41,13 +41,13 @@ if ($result_owners->num_rows>0) {
     </div>
     </a>
     <div id='owner-$ownerID' class='panel-collapse collapse'>
-    <div class='panel-body' id='packages-$ownerID'></div>
-    <script type='text/javascript'>
-    loadPackages($ownerID);
-    </script>
     <div class='panel-body' id='dogs-$ownerID'></div>
     <script type='text/javascript'>
     loadDogs($ownerID);
+    </script>
+    <div class='panel-body' id='packages-$ownerID'></div>
+    <script type='text/javascript'>
+    loadPackages($ownerID);
     </script>
     <div class='panel-footer'>
     <button type='button' class='button-delete' id='delete-owner-button' data-toggle='modal' data-target='#deleteOwnerModal' data-id='$ownerID' title='Delete Owner'></button>

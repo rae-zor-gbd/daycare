@@ -77,7 +77,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     <button type='button' class='button-edit' id='edit-package-button' data-toggle='modal' data-target='#editPackageModal' data-id='$packageID' data-owner='$ownerID' title='Edit Package'></button>
     <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Note'></button>";
     if (stripslashes($status)==='Active' AND $daysLeft>0) {
-      echo "<button type='button' class='button-decrease' id='decrease-package-days-button-$packageID' data-toggle='modal' data-target='#decreasePackageDaysModal' data-id='$packageID' data-days='$daysLeft' data-warning='$daysLeftWarning' title='Decrease Package Days'></button>";
+      echo "<button type='button' class='button-decrease' id='decrease-package-days-button-$packageID' data-id='$packageID' data-days='$daysLeft' data-warning='$daysLeftWarning' title='Decrease Package Days'></button>";
     }
     echo "</div>
     </div>";

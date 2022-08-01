@@ -166,9 +166,12 @@ textarea {
   transition-duration:.3s;
   transition-property:background;
 }
-.button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-notes::before, .button-package::before {
+.button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-notes::before, .button-package::before {
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
+}
+.button-complete::before {
+  content:var(--icon-circle-check);
 }
 .button-email::before {
   content:var(--icon-at);
@@ -384,6 +387,22 @@ nav {
   top:-1px;
   transform:rotate(0deg);
 }
+.contracts-container, .panel-collapse>.panel-body {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:left;
+}
+.contracts-container .panel, .panel-owner .panel-body .panel {
+  display:flex;
+  flex-direction:column;
+  margin-top:0;
+}
+.contracts-container .panel:not(:nth-of-type(4n-3)), .panel-owner .panel-body .panel:not(:nth-of-type(4n-3)) {
+  margin-left:calc(var(--spacer)/2);
+}
+.contracts-container .panel {
+  width:calc((100%/4) - 12px);
+}
 .dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before {
   display:inline-block;
   font-family:var(--icon-font-family);
@@ -470,11 +489,6 @@ nav {
 .panel-collapse>.panel-body>.panel>.panel-body {
   flex:1 1 auto;
 }
-.panel-collapse>.panel-body {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:left;
-}
 .panel-footer {
   background-color:var(--color-08);
 }
@@ -488,17 +502,11 @@ nav {
   top:1px;
   transform:rotate(180deg);
 }
-.panel-owner .panel-body .panel:nth-of-type(n+4) {
+.panel-owner .panel-body .panel:nth-of-type(n+5) {
   margin-top:calc(var(--spacer)/2);
 }
-.panel-owner .panel-body .panel:not(:nth-of-type(3n-2)) {
-  margin-left:calc(var(--spacer)/2);
-}
 .panel-owner .panel-body .panel {
-  display:flex;
-  flex-direction:column;
-  margin-top:0;
-  width:calc((100%/3) - 10px);
+  width:calc((100%/4) - 12px);
 }
 .panel-owner>a>.panel-heading {
   padding:calc(var(--spacer)/1.5) var(--spacer);
@@ -511,4 +519,7 @@ nav {
 }
 .panel-title {
   font-size:var(--font-size);
+}
+#complete-contract-button {
+  float:right;
 }
