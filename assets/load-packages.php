@@ -16,7 +16,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     }
     $daysLeft=$row_packages['daysLeft'];
     $daysLeftWarning=$row_packages['daysLeftWarning'];
-    $packageNotes=mysqli_real_escape_string($conn, $row_packages['notes']);
+    $packageNotes=nl2br($row_packages['notes']);
     echo "<div class='panel panel-";
     if (stripslashes($status)==='Expired' OR stripslashes($status)==='Out of Days' OR (isset($expirationDate) AND $expirationDate!='' AND $expirationDate<=$today) OR (isset($daysLeft) AND $daysLeft!='' AND $daysLeft==0)) {
       echo "danger";

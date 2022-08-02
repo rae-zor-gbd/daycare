@@ -278,6 +278,12 @@ textarea {
 .search-panel {
   padding:calc(var(--spacer)/2) var(--spacer);
 }
+.table {
+  margin-bottom:0;
+}
+.table-condensed>tbody>tr>td {
+  padding:calc(var(--spacer)/2) 5px;
+}
 @keyframes loading-ring {
   0% {
     transform:rotate(0deg);
@@ -301,7 +307,7 @@ textarea {
   display:table-cell;
   vertical-align:middle;
 }
-nav, .panel-group .panel-owner {
+nav, .panel-group .panel-owner, .table-container {
   box-shadow:rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
 nav {
@@ -343,7 +349,7 @@ nav {
 .nav-links a .nav-link.active::before {
   color:var(--color-01);
 }
-.nav-link, .panel-group .panel {
+.nav-link, .panel-group .panel, .table-container {
   border-radius:6px;
 }
 .nav-link {
@@ -403,17 +409,17 @@ nav {
 .contracts-container .panel {
   width:calc((100%/4) - 12px);
 }
-.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before {
+.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before, .package-reminder .label::before, .package-reminder-notes .label::before, .vaccine-reminder .label::before, .vaccine-reminder-notes .label::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
   text-align:left;
 }
-.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before {
+.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before, .package-reminder .label::before, .package-reminder-notes .label::before, .vaccine-reminder .label::before, .vaccine-reminder-notes .label::before {
   position:relative;
   top:1px;
 }
-.dog-daycare-contract-status .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before {
+.dog-daycare-contract-status .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-reminder .label::before, .vaccine-reminder .label::before {
   width:calc(var(--spacer)/1.5);
 }
 .dog-daycare-contract-status .label::before {
@@ -425,24 +431,24 @@ nav {
 .dog-heading::before {
   content:var(--icon-dog);
 }
-.dog-notes .label, .package-notes .label {
+.dog-notes .label, .package-notes .label, .package-reminder-notes .label, .vaccine-reminder-notes .label {
   padding-left:calc(.6em + (var(--spacer)/1.5));
 }
-.dog-notes .label::before, .package-notes .label::before {
+.dog-notes .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .vaccine-reminder-notes .label::before {
   content:var(--icon-thumbtack);
   right:calc(var(--spacer)/1.5);
   width:0;
 }
-.dog-notes .label, .package-notes .label {
-  display:inline-table;
+.dog-notes .label, .package-notes .label, .package-reminder-notes .label, .vaccine-reminder-notes .label {
+  display:inline-block;
   line-height:1.15;
   text-align:left;
   white-space:unset;
 }
-.dog-notes, .dog-vaccine-status, .package-expiration-date, .package-notes {
+.dog-notes, .dog-vaccine-status, .package-expiration-date, .package-notes, .package-reminder-notes, .vaccine-reminder:not(:first-of-type), .vaccine-reminder-notes {
   margin-top:5px;
 }
-.dog-vaccine-status .label::before {
+.dog-vaccine-status .label::before, .vaccine-reminder .label::before {
   content:var(--icon-vaccine);
 }
 .load-more, .panel-group .panel-owner+.panel-owner {
@@ -457,7 +463,7 @@ nav {
 .package-days-left .label::before {
   content:var(--icon-calendar-day);
 }
-.package-expiration-date .label::before {
+.package-expiration-date .label::before, .package-reminder .label::before {
   content:var(--icon-clock);
 }
 .package-heading::before {
@@ -508,13 +514,13 @@ nav {
 .panel-owner .panel-body .panel {
   width:calc((100%/4) - 12px);
 }
-.panel-owner>a>.panel-heading {
+.panel-owner>a>.panel-heading, .table-container {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
 .panel-owner>.panel-collapse>.panel-body, .panel-owner>.panel-collapse>.panel-footer {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
-.panel-owner {
+.panel-owner, .table-container {
   background-color:var(--color-08);
 }
 .panel-title {
