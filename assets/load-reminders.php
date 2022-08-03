@@ -37,11 +37,15 @@ if ($result_reminders->num_rows>0) {
           } else {
             echo "warning";
           }
-          echo "'>$daysLeft day";
+          echo "'>
+          <span class='package-reminder-title'>$packageTitle</span>
+          <span class='package-reminder-days'>$daysLeft day";
           if ($daysLeft!=1) {
             echo "s";
           }
-          echo " left by " . date('D, M j, Y', $expirationDate) . "</span>
+          echo "</span>
+          <span class='package-reminder-expiration'>" . date('D, M j, Y', $expirationDate) . "</span>
+          </span>
           </div>";
           if (isset($packageNotes) AND $packageNotes!=='') {
             echo "<div class='package-reminder-notes'>
@@ -70,7 +74,10 @@ if ($result_reminders->num_rows>0) {
           } else {
             echo "warning";
           }
-          echo "'>$dogName: $vaccineTitle due " . date('D, M j, Y', $vaccineDueDate) . "</span>
+          echo "'>
+          <span class='vaccine-reminder-dog'>$dogName</span>
+          <span class='vaccine-reminder-due'>$vaccineTitle due " . date('D, M j, Y', $vaccineDueDate) . "</span>
+          </span>
           </div>";
         }
         if (isset($vaccineNotes) AND $vaccineNotes!=='') {
