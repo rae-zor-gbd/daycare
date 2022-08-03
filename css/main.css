@@ -152,8 +152,12 @@ button, .nav-link {
   transition-duration:.3s;
   transition-property:color;
 }
-button:hover {
+button:hover:not(.disabled) {
   color:var(--color-03);
+}
+button.disabled {
+  cursor:not-allowed;
+  opacity:0.5;
 }
 input[type=checkbox]:hover {
   cursor:pointer;
@@ -174,7 +178,8 @@ textarea {
   content:var(--icon-circle-check);
 }
 .button-email::before {
-  content:var(--icon-at);
+  content:var(--icon-envelope);
+  padding-left:calc(var(--spacer)/10);
 }
 .button-decrease::before {
   content:var(--icon-arrow-down);
@@ -409,13 +414,13 @@ nav {
 .contracts-container .panel {
   width:calc((100%/4) - 12px);
 }
-.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before {
+.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
   text-align:left;
 }
-.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before {
+.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before {
   position:relative;
   top:1px;
 }
@@ -431,11 +436,13 @@ nav {
 .dog-heading::before, .vaccine-reminder-dog::before {
   content:var(--icon-dog);
 }
-.dog-notes .label, .package-notes .label, .package-reminder-notes .label, .vaccine-reminder-notes .label {
+.dog-notes .label, .package-notes .label, .package-reminder-notes .label {
   padding-left:calc(.6em + (var(--spacer)/1.5));
 }
-.dog-notes .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .vaccine-reminder-notes .label::before {
+.dog-notes .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .vaccine-reminder-notes-text::before {
   content:var(--icon-thumbtack);
+}
+.dog-notes .label::before, .package-notes .label::before, .package-reminder-notes .label::before{
   right:calc(var(--spacer)/1.5);
   width:0;
 }
@@ -469,12 +476,17 @@ nav {
 .package-heading::before, .package-reminder-title::before {
   content:var(--icon-calendar-days);
 }
+.package-reminder button, .vaccine-reminder button {
+  padding-left:calc(var(--spacer)/3);
+  position:relative;
+  top:4px;
+}
 .package-reminder-days, .package-reminder-title, .vaccine-reminder-dog {
-  border-right:1.25px solid rgb(255 255 255 / 50%);
+  border-right:1.5px solid rgb(255 255 255 / 50%);
   margin-right:calc(var(--spacer)/10);
   padding-right:calc(var(--spacer)/6);
 }
-.package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before {
+.package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes-text::before {
   padding-right:calc(var(--spacer)/6);
 }
 .package-status {
@@ -533,6 +545,9 @@ nav {
 }
 .panel-title {
   font-size:var(--font-size);
+}
+.vaccine-reminder-notes-text::before {
+  padding-right:9px;
 }
 #complete-contract-button {
   float:right;

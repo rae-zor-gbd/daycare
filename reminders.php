@@ -24,6 +24,80 @@ include 'assets/config.php';
   $(document).ready(function(){
     $('#reminders').addClass('active');
     loadReminders();
+    $(document).on('click', '.button-email', function() {
+      var email=$(this).data('email');
+      const textarea = document.createElement('textarea');
+      textarea.textContent = email;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert("Copied owner emails to clipboard: " + email);
+    });
+    $(document).on('click', '#add-package-notes-button', function() {
+      var id=$(this).data('id');
+      var owner=$(this).data('owner');
+      $.ajax({
+        url:'assets/load-add-package-notes-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, owner:owner},
+        success:function(response){
+          $('#addPackageNotesModalBody').append(response);
+        }
+      });
+    });
+    $('#addPackageNotes').click(function (e) {
+      e.preventDefault();
+      var packageID=document.getElementById('addPackageNotesID').value;
+      var ownerID=document.getElementById('addPackageNotesForOwnerID').value;
+      var packageNotes=document.getElementById('addPackageNotesBox').value;
+      $.ajax({
+        url:'assets/add-package-notes.php',
+        type:'POST',
+        cache:false,
+        data:{packageID:packageID, ownerID:ownerID, packageNotes:packageNotes},
+        success:function(response){
+          $('#addPackageNotesModal').modal('hide');
+          $('#addPackageNotesModalBody').empty();
+          loadReminders();
+        }
+      });
+    });
+    $(document).on('click', '#add-vaccine-notes-button', function() {
+      var id=$(this).data('id');
+      var owner=$(this).data('owner');
+      $.ajax({
+        url:'assets/load-add-dog-notes-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, owner:owner},
+        success:function(response){
+          $('#addVaccineNotesModalBody').append(response);
+        }
+      });
+    });
+    $('#addVaccineNotes').click(function (e) {
+      e.preventDefault();
+      var dogID=document.getElementById('addDogNotesID').value;
+      var ownerID=document.getElementById('addDogNotesOwnerID').value;
+      var dogNotes=document.getElementById('addDogNotesBox').value;
+      $.ajax({
+        url:'assets/add-dog-notes.php',
+        type:'POST',
+        cache:false,
+        data:{dogID:dogID, dogNotes:dogNotes},
+        success:function(response){
+          $('#addVaccineNotesModal').modal('hide');
+          $('#addVaccineNotesModalBody').empty();
+          loadReminders();
+        }
+      });
+    });
+    $('.modal').on('hidden.bs.modal', function(){
+      $('#addPackageNotesModalBody').empty();
+      $('#addVaccineNotesModalBody').empty();
+    });
   });
   </script>
 </head>
@@ -35,7 +109,6 @@ include 'assets/config.php';
         <thead>
           <tr>
             <th>Owner</th>
-            <th>Email Address</th>
             <th>Package Reminders</th>
             <th>Vaccine Reminders</th>
           </tr>
@@ -44,5 +117,37 @@ include 'assets/config.php';
       </table>
     </div>
   </div>
+  <form action='' method='post' spellcheck='false' id='addPackageNotesForm'>
+    <div class='modal fade' id='addPackageNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Add Package Notes</h4>
+          </div>
+          <div class='modal-body' id='addPackageNotesModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='addPackageNotes'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form action='' method='post' spellcheck='false' id='addVaccineNotesForm'>
+    <div class='modal fade' id='addVaccineNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Add Vaccine Notes</h4>
+          </div>
+          <div class='modal-body' id='addVaccineNotesModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='addVaccineNotes'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </body>
 </html>

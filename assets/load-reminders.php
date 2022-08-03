@@ -7,17 +7,15 @@ if ($result_reminders->num_rows>0) {
     $ownerID=$row_reminders['ownerID'];
     $ownerName=mysqli_real_escape_string($conn, $row_reminders['ownerName']);
     echo "<tr>
-      <td>$ownerName</td>
-      <td>";
-      $sql_emails="SELECT email FROM emails WHERE ownerID='$ownerID'";
+      <td>$ownerName";
+      $sql_emails="SELECT GROUP_CONCAT(email) AS email FROM emails WHERE ownerID='$ownerID'";
       $result_emails=$conn->query($sql_emails);
-      if ($result_emails->num_rows>0) {
-        while ($row_emails=$result_emails->fetch_assoc()) {
-          $ownerEmail=mysqli_real_escape_string($conn, $row_emails['email']);
-          echo "$ownerEmail<br>";
-        }
+      $row_emails=$result_emails->fetch_assoc();
+      $ownerEmail=mysqli_real_escape_string($conn, $row_emails['email']);
+      if (isset($ownerEmail) AND $ownerEmail!='') {
+        echo "<button type='button' class='button-email' id='owner-email-button' data-email='$ownerEmail' title='Copy All Email Addresses to Clipboard'></button>";
       } else {
-        echo "<em class='text-muted'>None</em>";
+        echo "<button type='button' class='button-email disabled' title='No Email on File' disabled></button>";
       }
       echo "</td>
       <td>";
@@ -46,6 +44,7 @@ if ($result_reminders->num_rows>0) {
           echo "</span>
           <span class='package-reminder-expiration'>" . date('D, M j, Y', $expirationDate) . "</span>
           </span>
+          <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Package Notes'></button>
           </div>";
           if (isset($packageNotes) AND $packageNotes!=='') {
             echo "<div class='package-reminder-notes'>
@@ -78,18 +77,22 @@ if ($result_reminders->num_rows>0) {
           <span class='vaccine-reminder-dog'>$dogName</span>
           <span class='vaccine-reminder-due'>$vaccineTitle due " . date('D, M j, Y', $vaccineDueDate) . "</span>
           </span>
+          <button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' title='Add Vaccine Notes for $dogName'></button>
           </div>";
         }
         if (isset($vaccineNotes) AND $vaccineNotes!=='') {
           echo "<div class='vaccine-reminder-notes'>
-          <span class='label label-default'>" . stripslashes($vaccineNotes) . "</span>
+          <span class='label label-default'>
+          <span class='vaccine-reminder-dog'>$dogName</span>
+          <span class='vaccine-reminder-notes-text'>" . stripslashes($vaccineNotes) . "</span>
+          </span>
           </div>";
         }
       } else {
         echo "<em class='text-muted'>None</em>";
       }
       echo "</td>
-    </tr>";
+      </tr>";
   }
 }
 ?>
