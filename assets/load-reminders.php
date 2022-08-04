@@ -19,7 +19,7 @@ if ($result_reminders->num_rows>0) {
       }
       echo "</td>
       <td>";
-      $sql_package_reminders="SELECT ownerPackageID, packageTitle, daysLeft, expirationDate, notes FROM owners o JOIN owners_packages op USING (ownerID) JOIN packages USING (packageID) WHERE ownerID='$ownerID' AND status!='Expired' AND daysLeft>0 AND (daysLeft<=daysLeftWarning OR expirationDate<=DATE_ADD(CURDATE(), INTERVAL expirationWarning DAY))";
+      $sql_package_reminders="SELECT ownerPackageID, packageTitle, daysLeft, expirationDate, notes FROM owners o JOIN owners_packages op USING (ownerID) JOIN packages USING (packageID) WHERE ownerID='$ownerID' AND status!='Expired' AND daysLeft>0 AND (daysLeft<=daysLeftWarning OR expirationDate<=DATE_ADD(CURDATE(), INTERVAL expirationWarning DAY)) AND ownerID NOT IN (SELECT ownerID FROM owners_packages WHERE ownerID='$ownerID' AND status='Not Started')";
       $result_package_reminders=$conn->query($sql_package_reminders);
       if ($result_package_reminders->num_rows>0) {
         while ($row_package_reminders=$result_package_reminders->fetch_assoc()) {
