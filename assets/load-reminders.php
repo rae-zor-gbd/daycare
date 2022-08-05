@@ -46,7 +46,7 @@ if ($result_reminders->num_rows>0) {
           if (isset($expirationDate) AND $expirationDate!='') {
             echo date('D, M j, Y', $expirationDate);
           } else {
-            echo "No Package Expiration Date";
+            echo "No Expiration Date";
           }
           echo "</span>
           </span>
