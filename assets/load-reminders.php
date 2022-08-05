@@ -30,7 +30,7 @@ if ($result_reminders->num_rows>0) {
           $packageNotes=nl2br($row_package_reminders['notes']);
           echo "<div class='package-reminder'>
           <span class='label label-";
-          if ($expirationDate<$today OR $daysLeft==0) {
+          if (isset($expirationDate) AND $expirationDate!='' AND ($expirationDate<$today OR $daysLeft==0)) {
             echo "danger";
           } else {
             echo "warning";
@@ -42,7 +42,13 @@ if ($result_reminders->num_rows>0) {
             echo "s";
           }
           echo "</span>
-          <span class='package-reminder-expiration'>" . date('D, M j, Y', $expirationDate) . "</span>
+          <span class='package-reminder-expiration'>";
+          if (isset($expirationDate) AND $expirationDate!='') {
+            echo date('D, M j, Y', $expirationDate);
+          } else {
+            echo "No Package Expiration Date";
+          }
+          echo "</span>
           </span>
           <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Package Notes'></button>
           </div>";
