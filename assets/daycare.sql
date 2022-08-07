@@ -86,6 +86,6 @@ CREATE TABLE dogs_vaccines (
   FOREIGN KEY (vaccineID) REFERENCES vaccines(vaccineID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE INDEX indDogsVaccinesDueDate ON dogs_vaccines(dueDate) USING HASH;
+CREATE INDEX indDogsVaccinesDueDate ON dogs_vaccines(dueDate) USING BTREE;
 
 SET FOREIGN_KEY_CHECKS=1;
