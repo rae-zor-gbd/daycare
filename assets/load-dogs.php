@@ -83,7 +83,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
         } elseif ($dueDate>=$today) {
           echo "warning";
         }
-        echo "'>" . stripslashes($vaccineTitle) . " due " . date('D, M j, Y', $dueDate) . "</span>
+        echo "'>" . stripslashes($vaccineTitle) . " due " . date('D n/j', $dueDate) . "</span>
         </div>";
       }
     }

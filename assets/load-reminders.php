@@ -44,7 +44,7 @@ if ($result_reminders->num_rows>0) {
           echo "</span>
           <span class='package-reminder-expiration'>";
           if (isset($expirationDate) AND $expirationDate!='') {
-            echo date('D, M j, Y', $expirationDate);
+            echo date('D n/j', $expirationDate);
           } else {
             echo "No Expiration Date";
           }
@@ -81,7 +81,7 @@ if ($result_reminders->num_rows>0) {
           }
           echo "'>
           <span class='vaccine-reminder-dog'>$dogName</span>
-          <span class='vaccine-reminder-due'>$vaccineTitle due " . date('D, M j, Y', $vaccineDueDate) . "</span>
+          <span class='vaccine-reminder-due'>$vaccineTitle due " . date('D n/j', $vaccineDueDate) . "</span>
           </span>
           <button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' title='Add Vaccine Notes for $dogName'></button>
           </div>";

@@ -63,7 +63,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       } elseif ($expirationDate<$today) {
         echo "d ";
       }
-      echo date('D, M j, Y', $expirationDate) . "</span>
+      echo date('D n/j', $expirationDate) . "</span>
       </div>";
     }
     if (isset($packageNotes) AND $packageNotes!=='') {
