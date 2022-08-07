@@ -11,6 +11,12 @@
   src:url(/fonts/HelveticaNowDisplay-Bold.woff) format('woff');
 }
 @font-face {
+  font-family:'Helvetica Now Display';
+  font-style:normal;
+  font-weight:800;
+  src:url(/fonts/HelveticaNowDisplay-ExtraBold.woff) format('woff');
+}
+@font-face {
   font-family:'Icons';
   font-style:normal;
   font-weight:400;
@@ -532,6 +538,9 @@ nav {
 }
 .panel-owner .panel-body .panel {
   width:calc((100%/4) - 12px);
+}
+.panel-owner .panel-body .panel .panel-heading {
+  font-weight:var(--font-weight-bold);
 }
 .panel-owner>a>.panel-heading, .table-container {
   padding:calc(var(--spacer)/1.5) var(--spacer);
