@@ -1,14 +1,14 @@
 @font-face {
-  font-family:'Helvetica Neue';
+  font-family:'Helvetica Now Display';
   font-style:normal;
   font-weight:400;
-  src:url(/fonts/HelveticaNeue-Regular.woff2) format('woff2');
+  src:url(/fonts/HelveticaNowDisplay-Regular.woff) format('woff');
 }
 @font-face {
-  font-family:'Helvetica Neue';
+  font-family:'Helvetica Now Display';
   font-style:normal;
   font-weight:700;
-  src:url(/fonts/HelveticaNeue-Bold.woff2) format('woff2');
+  src:url(/fonts/HelveticaNowDisplay-Bold.woff) format('woff');
 }
 @font-face {
   font-family:'Icons';
@@ -26,7 +26,7 @@
   --color-06:hsl(var(--base-color), 10%, 93%);
   --color-07:hsl(var(--base-color), 25%, 96%);
   --color-08:hsl(var(--base-color), 10%, 100%);
-  --font-family:'Helvetica Neue', sans-serif;
+  --font-family:'Helvetica Now Display', sans-serif;
   --font-size:17px;
   --font-weight-bold:700;
   --font-weight-regular:400;
@@ -124,7 +124,6 @@ body {
   cursor:default;
   font-family:var(--font-family);
   font-size:var(--font-size);
-  font-variant-numeric:tabular-nums;
   font-weight:var(--font-weight-regular);
   -webkit-font-smoothing:antialiased;
 }
