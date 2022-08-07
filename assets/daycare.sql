@@ -7,7 +7,7 @@ SET character_set_client=utf8mb4;
 
 CREATE TABLE follow_ups (
   followUpID INT(11) NOT NULL AUTO_INCREMENT,
-  service ENUM('Boarding', 'Daycare', 'Grooming', 'Training') NOT NULL,
+  service ENUM('Boarding', 'Daycare', 'Grooming', 'Training') NOT NULL UNIQUE,
   requirementsDueIn INT(11) NOT NULL,
   followUpDueIn INT(11) NOT NULL,
   PRIMARY KEY (followUpID)
@@ -85,5 +85,7 @@ CREATE TABLE dogs_vaccines (
   FOREIGN KEY (dogID) REFERENCES dogs(dogID) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (vaccineID) REFERENCES vaccines(vaccineID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE INDEX indDogsVaccinesDueDate ON dogs_vaccines(dueDate) USING HASH;
 
 SET FOREIGN_KEY_CHECKS=1;
