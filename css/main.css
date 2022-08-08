@@ -1,38 +1,20 @@
 @font-face {
-  font-family:'Helvetica Neue';
-  font-style:normal;
-  font-weight:400;
-  src:url(/fonts/HelveticaNeue-Regular.woff2) format('woff2');
-}
-@font-face {
-  font-family:'Helvetica Neue';
-  font-style:normal;
-  font-weight:700;
-  src:url(/fonts/HelveticaNeue-Bold.woff2) format('woff2');
-}
-@font-face {
-  font-family:'Helvetica Now Display';
-  font-style:normal;
-  font-weight:400;
-  src:url(/fonts/HelveticaNowDisplay-Regular.woff) format('woff');
-}
-@font-face {
-  font-family:'Helvetica Now Display';
-  font-style:normal;
-  font-weight:700;
-  src:url(/fonts/HelveticaNowDisplay-Bold.woff) format('woff');
-}
-@font-face {
-  font-family:'Helvetica Now Display';
-  font-style:normal;
-  font-weight:800;
-  src:url(/fonts/HelveticaNowDisplay-ExtraBold.woff) format('woff');
-}
-@font-face {
   font-family:'Icons';
   font-style:normal;
   font-weight:400;
   src:url(/fonts/Icons-Regular.woff) format('woff');
+}
+@font-face {
+  font-family:'Noto Sans';
+  font-style:normal;
+  font-weight:400;
+  src:url(/fonts/NotoSans-Regular.woff) format('woff');
+}
+@font-face {
+  font-family:'Noto Sans';
+  font-style:normal;
+  font-weight:700;
+  src:url(/fonts/NotoSans-Bold.woff) format('woff');
 }
 :root {
   --base-color:240;
@@ -44,7 +26,7 @@
   --color-06:hsl(var(--base-color), 10%, 93%);
   --color-07:hsl(var(--base-color), 25%, 96%);
   --color-08:hsl(var(--base-color), 10%, 100%);
-  --font-family:'Helvetica Neue', 'Helvetica Now Display', sans-serif;
+  --font-family:'Noto Sans', sans-serif;
   --font-size:17px;
   --font-weight-bold:700;
   --font-weight-regular:400;
@@ -550,9 +532,6 @@ nav {
 }
 .panel-owner .panel-body .panel {
   width:calc((100%/4) - 12px);
-}
-.panel-owner .panel-body .panel .panel-heading {
-  font-weight:var(--font-weight-bold);
 }
 .panel-owner>a>.panel-heading, .table-container {
   padding:calc(var(--spacer)/1.5) var(--spacer);
