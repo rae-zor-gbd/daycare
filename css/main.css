@@ -1,4 +1,16 @@
 @font-face {
+  font-family:'Helvetica Neue';
+  font-style:normal;
+  font-weight:400;
+  src:url(/fonts/HelveticaNeue-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family:'Helvetica Neue';
+  font-style:normal;
+  font-weight:700;
+  src:url(/fonts/HelveticaNeue-Bold.woff2) format('woff2');
+}
+@font-face {
   font-family:'Helvetica Now Display';
   font-style:normal;
   font-weight:400;
@@ -32,7 +44,7 @@
   --color-06:hsl(var(--base-color), 10%, 93%);
   --color-07:hsl(var(--base-color), 25%, 96%);
   --color-08:hsl(var(--base-color), 10%, 100%);
-  --font-family:'Helvetica Now Display', sans-serif;
+  --font-family:'Helvetica Neue', 'Helvetica Now Display', sans-serif;
   --font-size:17px;
   --font-weight-bold:700;
   --font-weight-regular:400;
