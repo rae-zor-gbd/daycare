@@ -9,7 +9,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     $dogName=mysqli_real_escape_string($conn, $row_dogs['dogName']);
     $daycareContract=mysqli_real_escape_string($conn, $row_dogs['daycareContract']);
     $dogNotes=nl2br($row_dogs['notes']);
-    $sql_current_fecal="SELECT * FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines v USING (vaccineID) WHERE ownerID='$ownerID' AND vaccineTitle='Fecal' AND dueDate>=DATE_ADD(NOW(), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY)";
+    $sql_current_fecal="SELECT * FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines v USING (vaccineID) WHERE ownerID='$ownerID' AND vaccineTitle='Fecal' AND dueDate>=DATE_ADD(DATE(NOW()), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY)";
     $result_current_fecal=$conn->query($sql_current_fecal);
     $sql_flu_waiver="SELECT dueDate FROM dogs_vaccines dv JOIN vaccines v USING (vaccineID) WHERE vaccineTitle='Flu Waiver' AND dogID='$dogID'";
     $result_flu_waiver=$conn->query($sql_flu_waiver);
@@ -30,7 +30,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     if ($result_current_fecal->num_rows>0) {
       $sql_vaccines.="AND vaccineTitle!='Fecal'";
     }
-    $sql_vaccines.="AND dueDate<=DATE_ADD(NOW(), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY) ORDER BY dueDate, vaccineTitle";
+    $sql_vaccines.="AND dueDate<=DATE_ADD(DATE(NOW()), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY) ORDER BY dueDate, vaccineTitle";
     $result_vaccines=$conn->query($sql_vaccines);
     echo "<div class='panel panel-";
     if ($result_vaccines->num_rows>0 OR $result_vaccines_not_given->num_rows>0) {
@@ -38,13 +38,13 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       if ($result_current_fecal->num_rows>0) {
         $sql_past_due_vaccines.="AND vaccineTitle!='Fecal'";
       }
-      $sql_past_due_vaccines.="AND dueDate<NOW() ORDER BY dueDate, vaccineTitle";
+      $sql_past_due_vaccines.="AND dueDate<DATE(NOW()) ORDER BY dueDate, vaccineTitle";
       $result_past_due_vaccines=$conn->query($sql_past_due_vaccines);
       $sql_vaccines_due_soon="SELECT vaccineTitle, dueDate FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines USING (vaccineID) WHERE ownerID='$ownerID' AND dogID='$dogID' AND requirementStatus='Required'";
       if ($result_current_fecal->num_rows>0) {
         $sql_vaccines_due_soon.="AND vaccineTitle!='Fecal'";
       }
-      $sql_vaccines_due_soon.="AND dueDate>=NOW() ORDER BY dueDate, vaccineTitle";
+      $sql_vaccines_due_soon.="AND dueDate>=DATE(NOW()) ORDER BY dueDate, vaccineTitle";
       $result_vaccines_due_soon=$conn->query($sql_vaccines_due_soon);
       if ($result_past_due_vaccines->num_rows>0 OR $result_vaccines_not_given->num_rows>0) {
         echo "danger";
