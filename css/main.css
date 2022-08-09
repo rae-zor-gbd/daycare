@@ -12,9 +12,21 @@
 }
 @font-face {
   font-family:'Noto Sans';
+  font-style:italic;
+  font-weight:400;
+  src:url(/fonts/NotoSans-RegularItalic.woff) format('woff');
+}
+@font-face {
+  font-family:'Noto Sans';
   font-style:normal;
   font-weight:700;
   src:url(/fonts/NotoSans-Bold.woff) format('woff');
+}
+@font-face {
+  font-family:'Noto Sans';
+  font-style:italic;
+  font-weight:700;
+  src:url(/fonts/NotoSans-BoldItalic.woff) format('woff');
 }
 :root {
   --base-color:240;
