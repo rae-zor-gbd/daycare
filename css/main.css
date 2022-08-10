@@ -214,9 +214,7 @@ textarea {
   padding:0;
 }
 .container-fluid {
-  float:right;
-  margin:calc(var(--spacer)*(2/3)) calc(var(--spacer)*(5/3));
-  width:75%;
+  margin:calc(var(--spacer)*(2/3)) calc(var(--spacer)*(5/3)) calc(var(--spacer)*(2/3)) calc((var(--spacer)*11) + (var(--spacer)*(5/3)));
 }
 .input-group:not(:last-child) {
   margin-bottom:calc(var(--spacer)/2);
@@ -334,7 +332,7 @@ nav {
   padding:var(--spacer) var(--spacer) calc(var(--spacer)*(5/3));
   position:fixed;
   top:0;
-  width:calc(25% - calc(var(--spacer)*(10/3)));
+  width:calc(var(--spacer)*11);
 }
 .nav>li>a {
   padding-left:25px;
@@ -347,7 +345,7 @@ nav {
   content:var(--icon-calendar-days);
 }
 .nav-link#reminders::before {
-  content:var(--icon-bullhorn);
+  content:var(--icon-thumbtack);
 }
 .nav-links, .panel-body, .panel-footer {
   border-top:1.5px solid var(--color-06)!important;
