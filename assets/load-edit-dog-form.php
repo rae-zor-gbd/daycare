@@ -3,11 +3,12 @@ include 'config.php';
 if (isset($_POST['id']) AND isset($_POST['owner'])) {
   $id=$_POST['id'];
   $owner=$_POST['owner'];
-  $sql_dog_info="SELECT dogName, daycareContract FROM dogs WHERE dogID='$id'";
+  $sql_dog_info="SELECT dogName, daycareContract, vetID FROM dogs WHERE dogID='$id'";
   $result_dog_info=$conn->query($sql_dog_info);
   $row_dog_info=$result_dog_info->fetch_assoc();
   $editDogName=htmlspecialchars($row_dog_info['dogName'], ENT_QUOTES);
   $editDaycareContract=htmlspecialchars($row_dog_info['daycareContract'], ENT_QUOTES);
+  $editVet=$row_dog_info['vetID'];
   echo "<input type='hidden' class='form-control' name='id' id='editDogID' value='$id' required>
   <input type='hidden' class='form-control' name='editDogForOwnerID' id='editDogForOwnerID' value='$owner' required>
   <div class='input-group'>
@@ -29,6 +30,23 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   }
   echo ">Completed</option>
   </select>
+  </div>
+  <div class='input-group'>
+  <span class='input-group-addon vet'>Vet</span>
+  <select class='form-control' name='editVet' id='editVet' required>
+  <option value='' disabled>Select Vet</option>";
+  $sql_all_vets="SELECT vetID, vetName FROM vets ORDER BY vetName";
+  $result_all_vets=$conn->query($sql_all_vets);
+  while ($row_all_vets=$result_all_vets->fetch_assoc()) {
+    $vetID=$row_all_vets['vetID'];
+    $vetName=mysqli_real_escape_string($conn, $row_all_vets['vetName']);
+    echo "<option value='$vetID'";
+    if ($editVet===$vetID) {
+      echo " selected";
+    }
+    echo ">$vetName</option>";
+  }
+  echo "</select>
   </div>";
   $sql_all_vaccines="SELECT vaccineID, vaccineTitle FROM vaccines ORDER BY vaccineTitle";
   $result_all_vaccines=$conn->query($sql_all_vaccines);

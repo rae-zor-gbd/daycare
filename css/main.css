@@ -223,7 +223,7 @@ textarea {
   min-width:calc(var(--spacer)*6);
   text-align:left;
 }
-.input-group-addon.clock::before, .input-group-addon.contract::before, .input-group-addon.day::before, .input-group-addon.days::before, .input-group-addon.dog::before, .input-group-addon.email::before, .input-group-addon.info::before, .input-group-addon.notes::before, .input-group-addon.owner::before, .input-group-addon.vaccine::before {
+.input-group-addon.clock::before, .input-group-addon.contract::before, .input-group-addon.day::before, .input-group-addon.days::before, .input-group-addon.dog::before, .input-group-addon.email::before, .input-group-addon.info::before, .input-group-addon.notes::before, .input-group-addon.owner::before, .input-group-addon.vaccine::before, .input-group-addon.vet::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
@@ -258,6 +258,9 @@ textarea {
 }
 .input-group-addon.vaccine::before {
   content:var(--icon-vaccine);
+}
+.input-group-addon.vet::before {
+  content:var(--icon-clipboard-list);
 }
 .loading-ring {
   display:inline-block;

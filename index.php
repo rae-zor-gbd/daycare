@@ -345,6 +345,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var owner=document.getElementById('editDogForOwnerID').value;
       var dogName=document.getElementById('editDogName').value;
       var daycareContract=document.getElementById('editDaycareContract').value;
+      var vetID=document.getElementById('editVet').value;
       <?php
       $sql_all_vaccines_edit="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
       $result_all_vaccines_edit=$conn->query($sql_all_vaccines_edit);
@@ -359,7 +360,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/edit-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, owner:owner, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
+        data:{id:id, owner:owner, dogName:dogName, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
         success:function(response){
           $('#editDogModal').modal('hide');
           $('#editDogModalBody').empty();
