@@ -1,4 +1,28 @@
 @font-face {
+  font-family:'Akzidenz Grotesk';
+  font-style:normal;
+  font-weight:400;
+  src:url(/fonts/AkzidenzGrotesk-Regular.woff) format('woff');
+}
+@font-face {
+  font-family:'Akzidenz Grotesk';
+  font-style:normal;
+  font-weight:700;
+  src:url(/fonts/AkzidenzGrotesk-Bold.woff) format('woff');
+}
+@font-face {
+  font-family:'Helvetica Now Text';
+  font-style:normal;
+  font-weight:400;
+  src:url(/fonts/HelveticaNowText-Regular.woff) format('woff');
+}
+@font-face {
+  font-family:'Helvetica Now Text';
+  font-style:normal;
+  font-weight:700;
+  src:url(/fonts/HelveticaNowText-Bold.woff) format('woff');
+}
+@font-face {
   font-family:'Icons';
   font-style:normal;
   font-weight:400;
@@ -28,6 +52,18 @@
   font-weight:700;
   src:url(/fonts/NotoSans-BoldItalic.woff) format('woff');
 }
+@font-face {
+  font-family:'Proxima Nova';
+  font-style:normal;
+  font-weight:400;
+  src:url(/fonts/ProximaNova-Regular.woff) format('woff');
+}
+@font-face {
+  font-family:'Proxima Nova';
+  font-style:normal;
+  font-weight:700;
+  src:url(/fonts/ProximaNova-Bold.woff) format('woff');
+}
 :root {
   --base-color:240;
   --color-01:hsl(var(--base-color), 7%, 20%);
@@ -49,6 +85,7 @@
   --icon-arrow-left:'\e904';
   --icon-arrow-right:'\e905';
   --icon-arrow-up:'\e906';
+  --icon-asterisk:'\e955';
   --icon-at:'\e907';
   --icon-bars:'\e908';
   --icon-bell:'\e909';
@@ -82,6 +119,7 @@
   --icon-clock:'\e925';
   --icon-comment:'\e926';
   --icon-contract:'\e931';
+  --icon-doctor:'\e956';
   --icon-dog:'\e927';
   --icon-dollar:'\e928';
   --icon-edit:'\e929';
@@ -96,6 +134,7 @@
   --icon-folders:'\e934';
   --icon-font-family:'Icons';
   --icon-history:'\e935';
+  --icon-hospital:'\e957';
   --icon-info:'\e936';
   --icon-inventory:'\e937';
   --icon-list-01:'\e93a';
@@ -110,8 +149,11 @@
   --icon-money-03:'\e93f';
   --icon-new:'\e940';
   --icon-open:'\e941';
+  --icon-paper-plane:'\e958';
   --icon-paperclip:'\e942';
   --icon-paw:'\e943';
+  --icon-phone-01:'\e959';
+  --icon-phone-02:'\e95a';
   --icon-play:'\e945';
   --icon-plus:'\e946';
   --icon-print:'\e948';
@@ -260,13 +302,13 @@ textarea {
   content:var(--icon-user);
 }
 .input-group-addon.phone::before {
-  content:var(--icon-bell);
+  content:var(--icon-phone-01);
 }
 .input-group-addon.vaccine::before {
   content:var(--icon-vaccine);
 }
 .input-group-addon.vet::before, .nav-link#requests::before, .vaccine-reminder-vet::before, .vet-heading::before {
-  content:var(--icon-clipboard-list);
+  content:var(--icon-hospital);
 }
 .loading-ring {
   display:inline-block;
