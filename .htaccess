@@ -10,6 +10,8 @@ RewriteRule ^contracts contracts.php [NC,L]
 
 RewriteRule ^reminders reminders.php [NC,L]
 
+RewriteRule ^requests requests.php [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)(\.gz)?$">

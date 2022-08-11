@@ -46,6 +46,9 @@
       <a href='/reminders'>
         <div class='nav-link' id='reminders'>Reminders</div>
       </a>
+      <a href='/requests'>
+        <div class='nav-link' id='requests'>Vet Requests</div>
+      </a>
       <a href='/contracts'>
         <div class='nav-link' id='contracts'>Contracts</div>
       </a>

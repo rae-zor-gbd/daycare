@@ -2,12 +2,15 @@
 include 'config.php';
 if (isset($_POST['id'])) {
   $id=$_POST['id'];
-  $sql_owner_info="SELECT lastName, primaryOwner, secondaryOwner FROM owners WHERE ownerID='$id'";
+  $sql_owner_info="SELECT * FROM owners WHERE ownerID='$id'";
   $result_owner_info=$conn->query($sql_owner_info);
   $row_owner_info=$result_owner_info->fetch_assoc();
   $editLastName=htmlspecialchars($row_owner_info['lastName'], ENT_QUOTES);
   $editPrimaryOwner=htmlspecialchars($row_owner_info['primaryOwner'], ENT_QUOTES);
   $editSecondaryOwner=htmlspecialchars($row_owner_info['secondaryOwner'], ENT_QUOTES);
+  $editPrimaryCell=$row_owner_info['primaryCell'];
+  $editSecondaryCell=$row_owner_info['secondaryCell'];
+  $editHomePhone=$row_owner_info['homePhone'];
   $sql_owner_emails="SELECT email FROM emails WHERE ownerID='$id'";
   $result_owner_emails=$conn->query($sql_owner_emails);
   $ownerEmails=array();
@@ -41,6 +44,18 @@ if (isset($_POST['id'])) {
   <div class='input-group'>
   <span class='input-group-addon owner'>Secondary Owner</span>
   <input type='text' class='form-control' name='secondaryOwner' maxlength='255' id='editSecondaryOwner' value='$editSecondaryOwner'>
+  </div>
+  <div class='input-group'>
+  <span class='input-group-addon phone'>Primary Cell</span>
+  <input type='tel' class='form-control' name='primaryCell' minlength='12' maxlength='12' id='editPrimaryCell' value='$editPrimaryCell'>
+  </div>
+  <div class='input-group'>
+  <span class='input-group-addon phone'>Secondary Cell</span>
+  <input type='tel' class='form-control' name='secondaryCell' minlength='12' maxlength='12' id='editSecondaryCell' value='$editSecondaryCell'>
+  </div>
+  <div class='input-group'>
+  <span class='input-group-addon phone'>Home Phone</span>
+  <input type='tel' class='form-control' name='homePhone' minlength='12' maxlength='12' id='editHomePhone' value='$editHomePhone'>
   </div>
   <div class='input-group'>
   <span class='input-group-addon email'>Primary Email</span>

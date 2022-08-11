@@ -143,6 +143,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight:var(--font-weight-bold);
   text-transform:uppercase;
 }
+p {
+  margin:0;
+}
 a, a:focus, a:hover {
   color:inherit;
   cursor:pointer;
@@ -223,7 +226,7 @@ textarea {
   min-width:calc(var(--spacer)*6);
   text-align:left;
 }
-.input-group-addon.clock::before, .input-group-addon.contract::before, .input-group-addon.day::before, .input-group-addon.days::before, .input-group-addon.dog::before, .input-group-addon.email::before, .input-group-addon.info::before, .input-group-addon.notes::before, .input-group-addon.owner::before, .input-group-addon.vaccine::before, .input-group-addon.vet::before {
+.input-group-addon.clock::before, .input-group-addon.contract::before, .input-group-addon.day::before, .input-group-addon.days::before, .input-group-addon.dog::before, .input-group-addon.email::before, .input-group-addon.info::before, .input-group-addon.notes::before, .input-group-addon.owner::before, .input-group-addon.phone::before, .input-group-addon.vaccine::before, .input-group-addon.vet::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
@@ -256,10 +259,13 @@ textarea {
 .input-group-addon.owner::before {
   content:var(--icon-user);
 }
+.input-group-addon.phone::before {
+  content:var(--icon-bell);
+}
 .input-group-addon.vaccine::before {
   content:var(--icon-vaccine);
 }
-.input-group-addon.vet::before {
+.input-group-addon.vet::before, .nav-link#requests::before, .vaccine-reminder-vet::before, .vet-heading::before {
   content:var(--icon-clipboard-list);
 }
 .loading-ring {
@@ -324,7 +330,7 @@ textarea {
   display:table-cell;
   vertical-align:middle;
 }
-nav, .panel-group .panel-owner, .table-container {
+nav, .panel-group .panel-owner, .panel-group .panel-vet, .table-container {
   box-shadow:rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
 nav {
@@ -393,7 +399,7 @@ nav {
 }
 .nav-logo svg {
   height:100%;
-  width:80%;
+  width:100%;
 }
 .add-new-owner {
   bottom:calc(var(--spacer)*(4/3));
@@ -410,11 +416,6 @@ nav {
   top:-1px;
   transform:rotate(0deg);
 }
-.contracts-container, .panel-collapse>.panel-body {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:left;
-}
 .contracts-container .panel, .panel-owner .panel-body .panel {
   display:flex;
   flex-direction:column;
@@ -426,13 +427,18 @@ nav {
 .contracts-container .panel {
   width:calc((100%/4) - 12px);
 }
-.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before {
+.contracts-container, .panel-owner>.panel-collapse>.panel-body {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:left;
+}
+.dog-daycare-contract-status .label::before, .dog-heading::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .owner-heading::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-heading::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before, .vet-heading::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
   text-align:left;
 }
-.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before {
+.dog-daycare-contract-status .label::before, .dog-notes .label::before, .dog-vaccine-status .label::before, .package-days-left .label::before, .package-expiration-date .label::before, .package-notes .label::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before {
   position:relative;
   top:1px;
 }
@@ -442,7 +448,7 @@ nav {
 .dog-daycare-contract-status .label::before {
   content:var(--icon-contract);
 }
-.dog-heading::before, .owner-heading::before, .package-heading::before {
+.dog-heading::before, .owner-heading::before, .package-heading::before, .vet-heading::before {
   width:var(--spacer);
 }
 .dog-heading::before, .vaccine-reminder-dog::before {
@@ -470,7 +476,7 @@ nav {
 .dog-vaccine-status .label::before, .vaccine-reminder-due::before {
   content:var(--icon-vaccine);
 }
-.load-more, .panel-group .panel-owner+.panel-owner {
+.load-more, .panel-group .panel-owner+.panel-owner, .panel-group .panel-vet+.panel-vet {
   margin-top:calc(var(--spacer)/2);
 }
 .load-more {
@@ -493,12 +499,12 @@ nav {
   position:relative;
   top:4px;
 }
-.package-reminder-days, .package-reminder-title, .vaccine-reminder-dog {
+.package-reminder-days, .package-reminder-title, .vaccine-reminder-dog, .vaccine-reminder-due {
   border-right:1.5px solid rgb(255 255 255 / 50%);
   margin-right:calc(var(--spacer)/10);
   padding-right:calc(var(--spacer)/6);
 }
-.package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes-text::before {
+.package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before {
   padding-right:calc(var(--spacer)/6);
 }
 .package-status {
@@ -533,7 +539,7 @@ nav {
 .panel-footer button:first-of-type {
   padding-left:0;
 }
-.panel-group .panel-owner {
+.panel-group .panel-owner, .panel-group .panel-vet {
   border:0;
 }
 .panel-heading .panel-arrow {
@@ -546,13 +552,13 @@ nav {
 .panel-owner .panel-body .panel {
   width:calc((100%/4) - 12px);
 }
-.panel-owner>a>.panel-heading, .table-container {
+.panel-owner>a>.panel-heading, .panel-vet>a>.panel-heading, .table-container {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
-.panel-owner>.panel-collapse>.panel-body, .panel-owner>.panel-collapse>.panel-footer {
+.panel-owner>.panel-collapse>.panel-body, .panel-owner>.panel-collapse>.panel-footer, .panel-vet>.panel-collapse>.panel-body, .panel-vet>.panel-collapse>.panel-footer {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
-.panel-owner, .table-container {
+.panel-owner, .panel-vet, .table-container {
   background-color:var(--color-08);
 }
 .panel-title {

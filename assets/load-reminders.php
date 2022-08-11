@@ -63,7 +63,7 @@ if ($result_reminders->num_rows>0) {
       }
       echo "</td>
       <td>";
-      $sql_vaccine_reminders="SELECT dogID, dogName, vaccineTitle, dueDate, notes FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines v USING (vaccineID) WHERE ownerID='$ownerID' AND requirementStatus='Required' AND dueDate<=DATE_ADD(NOW(), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY) ORDER BY dueDate";
+      $sql_vaccine_reminders="SELECT dogID, dogName, vaccineTitle, dueDate, vetName, notes FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines vx USING (vaccineID) JOIN vets v USING (vetID) WHERE ownerID='$ownerID' AND requirementStatus='Required' AND dueDate<=DATE_ADD(NOW(), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY) ORDER BY dueDate";
       $result_vaccine_reminders=$conn->query($sql_vaccine_reminders);
       if ($result_vaccine_reminders->num_rows>0) {
         while ($row_vaccine_reminders=$result_vaccine_reminders->fetch_assoc()) {
@@ -71,6 +71,7 @@ if ($result_reminders->num_rows>0) {
           $dogName=mysqli_real_escape_string($conn, $row_vaccine_reminders['dogName']);
           $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccine_reminders['vaccineTitle']);
           $vaccineDueDate=strtotime($row_vaccine_reminders['dueDate']);
+          $vetName=mysqli_real_escape_string($conn, $row_vaccine_reminders['vetName']);
           $vaccineNotes=nl2br($row_vaccine_reminders['notes']);
           echo "<div class='vaccine-reminder'>
           <span class='label label-";
@@ -82,6 +83,7 @@ if ($result_reminders->num_rows>0) {
           echo "'>
           <span class='vaccine-reminder-dog'>$dogName</span>
           <span class='vaccine-reminder-due'>$vaccineTitle due " . date('D n/j', $vaccineDueDate) . "</span>
+          <span class='vaccine-reminder-vet'>$vetName</span>
           </span>
           <button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' title='Add Vaccine Notes for $dogName'></button>
           </div>";

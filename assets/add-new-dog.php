@@ -1,14 +1,15 @@
 <?php
 include 'config.php';
-if (isset($_POST['id']) AND isset($_POST['dogName']) AND isset($_POST['daycareContract'])) {
+if (isset($_POST['id']) AND isset($_POST['dogName']) AND isset($_POST['daycareContract']) AND isset($_POST['vetID'])) {
   $ownerID=$_POST['id'];
   $dogName=mysqli_real_escape_string($conn, $_POST['dogName']);
   $daycareContract=mysqli_real_escape_string($conn, $_POST['daycareContract']);
+  $vetID=$_POST['vetID'];
   $sql_next_dog_id="SELECT AUTO_INCREMENT AS nextDogID FROM information_schema.TABLES WHERE TABLE_SCHEMA='daycare' AND TABLE_NAME='dogs'";
   $result_next_dog_id=$conn->query($sql_next_dog_id);
   $row_next_dog_id=$result_next_dog_id->fetch_assoc();
   $dogID=$row_next_dog_id['nextDogID'];
-  $sql_add_dog="INSERT INTO dogs (dogID, dogName, ownerID, daycareContract) VALUES ('$dogID', '$dogName', '$ownerID', '$daycareContract')";
+  $sql_add_dog="INSERT INTO dogs (dogID, dogName, ownerID, daycareContract, vetID) VALUES ('$dogID', '$dogName', '$ownerID', '$daycareContract', '$vetID')";
   $conn->query($sql_add_dog);
   $sql_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
   $result_vaccines=$conn->query($sql_vaccines);

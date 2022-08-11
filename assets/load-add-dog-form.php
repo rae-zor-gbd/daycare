@@ -14,6 +14,19 @@ if (isset($_POST['id'])) {
   <option value='Incomplete'>Incomplete</option>
   <option value='Completed'>Completed</option>
   </select>
+  </div>
+  <div class='input-group'>
+  <span class='input-group-addon vet'>Vet</span>
+  <select class='form-control' name='vet' id='addVet' required>
+  <option value='' selected disabled>Select Vet</option>";
+  $sql_all_vets="SELECT vetID, vetName FROM vets ORDER BY vetName";
+  $result_all_vets=$conn->query($sql_all_vets);
+  while ($row_all_vets=$result_all_vets->fetch_assoc()) {
+    $vetID=$row_all_vets['vetID'];
+    $vetName=mysqli_real_escape_string($conn, $row_all_vets['vetName']);
+    echo "<option value='$vetID'>$vetName</option>";
+  }
+  echo "</select>
   </div>";
   $sql_vaccines="SELECT vaccineID, vaccineTitle FROM vaccines ORDER BY vaccineTitle";
   $result_vaccines=$conn->query($sql_vaccines);

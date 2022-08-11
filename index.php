@@ -79,6 +79,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var id=document.getElementById('addToOwnerID').value;
       var dogName=document.getElementById('addDogName').value;
       var daycareContract=document.getElementById('addDaycareContract').value;
+      var vetID=document.getElementById('addVet').value;
       <?php
       $sql_all_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
       $result_all_vaccines=$conn->query($sql_all_vaccines);
@@ -93,7 +94,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/add-new-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, dogName:dogName, daycareContract:daycareContract<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
+        data:{id:id, dogName:dogName, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
         success:function(response){
           $('#addDogModal').modal('hide');
           $('#addDogModalBody').empty();
@@ -138,6 +139,9 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var lastName=document.getElementById('newLastName').value;
       var primaryOwner=document.getElementById('newPrimaryOwner').value;
       var secondaryOwner=document.getElementById('newSecondaryOwner').value;
+      var primaryCell=document.getElementById('newPrimaryCell').value;
+      var secondaryCell=document.getElementById('newSecondaryCell').value;
+      var homePhone=document.getElementById('newHomePhone').value;
       var primaryEmail=document.getElementById('newPrimaryEmail').value;
       var secondaryEmail=document.getElementById('newSecondaryEmail').value;
       var tertiaryEmail=document.getElementById('newTertiaryEmail').value;
@@ -145,7 +149,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/add-new-owner.php',
         type:'POST',
         cache:false,
-        data:{lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
+        data:{lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryCell:primaryCell, secondaryCell:secondaryCell, homePhone:homePhone, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
         success:function(response){
           $('#panel-owners').empty();
           loadOwners();
@@ -387,6 +391,9 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var lastName=document.getElementById('editLastName').value;
       var primaryOwner=document.getElementById('editPrimaryOwner').value;
       var secondaryOwner=document.getElementById('editSecondaryOwner').value;
+      var primaryCell=document.getElementById('editPrimaryCell').value;
+      var secondaryCell=document.getElementById('editSecondaryCell').value;
+      var homePhone=document.getElementById('editHomePhone').value;
       var primaryEmail=document.getElementById('editPrimaryEmail').value;
       var secondaryEmail=document.getElementById('editSecondaryEmail').value;
       var tertiaryEmail=document.getElementById('editTertiaryEmail').value;
@@ -394,7 +401,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/edit-owner.php',
         type:'POST',
         cache:false,
-        data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
+        data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryCell:primaryCell, secondaryCell:secondaryCell, homePhone:homePhone, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
         success:function(response){
           $('#editOwnerModal').modal('hide');
           $('#editOwnerModalBody').empty();
@@ -473,6 +480,18 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
             <div class='input-group'>
               <span class='input-group-addon owner'>Secondary Owner</span>
               <input type='text' class='form-control' name='secondary-owner' maxlength='255' id='newSecondaryOwner'>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon phone'>Primary Cell</span>
+              <input type='tel' class='form-control' name='primary-cell' minlength='12' maxlength='12' id='newPrimaryCell'>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon phone'>Secondary Cell</span>
+              <input type='tel' class='form-control' name='secondary-cell' minlength='12' maxlength='12' id='newSecondaryCell'>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon phone'>Home Phone</span>
+              <input type='tel' class='form-control' name='home-phone' minlength='12' maxlength='12' id='newHomePhone'>
             </div>
             <div class='input-group'>
               <span class='input-group-addon email'>Primary Email</span>
