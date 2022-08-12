@@ -427,6 +427,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       e.preventDefault();
       var id=document.getElementById('editPackageID').value;
       var owner=document.getElementById('editPackageForOwnerID').value;
+      var currentStatus=document.getElementById('editPackageCurrentStatus').value;
       var status=document.getElementById('editPackageStatus').value;
       var daysLeft=document.getElementById('editPackageDaysLeft').value;
       var startDate=document.getElementById('editPackageStartDate').value;
@@ -435,7 +436,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/edit-package.php',
         type:'POST',
         cache:false,
-        data:{id:id, owner:owner, status:status, daysLeft:daysLeft, startDate:startDate, expirationDate:expirationDate},
+        data:{id:id, owner:owner, currentStatus:currentStatus, status:status, daysLeft:daysLeft, startDate:startDate, expirationDate:expirationDate},
         success:function(response){
           $('#editPackageModal').modal('hide');
           $('#editPackageModalBody').empty();

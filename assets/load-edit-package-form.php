@@ -15,6 +15,7 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   $editPackageStartDate=$row_package_info['startDate'];
   $editPackageExpirationDate=$row_package_info['expirationDate'];
   echo "<input type='hidden' class='form-control' name='id' id='editPackageID' value='$id' required>
+  <input type='hidden' class='form-control' name='current-status' id='editPackageCurrentStatus' value='$editPackageStatus' required>
   <input type='hidden' class='form-control' name='owner' id='editPackageForOwnerID' value='$owner' required>
   <div class='input-group'>
   <span class='input-group-addon owner'>Last Name</span>

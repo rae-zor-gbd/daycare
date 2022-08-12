@@ -18,7 +18,7 @@ if (isset($_POST['ownerID']) AND isset($_POST['packageID'])) {
     $duration=NULL;
   }
   if (isset($_POST['startDate']) AND $_POST['startDate']!='') {
-    $startDate=$_POST['startDate'];
+    $startDate=date('Y-m-d', strtotime($_POST['startDate']));
     $status='Active';
     $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
   } else {

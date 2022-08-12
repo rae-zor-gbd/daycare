@@ -1,34 +1,33 @@
 <?php
 include 'config.php';
-if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['status'])) {
+if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStatus']) AND isset($_POST['status'])) {
   $packageID=$_POST['id'];
   $ownerID=$_POST['owner'];
+  $currentStatus=mysqli_real_escape_string($conn, $_POST['currentStatus']);
   $status=mysqli_real_escape_string($conn, $_POST['status']);
   $daysLeft=$_POST['daysLeft'];
-  $startDate=$_POST['startDate'];
-  $expirationDate=$_POST['expirationDate'];
+  $startDate=date('Y-m-d', strtotime($_POST['startDate']));
+  $expirationDate=date('Y-m-d', strtotime($_POST['expirationDate']));
   $sql_edit_package="UPDATE owners_packages SET status='$status' WHERE ownerPackageID='$packageID'";
   $conn->query($sql_edit_package);
-  if ($status==='Active') {
+  if ($currentStatus==='Not Started' AND $status==='Active') {
     $sql_package_info="SELECT totalDays, duration FROM packages p JOIN owners_packages op USING (packageID) WHERE ownerPackageID='$packageID'";
     $result_package_info=$conn->query($sql_package_info);
     $row_package_info=$result_package_info->fetch_assoc();
     if ($row_package_info['totalDays']>0) {
-      if (!isset($daysLeft) OR $daysLeft='') {
-        $daysLeft=$row_package_info['totalDays'];
-      }
+      $daysLeft=$row_package_info['totalDays'];
       $duration=$row_package_info['duration'];
     } else {
-      if (!isset($daysLeft) OR $daysLeft='') {
-        $daysLeft=NULL;
-      }
+      $daysLeft=NULL;
       $duration=NULL;
     }
     if (isset($startDate) AND $startDate!='') {
       $startDate=$_POST['startDate'];
-      $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
+      if ($currentStatus==='Not Started' AND $status==='Active') {
+        $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
+      }
     } else {
-      $startDate=date('Y-m-d');
+      $startDate=NULL;
       $expirationDate=NULL;
     }
     $sql_edit_package_start_expiration="UPDATE owners_packages SET startDate='$startDate', expirationDate='$expirationDate' WHERE ownerPackageID='$packageID'";

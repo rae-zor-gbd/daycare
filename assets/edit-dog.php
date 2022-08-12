@@ -15,7 +15,7 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['dogName']) 
   while ($row_vaccines=$result_vaccines->fetch_assoc()) {
     $vaccineID=$row_vaccines['vaccineID'];
     if (isset($_POST['vaccine' . $vaccineID]) AND $_POST['vaccine' . $vaccineID]!='') {
-      $dueDate=$_POST['vaccine' . $vaccineID];
+      $dueDate=date('Y-m-d', strtotime($_POST['vaccine' . $vaccineID]));
       $sql_add_vaccine="INSERT INTO dogs_vaccines (dogID, vaccineID, dueDate) VALUES ('$dogID', '$vaccineID', '$dueDate')";
       $conn->query($sql_add_vaccine);
     }
