@@ -1,68 +1,32 @@
 @font-face {
-  font-family:'Akzidenz Grotesk';
-  font-style:normal;
-  font-weight:400;
-  src:url(/fonts/AkzidenzGrotesk-Regular.woff) format('woff');
-}
-@font-face {
-  font-family:'Akzidenz Grotesk';
-  font-style:normal;
-  font-weight:700;
-  src:url(/fonts/AkzidenzGrotesk-Bold.woff) format('woff');
-}
-@font-face {
-  font-family:'Helvetica Now Text';
-  font-style:normal;
-  font-weight:400;
-  src:url(/fonts/HelveticaNowText-Regular.woff) format('woff');
-}
-@font-face {
-  font-family:'Helvetica Now Text';
-  font-style:normal;
-  font-weight:700;
-  src:url(/fonts/HelveticaNowText-Bold.woff) format('woff');
-}
-@font-face {
   font-family:'Icons';
   font-style:normal;
   font-weight:400;
   src:url(/fonts/Icons-Regular.woff) format('woff');
 }
 @font-face {
-  font-family:'Noto Sans';
-  font-style:normal;
-  font-weight:400;
-  src:url(/fonts/NotoSans-Regular.woff) format('woff');
-}
-@font-face {
-  font-family:'Noto Sans';
-  font-style:italic;
-  font-weight:400;
-  src:url(/fonts/NotoSans-RegularItalic.woff) format('woff');
-}
-@font-face {
-  font-family:'Noto Sans';
-  font-style:normal;
-  font-weight:700;
-  src:url(/fonts/NotoSans-Bold.woff) format('woff');
-}
-@font-face {
-  font-family:'Noto Sans';
-  font-style:italic;
-  font-weight:700;
-  src:url(/fonts/NotoSans-BoldItalic.woff) format('woff');
-}
-@font-face {
   font-family:'Proxima Nova';
   font-style:normal;
   font-weight:400;
-  src:url(/fonts/ProximaNova-Regular.woff) format('woff');
+  src:url(/fonts/ProximaNova-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family:'Proxima Nova';
+  font-style:italic;
+  font-weight:400;
+  src:url(/fonts/ProximaNova-RegularItalic.woff2) format('woff2');
 }
 @font-face {
   font-family:'Proxima Nova';
   font-style:normal;
   font-weight:700;
-  src:url(/fonts/ProximaNova-Bold.woff) format('woff');
+  src:url(/fonts/ProximaNova-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family:'Proxima Nova';
+  font-style:italic;
+  font-weight:700;
+  src:url(/fonts/ProximaNova-BoldItalic.woff2) format('woff2');
 }
 :root {
   --base-color:240;
@@ -74,7 +38,7 @@
   --color-06:hsl(var(--base-color), 10%, 93%);
   --color-07:hsl(var(--base-color), 25%, 96%);
   --color-08:hsl(var(--base-color), 10%, 100%);
-  --font-family:'Noto Sans', sans-serif;
+  --font-family:'Proxima Nova', sans-serif;
   --font-size:17px;
   --font-weight-bold:700;
   --font-weight-regular:400;
