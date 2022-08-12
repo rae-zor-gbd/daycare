@@ -52,11 +52,12 @@ include 'assets/config.php';
     $(document).on('click', '#add-vaccine-notes-button', function() {
       var id=$(this).data('id');
       var owner=$(this).data('owner');
+      var vetID=$(this).data('vet');
       $.ajax({
         url:'assets/load-add-dog-notes-form.php',
         type:'POST',
         cache:false,
-        data:{id:id, owner:owner},
+        data:{id:id, owner:owner, vetID:vetID},
         success:function(response){
           $('#addVaccineNotesModalBody').append(response);
         }
@@ -66,6 +67,7 @@ include 'assets/config.php';
       e.preventDefault();
       var dogID=document.getElementById('addDogNotesID').value;
       var ownerID=document.getElementById('addDogNotesOwnerID').value;
+      var vetID=document.getElementById('addDogNotesVetID').value;
       var dogNotes=document.getElementById('addDogNotesBox').value;
       $.ajax({
         url:'assets/add-dog-notes.php',
@@ -75,7 +77,7 @@ include 'assets/config.php';
         success:function(response){
           $('#addVaccineNotesModal').modal('hide');
           $('#addVaccineNotesModalBody').empty();
-          loadVets();
+          loadRequests(vetID);
         }
       });
     });

@@ -39,7 +39,7 @@
   --color-07:hsl(var(--base-color), 25%, 96%);
   --color-08:hsl(var(--base-color), 10%, 100%);
   --font-family:'Proxima Nova', sans-serif;
-  --font-size:17px;
+  --font-size:18px;
   --font-weight-bold:700;
   --font-weight-regular:400;
   --icon-archive:'\e900';
@@ -505,7 +505,7 @@ nav {
   position:relative;
   top:4px;
 }
-.package-reminder-days, .package-reminder-title, .vaccine-reminder-dog, .vaccine-reminder-due {
+.package-reminder-days, .package-reminder-title, .vaccine-reminder-dog {
   border-right:1.5px solid rgb(255 255 255 / 50%);
   margin-right:calc(var(--spacer)/10);
   padding-right:calc(var(--spacer)/6);

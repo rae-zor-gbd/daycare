@@ -14,10 +14,14 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['status'])) 
     $result_package_info=$conn->query($sql_package_info);
     $row_package_info=$result_package_info->fetch_assoc();
     if ($row_package_info['totalDays']>0) {
-      $daysLeft=$row_package_info['totalDays'];
+      if (!isset($daysLeft) OR $daysLeft='') {
+        $daysLeft=$row_package_info['totalDays'];
+      }
       $duration=$row_package_info['duration'];
     } else {
-      $daysLeft=NULL;
+      if (!isset($daysLeft) OR $daysLeft='') {
+        $daysLeft=NULL;
+      }
       $duration=NULL;
     }
     if (isset($startDate) AND $startDate!='') {
