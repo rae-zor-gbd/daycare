@@ -55,43 +55,33 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       echo "success";
     }
     echo "' id='panel-dog-$dogID'>
-    <div class='panel-heading dog-heading'>" . stripslashes($dogName) . "</div>
-    <div class='panel-body'>";
+    <div class='panel-heading dog-heading'>" . stripslashes($dogName) . "</div>";
     if (stripslashes($daycareContract)==='Incomplete') {
-      echo "<div class='dog-daycare-contract-status'>
-      <span class='label label-danger'>Incomplete Daycare Contract</span>
-      </div>";
+      echo "<div class='panel-body dog-daycare-contract-status text-danger'>Incomplete Daycare Contract</div>";
     }
     if ($result_vaccines_not_given->num_rows>0) {
       while ($row_vaccines_not_given=$result_vaccines_not_given->fetch_assoc()) {
         $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccines_not_given['vaccineTitle']);
-        echo "<div class='dog-vaccine-status'>
-        <span class='label label-danger'>" . stripslashes($vaccineTitle) . " required</span>
-        </div>";
+        echo "<div class='panel-body dog-vaccine-status text-danger'>" . stripslashes($vaccineTitle) . " required</div>";
       }
     }
     if ($result_vaccines->num_rows>0) {
       while ($row_vaccines=$result_vaccines->fetch_assoc()) {
         $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccines['vaccineTitle']);
         $dueDate=strtotime($row_vaccines['dueDate']);
-        echo "<div class='dog-vaccine-status'>
-        <span class='label label-";
+        echo "<div class='panel-body dog-vaccine-status text-";
         if ($dueDate<$today) {
           echo "danger";
         } elseif ($dueDate>=$today) {
           echo "warning";
         }
-        echo "'>" . stripslashes($vaccineTitle) . " due " . date('D n/j', $dueDate) . "</span>
-        </div>";
+        echo "'>" . stripslashes($vaccineTitle) . " due " . date('D n/j', $dueDate) . "</div>";
       }
     }
     if (isset($dogNotes) AND $dogNotes!=='') {
-      echo "<div class='dog-notes'>
-      <span class='label label-default'>" . stripslashes($dogNotes) . "</span>
-      </div>";
+      echo "<div class='panel-body dog-notes'>" . stripslashes($dogNotes) . "</div>";
     }
-    echo "</div>
-    <div class='panel-footer'>
+    echo "<div class='panel-footer'>
     <button type='button' class='button-delete' id='delete-dog-button' data-toggle='modal' data-target='#deleteDogModal' data-id='$dogID' title='Delete Dog'></button>
     <button type='button' class='button-edit' id='edit-dog-button' data-toggle='modal' data-target='#editDogModal' data-id='$dogID' data-owner='$ownerID' title='Edit Dog'></button>
     <button type='button' class='button-notes' id='add-dog-notes-button' data-toggle='modal' data-target='#addDogNotesModal' data-id='$dogID' data-owner='$ownerID' title='Add Note'></button>

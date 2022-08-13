@@ -237,10 +237,11 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
             $('#decrease-package-days-button-'+id).hide();
             $('#package-status-'+id).empty();
             $('#package-status-'+id).append('Out of Days');
-            $('#days-left-label-'+id).removeClass('label-warning').addClass('label-danger');
+            $('#days-left-'+id).removeClass('text-warning').addClass('text-danger');
             $('#panel-package-'+id).removeClass('panel-warning').addClass('panel-danger');
+            $('#days-left-plural-'+id).show();
           } else if (decreaseDays<=daysLeftWarning) {
-            $('#days-left-label-'+id).removeClass('label-success').addClass('label-warning');
+            $('#days-left-'+id).removeClass('text-success').addClass('text-warning');
             $('#panel-package-'+id).removeClass('panel-success').addClass('panel-warning');
             if (decreaseDays==1) {
               $('#days-left-plural-'+id).hide();

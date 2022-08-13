@@ -28,11 +28,9 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       echo "info";
     }
     echo "' id='panel-package-$packageID'>
-    <div class='panel-heading package-heading'>" . stripslashes($packageTitle) . "<span class='package-status' id='package-status-$packageID'>" . stripslashes($status) . "</span></div>
-    <div class='panel-body'>";
+    <div class='panel-heading package-heading'>" . stripslashes($packageTitle) . "<span class='package-status' id='package-status-$packageID'>" . stripslashes($status) . "</span></div>";
     if (isset($daysLeft) AND $daysLeft!=='') {
-      echo "<div class='package-days-left'>
-      <span class='label label-";
+      echo "<div class='panel-body package-days-left text-";
       if ($daysLeft==0) {
         echo "danger";
       } elseif ($daysLeft<=$daysLeftWarning) {
@@ -40,16 +38,14 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       } else {
         echo "success";
       }
-      echo "' id='days-left-label-$packageID'><span id='days-left-count-$packageID'>$daysLeft</span> day";
+      echo "' id='days-left-$packageID'><span id='days-left-count-$packageID'>$daysLeft</span> day";
       if ($daysLeft!=1) {
         echo "<span id='days-left-plural-$packageID'>s</span>";
       }
-      echo " left</span>
-      </div>";
+      echo " left</div>";
     }
     if (isset($expirationDate) AND $expirationDate!=='') {
-      echo "<div class='package-expiration-date'>
-      <span class='label label-";
+      echo "<div class='panel-body package-expiration-date text-";
       if ($expirationDate<$today) {
         echo "danger";
       } elseif ($today>=$expirationWarning) {
@@ -63,16 +59,12 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       } elseif ($expirationDate<$today) {
         echo "d ";
       }
-      echo date('D n/j', $expirationDate) . "</span>
-      </div>";
+      echo date('D n/j', $expirationDate) . "</div>";
     }
     if (isset($packageNotes) AND $packageNotes!=='') {
-      echo "<div class='package-notes'>
-      <span class='label label-default'>" . stripslashes($packageNotes) . "</span>
-      </div>";
+      echo "<div class='panel-body package-notes text-default'>" . stripslashes($packageNotes) . "</div>";
     }
-    echo "</div>
-    <div class='panel-footer'>
+    echo "<div class='panel-footer'>
     <button type='button' class='button-delete' id='delete-package-button' data-toggle='modal' data-target='#deletePackageModal' data-id='$packageID' title='Delete Package'></button>
     <button type='button' class='button-edit' id='edit-package-button' data-toggle='modal' data-target='#editPackageModal' data-id='$packageID' data-owner='$ownerID' title='Edit Package'></button>
     <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Note'></button>";
