@@ -56,14 +56,12 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     }
     echo "' id='panel-dog-$dogID'>
     <div class='panel-heading dog-heading'>" . stripslashes($dogName) . "</div>
-    <div class='panel-body'>
-    <div class='dog-daycare-contract-status'>";
-    if (stripslashes($daycareContract)==='Completed') {
-      echo "<span class='label label-success'>Completed Daycare Contract</span>";
-    } elseif (stripslashes($daycareContract)==='Incomplete') {
-      echo "<span class='label label-danger'>Incomplete Daycare Contract</span>";
+    <div class='panel-body'>";
+    if (stripslashes($daycareContract)==='Incomplete') {
+      echo "<div class='dog-daycare-contract-status'>
+      <span class='label label-danger'>Incomplete Daycare Contract</span>
+      </div>";
     }
-    echo "</div>";
     if ($result_vaccines_not_given->num_rows>0) {
       while ($row_vaccines_not_given=$result_vaccines_not_given->fetch_assoc()) {
         $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccines_not_given['vaccineTitle']);

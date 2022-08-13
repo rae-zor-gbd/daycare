@@ -476,7 +476,7 @@ nav {
   text-align:left;
   white-space:unset;
 }
-.dog-notes, .dog-vaccine-status, .package-expiration-date, .package-notes, .package-reminder-notes, .vaccine-reminder:not(:first-of-type), .vaccine-reminder-notes {
+.dog-notes, .dog-vaccine-status:not(:first-of-type), .package-expiration-date, .package-notes, .package-reminder-notes, .vaccine-reminder:not(:first-of-type), .vaccine-reminder-notes {
   margin-top:5px;
 }
 .dog-vaccine-status .label::before, .vaccine-reminder-due::before {
