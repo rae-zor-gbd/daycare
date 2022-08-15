@@ -530,6 +530,9 @@ nav {
   font-family:var(--icon-font-family);
   font-size:10px;
 }
+.panel-body {
+  padding:calc(var(--spacer)/5) calc(var(--spacer)/2);
+}
 .panel-body:empty {
   display:none;
 }
