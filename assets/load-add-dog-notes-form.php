@@ -3,18 +3,18 @@ include 'config.php';
 if (isset($_POST['id']) AND isset($_POST['owner'])) {
   $dogID=$_POST['id'];
   $ownerID=$_POST['owner'];
-  if (isset($_POST['vetID']) AND $_POST['vetID']!='') {
-    $vetID=$_POST['vetID'];
-  }
   $sql_dog_info="SELECT lastName, dogName, notes FROM dogs d JOIN owners o USING (ownerID) WHERE dogID='$dogID'";
   $result_dog_info=$conn->query($sql_dog_info);
   $row_dog_info=$result_dog_info->fetch_assoc();
   $editLastName=htmlspecialchars($row_dog_info['lastName'], ENT_QUOTES);
   $editDogName=htmlspecialchars($row_dog_info['dogName'], ENT_QUOTES);
   $editDogNotes=htmlentities($row_dog_info['notes']);
-  echo "<input type='hidden' class='form-control' name='id' id='addDogNotesID' value='$dogID' required>
-  <input type='hidden' class='form-control' name='vetID' id='addDogNotesVetID' value='$vetID'>
-  <input type='hidden' class='form-control' name='ownerID' id='addDogNotesOwnerID' value='$ownerID' required>
+  echo "<input type='hidden' class='form-control' name='id' id='addDogNotesID' value='$dogID' required>";
+  if (isset($_POST['vetID']) AND $_POST['vetID']!='') {
+    $vetID=$_POST['vetID'];
+    echo "<input type='hidden' class='form-control' name='vetID' id='addDogNotesVetID' value='$vetID'>";
+  }
+  echo "<input type='hidden' class='form-control' name='ownerID' id='addDogNotesOwnerID' value='$ownerID' required>
   <div class='input-group'>
   <span class='input-group-addon owner'>Last Name</span>
   <input type='text' class='form-control' name='lastName' maxlength='255' id='addDogNotesLastName' value='$editLastName' disabled>
