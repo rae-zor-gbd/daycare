@@ -58,6 +58,7 @@ CREATE TABLE packages (
   duration INT(11) NOT NULL,
   daysLeftWarning INT(11) NOT NULL,
   expirationWarning INT(11) NOT NULL,
+  sortOrder INT(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (packageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

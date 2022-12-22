@@ -7,7 +7,7 @@ if (isset($_POST['id'])) {
   <span class='input-group-addon days'>Package</span>
   <select class='form-control' id='addDaycarePackage' name='package' required>
   <option value='' disabled selected>Select Package</option>";
-  $sql_all_packages="SELECT packageID, packageTitle FROM packages ORDER BY packageID";
+  $sql_all_packages="SELECT packageID, packageTitle FROM packages ORDER BY sortOrder, packageTitle";
   $result_all_packages=$conn->query($sql_all_packages);
   while ($row_all_packages=$result_all_packages->fetch_assoc()) {
     $packageID=$row_all_packages['packageID'];
