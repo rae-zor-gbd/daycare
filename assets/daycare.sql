@@ -46,6 +46,7 @@ CREATE TABLE dogs (
   vetID INT(11) NOT NULL,
   daycareContract ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
   notes TEXT DEFAULT NULL,
+  journalEntry ENUM('Yes', 'No') NOT NULL DEFAULT 'Yes',
   PRIMARY KEY (dogID),
   FOREIGN KEY (ownerID) REFERENCES owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (vetID) REFERENCES vets(vetID) ON DELETE CASCADE ON UPDATE CASCADE

@@ -42,7 +42,7 @@
 </head>
 <body>
   <?php
-  $sql_list="SELECT lastName, dogName FROM dogs d JOIN owners o USING (ownerID) ORDER BY lastName, dogName";
+  $sql_list="SELECT lastName, dogName FROM dogs d JOIN owners o USING (ownerID) WHERE journalEntry='Yes' ORDER BY lastName, dogName";
   $result_list=$conn->query($sql_list);
   while ($row_list=$result_list->fetch_assoc()) {
     $lastName=mysqli_real_escape_string($conn, $row_list['lastName']);
