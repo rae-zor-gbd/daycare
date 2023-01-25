@@ -2,7 +2,7 @@
 include 'config.php';
 if (isset($_POST['owner']) AND $_POST['owner']!='') {
   $ownerID=$_POST['owner'];
-  $sql_packages="SELECT ownerPackageID, packageTitle, status, daysLeft, daysLeftWarning, startDate, expirationDate, DATE_SUB(expirationDate, INTERVAL expirationWarning DAY) AS expirationWarning, notes FROM owners_packages op JOIN packages p USING (packageID) WHERE ownerID='$ownerID' ORDER BY FIELD(status, 'Expired', 'Out of Days', 'Active', 'Not Started')";
+  $sql_packages="SELECT ownerPackageID, packageTitle, status, daysLeft, daysLeftWarning, startDate, expirationDate, DATE_SUB(expirationDate, INTERVAL expirationWarning DAY) AS expirationWarning, notes FROM owners_packages op JOIN packages p USING (packageID) WHERE ownerID='$ownerID' ORDER BY FIELD(status, 'Expired', 'Out of Days', 'Active', 'Not Started'), ownerPackageID";
   $result_packages=$conn->query($sql_packages);
   while ($row_packages=$result_packages->fetch_assoc()) {
     $packageID=$row_packages['ownerPackageID'];
