@@ -134,6 +134,7 @@
   --icon-vaccine:'\e94f';
   --icon-warning:'\e953';
   --icon-x:'\e954';
+  --journal-box-height:93px;
   --spacer:30px;
 }
 body {
@@ -190,7 +191,7 @@ textarea {
   transition-duration:.3s;
   transition-property:background;
 }
-.button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-notes::before, .button-package::before {
+.button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before {
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
 }
@@ -212,6 +213,12 @@ textarea {
 }
 .button-edit::before {
   content:var(--icon-edit);
+}
+.button-journal {
+  padding-left:6px!important;
+}
+.button-journal::before {
+  content:var(--icon-print);
 }
 .button-notes::before {
   content:var(--icon-comment);
@@ -303,6 +310,9 @@ textarea {
 }
 .modal-header {
   text-align:center;
+}
+.normal {
+  font-weight:400;
 }
 .search-panel {
   padding:calc(var(--spacer)/2) var(--spacer);
@@ -469,6 +479,33 @@ nav {
 }
 .dog-vaccine-status::before, .vaccine-reminder-due::before {
   content:var(--icon-vaccine);
+}
+.journal-box {
+  border-right:1px solid;
+  padding-left:5px;
+  text-transform:uppercase;
+}
+.journal-box-date, .journal-box-initials {
+  border-left:1px solid;
+  height:var(--journal-box-height);
+}
+.journal-box-initials {
+  border-top:1px solid;
+}
+.journal-box-notes {
+  height:calc(var(--journal-box-height)*2);
+}
+.journal-header {
+  text-align:right;
+}
+.journal-header:first-of-type {
+  margin-top:0;
+}
+.journal-row {
+  border-bottom:5px solid;
+}
+.journal-row:first-of-type {
+  border-top:5px solid;
 }
 .load-more, .panel-group .panel-owner+.panel-owner, .panel-group .panel-vet+.panel-vet {
   margin-top:calc(var(--spacer)/2);
