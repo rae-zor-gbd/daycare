@@ -4,6 +4,20 @@
 <head>
   <title>Daycare Journal</title>
   <?php include 'assets/header.php'; ?>
+  <style>
+  @page {
+    margin-bottom:0.25in;
+    margin-top:0.25in;
+  }
+  @page :left {
+    margin-left:0.25in;
+    margin-right:1in;
+  }
+  @page :right {
+    margin-left:1in;
+    margin-right:0.25in;
+  }
+  </style>
 </head>
 <body>
   <?php
@@ -17,20 +31,22 @@
   while ($row_list=$result_list->fetch_assoc()) {
     $lastName=mysqli_real_escape_string($conn, $row_list['lastName']);
     $dogName=mysqli_real_escape_string($conn, $row_list['dogName']);
-    echo "<div>
-    <h2 class='journal-header'>$dogName <span class='normal'>$lastName</span></h2>";
-    for ($x=0; $x<5; $x++) {
-      echo "<div class='row row-no-gutters journal-row'>
-      <div class='col-xs-3'>
-      <div class='journal-box journal-box-date'>Date</div>
-      <div class='journal-box journal-box-initials'>Initials</div>
-      </div>
-      <div class='col-xs-9'>
-      <div class='journal-box journal-box-notes'>Enrichment Notes</div>
-      </div>
-      </div>";
+    for ($journalPages=0; $journalPages<2; $journalPages++) {
+      echo "<div>
+      <h2 class='journal-header'>$dogName <span class='normal'>$lastName</span></h2>";
+      for ($journalRows=0; $journalRows<5; $journalRows++) {
+        echo "<div class='row row-no-gutters journal-row'>
+        <div class='col-xs-3'>
+        <div class='journal-box journal-box-date'>Date</div>
+        <div class='journal-box journal-box-initials'>Initials</div>
+        </div>
+        <div class='col-xs-9'>
+        <div class='journal-box journal-box-notes'>Enrichment Notes</div>
+        </div>
+        </div>";
+      }
+      echo "</div>";
     }
-    echo "</div>";
   }
   ?>
 </body>
