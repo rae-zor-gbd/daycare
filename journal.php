@@ -18,6 +18,11 @@
     margin-right:0.25in;
   }
   </style>
+  <script>
+  $(document).ready(function(){
+    window.print();
+  });
+  </script>
 </head>
 <body>
   <?php
