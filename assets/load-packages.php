@@ -18,7 +18,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     $daysLeftWarning=$row_packages['daysLeftWarning'];
     $packageNotes=nl2br($row_packages['notes']);
     echo "<div class='panel panel-";
-    if (stripslashes($status)==='Expired' OR stripslashes($status)==='Out of Days' OR (isset($expirationDate) AND $expirationDate!='' AND $expirationDate<=$today) OR (isset($daysLeft) AND $daysLeft!='' AND $daysLeft==0)) {
+    if (stripslashes($status)==='Expired' OR stripslashes($status)==='Out of Days' OR (isset($expirationDate) AND $expirationDate!='' AND $expirationDate<$today) OR (isset($daysLeft) AND $daysLeft!='' AND $daysLeft==0)) {
       echo "danger";
     } elseif ((isset($expirationDate) AND $expirationDate!='' AND $expirationDate<=$expirationWarning) OR (isset($daysLeft) AND $daysLeft!='' AND $daysLeft<=$daysLeftWarning)) {
       echo "warning";
