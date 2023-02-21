@@ -4,30 +4,30 @@ include 'assets/config.php';
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <title>Incomplete Daycare Contracts</title>
+  <title>Incomplete Client Registrations</title>
   <?php include 'assets/header.php'; ?>
   <script type='text/javascript'>
-  function loadContracts(){
+  function loadRegistrations(){
     $.ajax({
-      url:'/assets/load-contracts.php',
+      url:'/assets/load-registrations.php',
       type:'POST',
       cache:false,
       data:{},
       success:function(data){
         if (data) {
-          $('#contracts-panels').empty();
-          $('#contracts-panels').append(data);
+          $('#registrations-panels').empty();
+          $('#registrations-panels').append(data);
         }
       }
     });
   }
   $(document).ready(function(){
-    $('#contracts').addClass('active');
-    loadContracts();
+    $('#registrations').addClass('active');
+    loadRegistrations();
     $(document).on('click', '.button-complete', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/complete-daycare-contract.php',
+        url:'assets/complete-client-registration.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -42,7 +42,7 @@ include 'assets/config.php';
 <body>
   <?php include 'assets/navbar.php'; ?>
   <div class='container-fluid'>
-    <div class='contracts-container' id='contracts-panels'></div>
+    <div class='contracts-container' id='registrations-panels'></div>
   </div>
 </body>
 </html>

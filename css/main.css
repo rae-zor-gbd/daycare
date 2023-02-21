@@ -363,7 +363,7 @@ nav {
   padding-left:25px;
   padding-right:25px;
 }
-.nav-link#contracts::before {
+.nav-link#contracts::before, .nav-link#registrations::before {
   content:var(--icon-contract);
 }
 .nav-link#packages::before {

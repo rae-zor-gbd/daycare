@@ -49,6 +49,9 @@
       <a href='/requests'>
         <div class='nav-link' id='requests'>Vet Requests</div>
       </a>
+      <a href='/registrations'>
+        <div class='nav-link' id='registrations'>Registrations</div>
+      </a>
       <a href='/contracts'>
         <div class='nav-link' id='contracts'>Contracts</div>
       </a>

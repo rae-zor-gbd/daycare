@@ -8,6 +8,8 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 
 RewriteRule ^contracts contracts.php [NC,L]
 
+RewriteRule ^registrations registrations.php [NC,L]
+
 RewriteRule ^reminders reminders.php [NC,L]
 
 RewriteRule ^requests requests.php [NC,L]
