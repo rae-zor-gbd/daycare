@@ -45,6 +45,7 @@ CREATE TABLE dogs (
   dogName VARCHAR(255) NOT NULL,
   ownerID INT(11) NOT NULL,
   vetID INT(11) NOT NULL,
+  clientRegistration ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
   daycareContract ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
   notes TEXT DEFAULT NULL,
   journalEntry ENUM('Yes', 'No') NOT NULL DEFAULT 'Yes',

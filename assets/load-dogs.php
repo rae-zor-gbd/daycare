@@ -2,11 +2,12 @@
 include 'config.php';
 if (isset($_POST['owner']) AND $_POST['owner']!='') {
   $ownerID=$_POST['owner'];
-  $sql_dogs="SELECT dogID, dogName, daycareContract, notes FROM dogs WHERE ownerID='$ownerID' ORDER BY dogName";
+  $sql_dogs="SELECT dogID, dogName, clientRegistration, daycareContract, notes FROM dogs WHERE ownerID='$ownerID' ORDER BY dogName";
   $result_dogs=$conn->query($sql_dogs);
   while ($row_dogs=$result_dogs->fetch_assoc()) {
     $dogID=$row_dogs['dogID'];
     $dogName=mysqli_real_escape_string($conn, $row_dogs['dogName']);
+    $clientRegistration=mysqli_real_escape_string($conn, $row_dogs['clientRegistration']);
     $daycareContract=mysqli_real_escape_string($conn, $row_dogs['daycareContract']);
     $dogNotes=nl2br($row_dogs['notes']);
     $sql_current_fecal="SELECT * FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines v USING (vaccineID) WHERE ownerID='$ownerID' AND vaccineTitle='Fecal' AND dueDate>=DATE_ADD(DATE(NOW()), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY)";
@@ -56,6 +57,9 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     }
     echo "' id='panel-dog-$dogID'>
     <div class='panel-heading dog-heading'>" . stripslashes($dogName) . "</div>";
+    if (stripslashes($clientRegistration)==='Incomplete') {
+      echo "<div class='panel-body dog-client-registration-status text-danger'>Incomplete Client Registration</div>";
+    }
     if (stripslashes($daycareContract)==='Incomplete') {
       echo "<div class='panel-body dog-daycare-contract-status text-danger'>Incomplete Daycare Contract</div>";
     }

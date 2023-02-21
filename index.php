@@ -78,6 +78,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       e.preventDefault();
       var id=document.getElementById('addToOwnerID').value;
       var dogName=document.getElementById('addDogName').value;
+      var clientRegistration=document.getElementById('addClientRegistration').value;
       var daycareContract=document.getElementById('addDaycareContract').value;
       var vetID=document.getElementById('addVet').value;
       <?php
@@ -94,7 +95,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/add-new-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, dogName:dogName, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
+        data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
         success:function(response){
           $('#addDogModal').modal('hide');
           $('#addDogModalBody').empty();
@@ -349,6 +350,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var id=document.getElementById('editDogID').value;
       var owner=document.getElementById('editDogForOwnerID').value;
       var dogName=document.getElementById('editDogName').value;
+      var clientRegistration=document.getElementById('editClientRegistration').value;
       var daycareContract=document.getElementById('editDaycareContract').value;
       var vetID=document.getElementById('editVet').value;
       <?php
@@ -365,7 +367,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         url:'assets/edit-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, owner:owner, dogName:dogName, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
+        data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
         success:function(response){
           $('#editDogModal').modal('hide');
           $('#editDogModalBody').empty();
