@@ -41,11 +41,21 @@
       <h2 class='journal-header'>$dogName <span class='normal'>$lastName</span></h2>";
       for ($journalRows=0; $journalRows<5; $journalRows++) {
         echo "<div class='row row-no-gutters journal-row'>
-        <div class='col-xs-3'>
+        <div class='col-xs-2'>
         <div class='journal-box journal-box-date'>Date</div>
         <div class='journal-box journal-box-initials'>Initials</div>
         </div>
-        <div class='col-xs-9'>
+        <div class='col-xs-4'>
+        <div class='journal-box journal-box-notes'>Activities
+        <p>☐ Lick Mat</p>
+        <p>☐ Snuffle Mat</p>
+        <p>☐ Magic Mat</p>
+        <p>☐ Find It Games</p>
+        <p>☐ Daily Doggy Exercises</p>
+        <p>☐ Other:</p>
+        </div>
+        </div>
+        <div class='col-xs-6'>
         <div class='journal-box journal-box-notes'>Enrichment Notes</div>
         </div>
         </div>";
