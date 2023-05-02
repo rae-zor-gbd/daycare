@@ -31,7 +31,7 @@ if (isset($_POST['id'])) {
   $result_all_vets=$conn->query($sql_all_vets);
   while ($row_all_vets=$result_all_vets->fetch_assoc()) {
     $vetID=$row_all_vets['vetID'];
-    $vetName=mysqli_real_escape_string($conn, $row_all_vets['vetName']);
+    $vetName=stripslashes(mysqli_real_escape_string($conn, $row_all_vets['vetName']));
     echo "<option value='$vetID'>$vetName</option>";
   }
   echo "</select>
