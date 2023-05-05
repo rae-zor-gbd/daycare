@@ -15,8 +15,8 @@ CREATE TABLE follow_ups (
 
 CREATE TABLE vets (
   vetID INT(11) NOT NULL AUTO_INCREMENT,
-  vetName VARCHAR(255) NOT NULL,
-  vetEmail VARCHAR(255) DEFAULT NULL,
+  vetName VARCHAR(255) NOT NULL UNIQUE,
+  vetEmail VARCHAR(255) DEFAULT NULL UNIQUE,
   PRIMARY KEY (vetID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -57,7 +57,7 @@ CREATE TABLE dogs (
 
 CREATE TABLE packages (
   packageID INT(11) NOT NULL AUTO_INCREMENT,
-  packageTitle VARCHAR(50) NOT NULL,
+  packageTitle VARCHAR(50) NOT NULL UNIQUE,
   totalDays INT(11) NOT NULL,
   duration INT(11) NOT NULL,
   daysLeftWarning INT(11) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE owners_packages (
 
 CREATE TABLE vaccines (
   vaccineID INT(11) NOT NULL AUTO_INCREMENT,
-  vaccineTitle VARCHAR(255) NOT NULL,
+  vaccineTitle VARCHAR(255) NOT NULL UNIQUE,
   requirementStatus ENUM('Required', 'Not Required') NOT NULL DEFAULT 'Required',
   PRIMARY KEY (vaccineID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
