@@ -50,9 +50,9 @@
         <p>☐ Lick Mat</p>
         <p>☐ Snuffle Mat</p>
         <p>☐ Magic Mat</p>
+        <p>☐ Puzzle</p>
         <p>☐ Find It Games</p>
         <p>☐ Daily Doggy Exercises</p>
-        <p>☐ Other:</p>
         </div>
         </div>
         <div class='col-xs-6'>
