@@ -21,10 +21,14 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStat
       $daysLeft=NULL;
       $duration=NULL;
     }
-    if (isset($startDate) AND $startDate!='') {
+    if (isset($startDate) AND $startDate!='' AND $duration>0) {
       $startDate=$_POST['startDate'];
       if ($currentStatus==='Not Started' AND $status==='Active') {
-        $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
+        if ($duration>0) {
+          $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
+        } else {
+          $expirationDate=NULL;
+        }
       }
     } else {
       $startDate=NULL;

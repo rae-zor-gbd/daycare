@@ -247,6 +247,8 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
             if (decreaseDays==1) {
               $('#days-left-plural-'+id).hide();
             }
+          } else if (decreaseDays==1) {
+            $('#days-left-plural-'+id).hide();
           }
         }
       });
