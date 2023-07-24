@@ -137,6 +137,9 @@
   --journal-box-height:93px;
   --spacer:30px;
 }
+::-webkit-scrollbar {
+    display:none;
+}
 body {
   background-color:var(--color-07);
   color:var(--color-02);
