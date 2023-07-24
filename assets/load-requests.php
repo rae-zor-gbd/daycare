@@ -53,7 +53,7 @@ if (isset($_POST['vetID']) AND $_POST['vetID']!='') {
     if ($vetIndex>1) {
       echo "<br>";
     }
-    echo "<button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' data-vet='$vetID' title='Add Vaccine Notes for $dogName'></button>
+    echo "<button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' data-vet='$vetID' data-backdrop='static' title='Add Vaccine Notes for $dogName'></button>
     <strong>Notes for $dogName: </strong>" . stripslashes($dogNotes) . "</div>
     </div>";
   }

@@ -65,9 +65,9 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       echo "<div class='panel-body package-notes text-default'>" . stripslashes($packageNotes) . "</div>";
     }
     echo "<div class='panel-footer'>
-    <button type='button' class='button-delete' id='delete-package-button' data-toggle='modal' data-target='#deletePackageModal' data-id='$packageID' title='Delete Package'></button>
-    <button type='button' class='button-edit' id='edit-package-button' data-toggle='modal' data-target='#editPackageModal' data-id='$packageID' data-owner='$ownerID' title='Edit Package'></button>
-    <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Note'></button>";
+    <button type='button' class='button-delete' id='delete-package-button' data-toggle='modal' data-target='#deletePackageModal' data-id='$packageID' data-backdrop='static' title='Delete Package'></button>
+    <button type='button' class='button-edit' id='edit-package-button' data-toggle='modal' data-target='#editPackageModal' data-id='$packageID' data-owner='$ownerID' data-backdrop='static' title='Edit Package'></button>
+    <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' data-backdrop='static' title='Add Note'></button>";
     if (stripslashes($status)==='Active' AND $daysLeft>0) {
       echo "<button type='button' class='button-decrease' id='decrease-package-days-button-$packageID' data-id='$packageID' data-days='$daysLeft' data-warning='$daysLeftWarning' title='Decrease Package Days'></button>";
     }

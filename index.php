@@ -520,7 +520,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <button type='button' class='btn btn-default add-new-owner' data-toggle='modal' data-target='#addNewOwnerModal'>Add New Owner</button>
+  <button type='button' class='btn btn-default add-new-owner' data-toggle='modal' data-target='#addNewOwnerModal' data-backdrop='static' >Add New Owner</button>
   <div class='container-fluid'>
     <form action='' spellcheck='false'>
       <div class='form-group'>

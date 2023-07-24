@@ -50,7 +50,7 @@ if ($result_reminders->num_rows>0) {
           }
           echo "</span>
           </span>
-          <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' title='Add Package Notes'></button>
+          <button type='button' class='button-notes' id='add-package-notes-button' data-toggle='modal' data-target='#addPackageNotesModal' data-id='$packageID' data-owner='$ownerID' data-backdrop='static' title='Add Package Notes'></button>
           </div>";
           if (isset($packageNotes) AND $packageNotes!=='') {
             echo "<div class='package-reminder-notes'>
@@ -83,7 +83,7 @@ if ($result_reminders->num_rows>0) {
           <span class='vaccine-reminder-dog'>$dogName</span>
           <span class='vaccine-reminder-due'>$vaccineTitle due " . date('D n/j', $vaccineDueDate) . "</span>
           </span>
-          <button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' title='Add Vaccine Notes for $dogName'></button>
+          <button type='button' class='button-notes' id='add-vaccine-notes-button' data-toggle='modal' data-target='#addVaccineNotesModal' data-id='$dogID' data-owner='$ownerID' data-backdrop='static' title='Add Vaccine Notes for $dogName'></button>
           </div>";
         }
         $sql_dog_notes="SELECT dogName, notes FROM dogs WHERE ownerID='$ownerID' AND notes!='' AND notes IS NOT NULL";
