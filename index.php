@@ -14,7 +14,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
   <script type='text/javascript'>
   function loadDogs(owner){
     $.ajax({
-      url:'/assets/load-dogs.php',
+      url:'/ajax/load-dogs.php',
       type:'POST',
       cache:false,
       data:{owner:owner},
@@ -28,7 +28,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
   }
   function loadOwners(page, search='<?php echo $search; ?>'){
     $.ajax({
-      url:'/assets/load-owners.php',
+      url:'/ajax/load-owners.php',
       type:'POST',
       cache:false,
       data:{page:page, search:search},
@@ -42,7 +42,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
   }
   function loadPackages(owner){
     $.ajax({
-      url:'/assets/load-packages.php',
+      url:'/ajax/load-packages.php',
       type:'POST',
       cache:false,
       data:{owner:owner},
@@ -65,7 +65,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     $(document).on('click', '#add-dog-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-add-dog-form.php',
+        url:'ajax/load-add-dog-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -92,7 +92,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       }
       ?>
       $.ajax({
-        url:'assets/add-new-dog.php',
+        url:'ajax/add-new-dog.php',
         type:'POST',
         cache:false,
         data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
@@ -108,7 +108,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var id=$(this).data('id');
       var owner=$(this).data('owner');
       $.ajax({
-        url:'assets/load-add-dog-notes-form.php',
+        url:'ajax/load-add-dog-notes-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner},
@@ -123,7 +123,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var ownerID=document.getElementById('addDogNotesOwnerID').value;
       var dogNotes=document.getElementById('addDogNotesBox').value;
       $.ajax({
-        url:'assets/add-dog-notes.php',
+        url:'ajax/add-dog-notes.php',
         type:'POST',
         cache:false,
         data:{dogID:dogID, dogNotes:dogNotes},
@@ -147,7 +147,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var secondaryEmail=document.getElementById('newSecondaryEmail').value;
       var tertiaryEmail=document.getElementById('newTertiaryEmail').value;
       $.ajax({
-        url:'assets/add-new-owner.php',
+        url:'ajax/add-new-owner.php',
         type:'POST',
         cache:false,
         data:{lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryCell:primaryCell, secondaryCell:secondaryCell, homePhone:homePhone, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
@@ -162,7 +162,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     $(document).on('click', '#add-package-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-add-package-form.php',
+        url:'ajax/load-add-package-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -177,7 +177,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var packageID=document.getElementById('addDaycarePackage').value;
       var startDate=document.getElementById('addPackageStartDate').value;
       $.ajax({
-        url:'assets/add-new-package.php',
+        url:'ajax/add-new-package.php',
         type:'POST',
         cache:false,
         data:{ownerID:ownerID, packageID:packageID, startDate:startDate},
@@ -193,7 +193,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var id=$(this).data('id');
       var owner=$(this).data('owner');
       $.ajax({
-        url:'assets/load-add-package-notes-form.php',
+        url:'ajax/load-add-package-notes-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner},
@@ -208,7 +208,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var ownerID=document.getElementById('addPackageNotesForOwnerID').value;
       var packageNotes=document.getElementById('addPackageNotesBox').value;
       $.ajax({
-        url:'assets/add-package-notes.php',
+        url:'ajax/add-package-notes.php',
         type:'POST',
         cache:false,
         data:{packageID:packageID, ownerID:ownerID, packageNotes:packageNotes},
@@ -226,7 +226,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var decreaseDays=daysLeft-1;
       var daysLeftWarning=$(this).data('warning');
       $.ajax({
-        url:'assets/decrease-package-days.php',
+        url:'ajax/decrease-package-days.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -256,7 +256,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     $(document).on('click', '#delete-dog-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-delete-dog-form.php',
+        url:'ajax/load-delete-dog-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -269,7 +269,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       e.preventDefault();
       var id=document.getElementById('deleteID').value;
       $.ajax({
-        url:'assets/delete-dog.php',
+        url:'ajax/delete-dog.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -283,7 +283,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     $(document).on('click', '#delete-owner-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-delete-owner-form.php',
+        url:'ajax/load-delete-owner-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -296,7 +296,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       e.preventDefault();
       var id=document.getElementById('deleteID').value;
       $.ajax({
-        url:'assets/delete-owner.php',
+        url:'ajax/delete-owner.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -310,7 +310,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     $(document).on('click', '#delete-package-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-delete-package-form.php',
+        url:'ajax/load-delete-package-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -323,7 +323,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       e.preventDefault();
       var id=document.getElementById('deletePackageID').value;
       $.ajax({
-        url:'assets/delete-package.php',
+        url:'ajax/delete-package.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -338,7 +338,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var id=$(this).data('id');
       var owner=$(this).data('owner');
       $.ajax({
-        url:'assets/load-edit-dog-form.php',
+        url:'ajax/load-edit-dog-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner},
@@ -366,7 +366,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       }
       ?>
       $.ajax({
-        url:'assets/edit-dog.php',
+        url:'ajax/edit-dog.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
@@ -381,7 +381,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     $(document).on('click', '#edit-owner-button', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/load-edit-owner-form.php',
+        url:'ajax/load-edit-owner-form.php',
         type:'POST',
         cache:false,
         data:{id:id},
@@ -403,7 +403,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var secondaryEmail=document.getElementById('editSecondaryEmail').value;
       var tertiaryEmail=document.getElementById('editTertiaryEmail').value;
       $.ajax({
-        url:'assets/edit-owner.php',
+        url:'ajax/edit-owner.php',
         type:'POST',
         cache:false,
         data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryCell:primaryCell, secondaryCell:secondaryCell, homePhone:homePhone, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
@@ -419,7 +419,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var id=$(this).data('id');
       var owner=$(this).data('owner');
       $.ajax({
-        url:'assets/load-edit-package-form.php',
+        url:'ajax/load-edit-package-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner},
@@ -438,7 +438,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       var startDate=document.getElementById('editPackageStartDate').value;
       var expirationDate=document.getElementById('editPackageExpirationDate').value;
       $.ajax({
-        url:'assets/edit-package.php',
+        url:'ajax/edit-package.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner, currentStatus:currentStatus, status:status, daysLeft:daysLeft, startDate:startDate, expirationDate:expirationDate},

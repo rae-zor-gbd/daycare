@@ -9,7 +9,7 @@ include 'assets/config.php';
   <script type='text/javascript'>
   function loadRequests(vetID){
     $.ajax({
-      url:'/assets/load-requests.php',
+      url:'/ajax/load-requests.php',
       type:'POST',
       cache:false,
       data:{vetID:vetID},
@@ -24,7 +24,7 @@ include 'assets/config.php';
   }
   function loadVets(){
     $.ajax({
-      url:'/assets/load-vets.php',
+      url:'/ajax/load-vets.php',
       type:'POST',
       cache:false,
       data:{},
@@ -54,7 +54,7 @@ include 'assets/config.php';
       var owner=$(this).data('owner');
       var vetID=$(this).data('vet');
       $.ajax({
-        url:'assets/load-add-dog-notes-form.php',
+        url:'ajax/load-add-dog-notes-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner, vetID:vetID},
@@ -70,7 +70,7 @@ include 'assets/config.php';
       var vetID=document.getElementById('addDogNotesVetID').value;
       var dogNotes=document.getElementById('addDogNotesBox').value;
       $.ajax({
-        url:'assets/add-dog-notes.php',
+        url:'ajax/add-dog-notes.php',
         type:'POST',
         cache:false,
         data:{dogID:dogID, dogNotes:dogNotes},

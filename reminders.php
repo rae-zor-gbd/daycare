@@ -9,7 +9,7 @@ include 'assets/config.php';
   <script type='text/javascript'>
   function loadReminders(){
     $.ajax({
-      url:'/assets/load-reminders.php',
+      url:'/ajax/load-reminders.php',
       type:'POST',
       cache:false,
       data:{},
@@ -38,7 +38,7 @@ include 'assets/config.php';
       var id=$(this).data('id');
       var owner=$(this).data('owner');
       $.ajax({
-        url:'assets/load-add-package-notes-form.php',
+        url:'ajax/load-add-package-notes-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner},
@@ -53,7 +53,7 @@ include 'assets/config.php';
       var ownerID=document.getElementById('addPackageNotesForOwnerID').value;
       var packageNotes=document.getElementById('addPackageNotesBox').value;
       $.ajax({
-        url:'assets/add-package-notes.php',
+        url:'ajax/add-package-notes.php',
         type:'POST',
         cache:false,
         data:{packageID:packageID, ownerID:ownerID, packageNotes:packageNotes},
@@ -68,7 +68,7 @@ include 'assets/config.php';
       var id=$(this).data('id');
       var owner=$(this).data('owner');
       $.ajax({
-        url:'assets/load-add-dog-notes-form.php',
+        url:'ajax/load-add-dog-notes-form.php',
         type:'POST',
         cache:false,
         data:{id:id, owner:owner},
@@ -83,7 +83,7 @@ include 'assets/config.php';
       var ownerID=document.getElementById('addDogNotesOwnerID').value;
       var dogNotes=document.getElementById('addDogNotesBox').value;
       $.ajax({
-        url:'assets/add-dog-notes.php',
+        url:'ajax/add-dog-notes.php',
         type:'POST',
         cache:false,
         data:{dogID:dogID, dogNotes:dogNotes},

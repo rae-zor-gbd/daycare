@@ -9,7 +9,7 @@ include 'assets/config.php';
   <script type='text/javascript'>
   function loadRegistrations(){
     $.ajax({
-      url:'/assets/load-registrations.php',
+      url:'/ajax/load-registrations.php',
       type:'POST',
       cache:false,
       data:{},
@@ -27,7 +27,7 @@ include 'assets/config.php';
     $(document).on('click', '.button-complete', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/complete-client-registration.php',
+        url:'ajax/complete-client-registration.php',
         type:'POST',
         cache:false,
         data:{id:id},

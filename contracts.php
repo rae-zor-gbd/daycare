@@ -9,7 +9,7 @@ include 'assets/config.php';
   <script type='text/javascript'>
   function loadContracts(){
     $.ajax({
-      url:'/assets/load-contracts.php',
+      url:'/ajax/load-contracts.php',
       type:'POST',
       cache:false,
       data:{},
@@ -27,7 +27,7 @@ include 'assets/config.php';
     $(document).on('click', '.button-complete', function() {
       var id=$(this).data('id');
       $.ajax({
-        url:'assets/complete-daycare-contract.php',
+        url:'ajax/complete-daycare-contract.php',
         type:'POST',
         cache:false,
         data:{id:id},
