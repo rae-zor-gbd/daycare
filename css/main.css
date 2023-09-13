@@ -324,7 +324,7 @@ textarea {
   margin-bottom:0;
 }
 .table-condensed>tbody>tr>td {
-  padding:calc(var(--spacer)/2) 5px;
+  padding:calc(var(--spacer)/3) 5px;
 }
 @keyframes loading-ring {
   0% {
@@ -557,8 +557,8 @@ nav {
   text-align:left;
   white-space:unset;
 }
-.package-reminder-notes, .vaccine-reminder:not(:first-of-type), .vaccine-reminder-notes {
-  margin-top:5px;
+.package-reminder-notes, .vaccine-reminder-notes {
+  margin-top:2px;
 }
 .package-status {
   float:right;
@@ -619,6 +619,9 @@ nav {
 }
 .panel-title {
   font-size:var(--font-size);
+}
+.vaccine-reminder:not(:first-of-type) {
+  margin-top:-3px;
 }
 .vaccine-reminder-notes-text::before {
   padding-right:9px;
