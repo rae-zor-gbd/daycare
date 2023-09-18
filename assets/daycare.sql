@@ -47,12 +47,25 @@ CREATE TABLE dogs (
   vetID INT(11) NOT NULL,
   clientRegistration ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
   daycareContract ENUM('Completed', 'Incomplete') NOT NULL DEFAULT 'Incomplete',
-  notes TEXT DEFAULT NULL,
   journalEntry ENUM('Yes', 'No') NOT NULL DEFAULT 'Yes',
+  reserveMondays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
+  reserveTuesdays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
+  reserveWednesdays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
+  reserveThursdays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
+  reserveFridays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
+  notes TEXT DEFAULT NULL,
   lastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (dogID),
   FOREIGN KEY (ownerID) REFERENCES owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (vetID) REFERENCES vets(vetID) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE reservations (
+  dogID INT(11) NOT NULL,
+  reservationDate DATE NOT NULL,
+  lastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (dogID, reservationDate),
+  FOREIGN KEY (dogID) REFERENCES dogs(dogID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE packages (

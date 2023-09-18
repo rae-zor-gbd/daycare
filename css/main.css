@@ -194,7 +194,7 @@ textarea {
   transition-duration:.3s;
   transition-property:background;
 }
-.button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before {
+.button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before, .button-reservation::before {
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
 }
@@ -228,6 +228,9 @@ textarea {
 }
 .button-package::before {
   content:var(--icon-calendar-days);
+}
+.button-reservation::before {
+  content:var(--icon-calendar-plus);
 }
 .container, .container-fluid {
   padding:0;
@@ -374,6 +377,9 @@ nav {
 }
 .nav-link#reminders::before {
   content:var(--icon-thumbtack);
+}
+.nav-link#reservations::before {
+  content:var(--icon-list-02);
 }
 .nav-links, .panel-body, .panel-footer {
   border-top:1.5px solid var(--color-06)!important;

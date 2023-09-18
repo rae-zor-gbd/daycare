@@ -43,6 +43,9 @@
       <a href='/'>
         <div class='nav-link' id='packages'>Packages</div>
       </a>
+      <a href='/reservations'>
+        <div class='nav-link' id='reservations'>Reservations</div>
+      </a>
       <a href='/reminders'>
         <div class='nav-link' id='reminders'>Reminders</div>
       </a>
