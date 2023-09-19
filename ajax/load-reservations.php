@@ -20,9 +20,13 @@ if (isset($_POST['reservationDate'])) {
     </tr>
     </thead>
     <tbody>";
-    $sql_confirmed="SELECT dogID FROM reservations WHERE reservationDate='$reservationDate'";
-    $result_confirmed=$conn->query($sql_confirmed);
-    $confirmations=$result_confirmed->fetch_array(MYSQLI_NUM);
+    $sql_confirmations="SELECT dogID FROM reservations WHERE reservationDate='$reservationDate'";
+    $result_confirmations=$conn->query($sql_confirmations);
+    $confirmations=array();
+    while ($row_confirmations=$result_confirmations->fetch_assoc()) {
+        $pushID=$row_confirmations['dogID'];
+        array_push($confirmations, $pushID);
+    }
     $sql_reservations="SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate' UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE";
     if ($dayOfWeek=='Monday') {
         $sql_reservations.=" reserveMondays='Yes'";
@@ -45,16 +49,21 @@ if (isset($_POST['reservationDate'])) {
             echo "<tr>
             <td>$lastName, <strong>$dogName</strong></td>
             <td>";
-            if (in_array($dogID, $confirmations)) {
-                echo "<span class='label label-success'>Confirmed</span>";
+            if ($confirmations!=NULL) {
+                if (in_array($dogID, $confirmations)) {
+                    echo "<span class='label label-success'>Confirmed</span>";
+                }
             }
             echo "</td>
             <td style='text-align:right; width:75px;'>";
-            if (in_array($dogID, $confirmations)) {
-                echo "<button type='button' class='button-edit' id='edit-reservation-button' data-toggle='modal' data-target='#editReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Edit Reservation'></button>
-                <button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button>";
+            if ($confirmations!=NULL) {
+                if (in_array($dogID, $confirmations)) {
+                    echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button>";
+                } else {
+                    echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#confirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
+                }
             } else {
-                echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#ConfirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
+                echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#confirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
             }
             echo "</td>
             </tr>";

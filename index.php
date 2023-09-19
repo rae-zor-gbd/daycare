@@ -220,6 +220,36 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         }
       });
     });
+    $(document).on('click', '#add-dog-reservation-button', function() {
+      var id=$(this).data('id');
+      $.ajax({
+        url:'ajax/load-add-reservation-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id},
+        success:function(response){
+          $('#addReservationModalBody').append(response);
+        }
+      });
+    });
+    $('#addReservation').click(function (e) {
+      e.preventDefault();
+      var dogID=document.getElementById('addReservationID').value;
+      var ownerID=document.getElementById('addReservationOwnerID').value;
+      var date=document.getElementById('addReservationDate').value;
+      $.ajax({
+        url:'ajax/add-reservation.php',
+        type:'POST',
+        cache:false,
+        data:{dogID:dogID, date:date},
+        success:function(response){
+          $('#addReservationModal').modal('hide');
+          $('#addReservationModalBody').empty();
+          $('#dogs-'+ownerID).empty();
+          $('#dogs-'+ownerID).append(loadDogs(ownerID));
+        }
+      });
+    });
     $(document).on('click', '.button-decrease', function() {
       var id=$(this).data('id');
       var daysLeft=$(this).data('days');
@@ -331,6 +361,35 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           $('#panel-package-'+id).remove();
           $('#deletePackageModal').modal('hide');
           $('#deletePackageModalBody').empty();
+        }
+      });
+    });
+    $(document).on('click', '#delete-reservation-button', function() {
+      var id=$(this).data('id');
+      var date=$(this).data('date');
+      $.ajax({
+        url:'ajax/load-delete-reservation-form.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, date:date},
+        success:function(response){
+          $('#deleteReservationModalBody').append(response);
+        }
+      });
+    });
+    $('#deleteReservation').click(function (e) {
+      e.preventDefault();
+      var id=document.getElementById('deleteID').value;
+      var date=document.getElementById('deleteReservationDate').value;
+      $.ajax({
+        url:'ajax/delete-reservation.php',
+        type:'POST',
+        cache:false,
+        data:{id:id, date:date},
+        success:function(response){
+          $('#deleteReservationModal').modal('hide');
+          $('#deleteReservationModalBody').empty();
+          $('#reservation-'+id+'-'+date).remove();
         }
       });
     });
@@ -455,9 +514,11 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       $('#addDogNotesModalBody').empty();
       $('#addPackageModalBody').empty();
       $('#addPackageNotesModalBody').empty();
+      $('#addReservationModalBody').empty();
       $('#deleteDogModalBody').empty();
       $('#deleteOwnerModalBody').empty();
       $('#deletePackageModalBody').empty();
+      $('#deleteReservationModalBody').empty();
       $('#editDogModalBody').empty();
       $('#editOwnerModalBody').empty();
       $('#editPackageModalBody').empty();
@@ -593,6 +654,22 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
+  <form action='' method='post' spellcheck='false' id='addReservationForm'>
+    <div class='modal fade' id='addReservationModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Add Reservation</h4>
+          </div>
+          <div class='modal-body' id='addReservationModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-primary' id='addReservation'>Submit</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
   <form action='' method='post' spellcheck='false' id='deleteDogForm'>
     <div class='modal fade' id='deleteDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
@@ -635,6 +712,22 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           <div class='modal-body' id='deletePackageModalBody'></div>
           <div class='modal-footer'>
             <button type='submit' class='btn btn-danger' id='deletePackage'>Delete</button>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form action='' method='post' spellcheck='false' id='deleteReservationForm'>
+    <div class='modal fade' id='deleteReservationModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+      <div class='modal-dialog'>
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h4 class='modal-title'>Delete Reservation</h4>
+          </div>
+          <div class='modal-body' id='deleteReservationModalBody'></div>
+          <div class='modal-footer'>
+            <button type='submit' class='btn btn-danger' id='deleteReservation'>Delete</button>
             <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
           </div>
         </div>
