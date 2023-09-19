@@ -194,9 +194,12 @@ textarea {
   transition-duration:.3s;
   transition-property:background;
 }
-.button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before, .button-reservation::before {
+.button-check::before, .button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before, .button-reservation::before {
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
+}
+.button-check::before {
+  content:var(--icon-check);
 }
 .button-complete::before {
   content:var(--icon-circle-check);
@@ -369,6 +372,27 @@ nav {
   padding-left:25px;
   padding-right:25px;
 }
+.nav-button {
+  margin-top:calc(var(--spacer)/2);
+  width:100%;
+}
+.nav-button::before {
+  font-family:var(--icon-font-family);
+  font-weight:var(--font-weight-regular);
+  padding-right:calc(var(--spacer)/3);
+}
+.nav-footer {
+  bottom:calc(var(--spacer)*(4/3));
+  left:var(--spacer);
+  position:fixed;
+  width:calc(var(--spacer)*9);
+}
+.nav-footer form .input-group .input-group-addon {
+  min-width:calc(var(--spacer)*4);
+}
+.nav-footer form .input-group:last-child {
+  margin-bottom:calc(var(--spacer)/2);
+}
 .nav-link#contracts::before, .nav-link#registrations::before {
   content:var(--icon-contract);
 }
@@ -380,6 +404,9 @@ nav {
 }
 .nav-link#reservations::before {
   content:var(--icon-list-02);
+}
+.nav-links {
+  border-bottom:1.5px solid var(--color-06)!important;
 }
 .nav-links, .panel-body, .panel-footer {
   border-top:1.5px solid var(--color-06)!important;
@@ -525,6 +552,24 @@ nav {
 .load-more {
   width:100%;
 }
+.next-button {
+  float:right;
+  padding:0 0 0 calc(var(--spacer)/3);
+}
+.next-button::before, .previous-button::before {
+  display:inline-block;
+  font-family:var(--icon-font-family);
+  font-weight:var(--font-weight-normal);
+  position:relative;
+  top:2px;
+}
+.next-button::before {
+  content:var(--icon-chevron-right-01);
+}
+.next-button.disabled, .previous-button.disabled {
+  opacity:0.3;
+  pointer-events:none;
+}
 .owner-heading::before {
   content:var(--icon-user);
 }
@@ -626,12 +671,25 @@ nav {
 .panel-title {
   font-size:var(--font-size);
 }
+.previous-button {
+  float:left;
+  padding:0 calc(var(--spacer)/3) 0 0;
+}
+.previous-button::before {
+  content:var(--icon-chevron-left-01);
+}
 .vaccine-reminder:not(:first-of-type) {
   margin-top:-3px;
 }
 .vaccine-reminder-notes-text::before {
   padding-right:9px;
 }
+#addReservationButton::before {
+  content:var(--icon-calendar-plus);
+}
 #complete-contract-button {
   float:right;
+}
+#reservation-list .table>thead>tr>th {
+  text-align:center;
 }

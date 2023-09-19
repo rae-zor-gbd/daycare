@@ -26,6 +26,10 @@ if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
       }
     });
   }
+  function changeDate(){
+    var goToDate=document.getElementById('goToDate').value;
+    window.open('/reservations/'+goToDate, '_self');
+  }
   $(document).ready(function(){
     $('#reservations').addClass('active');
     loadReservations('<?php echo "$reservationDate"; ?>');
@@ -34,6 +38,15 @@ if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
 </head>
 <body>
   <?php include 'assets/navbar.php'; ?>
+  <div class='nav-footer'>
+    <form action='' method='post' spellcheck='false' id='goToDateForm' onchange='changeDate()'>
+      <div class='input-group'>
+        <span class='input-group-addon clock'>Date</span>
+        <input type='date' class='form-control' name='go-to-date' id='goToDate' value='<?php echo $reservationDate; ?>' required>
+      </div>
+    </form>
+    <button type='button' class='btn btn-default nav-button' id='addReservationButton' data-toggle='modal' data-target='#addReservationModal' data-backdrop='static' title='Add Reservation'>Add Reservation</button>
+  </div>
   <div class='container-fluid'>
     <div class='table-container' id='reservation-list'></div>
   </div>
