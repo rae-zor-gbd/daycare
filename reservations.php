@@ -1,7 +1,7 @@
 <?php
 include 'assets/config.php';
-if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
-  $reservationDate=date('Y-m-d', strtotime($_GET['reservationDate']));
+if (isset($_GET['search']) AND $_GET['search']!='') {
+  $reservationDate=date('Y-m-d', strtotime($_GET['search']));
 } else {
   $reservationDate=date('Y-m-d');
 }
@@ -12,6 +12,11 @@ if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
   <title>Daycare Reservations</title>
   <?php include 'assets/header.php'; ?>
   <script type='text/javascript'>
+  function loadReservationCount() {
+    $('#reservation-count').empty();
+    var reservationCount=$('#table-reservations').find('.reservation-row').length;
+    $('#reservation-count').append(reservationCount);
+  }
   function loadReservations(reservationDate){
     $.ajax({
       url:'/ajax/load-reservations.php',
@@ -22,17 +27,46 @@ if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
         if (data) {
           $('#reservation-list').empty();
           $('#reservation-list').append(data);
+          loadReservationCount();
         }
       }
     });
   }
   function changeDate(){
     var goToDate=document.getElementById('goToDate').value;
-    window.open('/reservations/'+goToDate, '_self');
+    window.open('?search='+goToDate, '_self');
   }
   $(document).ready(function(){
     $('#reservations').addClass('active');
     loadReservations('<?php echo "$reservationDate"; ?>');
+    $(document).on('click', '#add-reservation-button', function() {
+      var addReservationDate=$(this).data('date');
+      $.ajax({
+        url:'ajax/load-add-reservation-form.php',
+        type:'POST',
+        cache:false,
+        data:{addReservationDate:addReservationDate},
+        success:function(response){
+          $('#addReservationModalBody').append(response);
+        }
+      });
+    });
+    $('#addReservation').click(function (e) {
+      e.preventDefault();
+      var dogID=document.getElementById('addReservationID').value;
+      var date=document.getElementById('addReservationDate').value;
+      $.ajax({
+        url:'ajax/add-reservation.php',
+        type:'POST',
+        cache:false,
+        data:{dogID:dogID, date:date},
+        success:function(response){
+          $('#addReservationModal').modal('hide');
+          $('#addReservationModalBody').empty();
+          loadReservations(date);
+        }
+      });
+    });
     $(document).on('click', '#delete-reservation-button', function() {
       var id=$(this).data('id');
       var date=$(this).data('date');
@@ -58,7 +92,7 @@ if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
         success:function(response){
           $('#deleteReservationModal').modal('hide');
           $('#deleteReservationModalBody').empty();
-          loadReservations('<?php echo "$reservationDate"; ?>');
+          loadReservations(date);
         }
       });
     });
@@ -91,7 +125,7 @@ if (isset($_GET['reservationDate']) AND $_GET['reservationDate']!='') {
         <input type='date' class='form-control' name='go-to-date' id='goToDate' value='<?php echo $reservationDate; ?>' required>
       </div>
     </form>
-    <button type='button' class='btn btn-default nav-button' id='addReservationButton' data-toggle='modal' data-target='#addReservationModal' data-backdrop='static' title='Add Reservation'>Add Reservation</button>
+    <button type='button' class='btn btn-default nav-button' id='add-reservation-button' data-toggle='modal' data-target='#addReservationModal' data-backdrop='static' data-date='<?php echo $reservationDate; ?>' title='Add Reservation'>Add Reservation</button>
   </div>
   <div class='container-fluid'>
     <div class='table-container' id='reservation-list'></div>

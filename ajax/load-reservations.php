@@ -9,17 +9,18 @@ if (isset($_POST['reservationDate'])) {
     <thead>
     <tr>
     <th colspan='3'>
-    <a href='/reservations/$previousDate'>
+    <a href='?search=$previousDate'>
     <button class='previous-button' title='Previous Date'></button>
     </a>";
     echo date('l, F j, Y', strtotime($reservationDate));
-    echo "<a href='/reservations/$nextDate'>
+    echo " <span class='text-muted'>(<span id='reservation-count'>0</span>)</span>
+    <a href='?search=$nextDate'>
     <button class='next-button' title='Next Date'></button>
     </a>
     </th>
     </tr>
     </thead>
-    <tbody>";
+    <tbody id='table-reservations'>";
     $sql_confirmations="SELECT dogID FROM reservations WHERE reservationDate='$reservationDate'";
     $result_confirmations=$conn->query($sql_confirmations);
     $confirmations=array();
@@ -46,7 +47,7 @@ if (isset($_POST['reservationDate'])) {
             $dogID=$row_reservations['dogID'];
             $dogName=mysqli_real_escape_string($conn, $row_reservations['dogName']);
             $lastName=mysqli_real_escape_string($conn, $row_reservations['lastName']);
-            echo "<tr>
+            echo "<tr class='reservation-row'>
             <td>$lastName, <strong>$dogName</strong></td>
             <td>";
             if ($confirmations!=NULL) {
@@ -69,7 +70,7 @@ if (isset($_POST['reservationDate'])) {
             </tr>";
         }
     } else {
-        echo "<tr>
+        echo "<tr class='no-reservations-row'>
         <td><em class='text-muted'>No daycare reservations</em></td>
         <td></td>
         </tr>";

@@ -14,8 +14,6 @@ RewriteRule ^reminders reminders.php [NC,L]
 
 RewriteRule ^requests requests.php [NC,L]
 
-RewriteRule ^reservations/(.*) reservations.php?reservationDate=$1 [NC,L]
-
 RewriteRule ^reservations reservations.php [NC,L]
 
 RewriteRule ^journal/(.*) journal.php?id=$1 [NC,L]

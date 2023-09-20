@@ -24,4 +24,22 @@ if (isset($_POST['id'])) {
   <input type='date' class='form-control' name='reservationDate' id='addReservationDate' min='$today' required>
   </div>";
 }
+if (isset($_POST['addReservationDate'])) {
+  $reservationDate=$_POST['addReservationDate'];
+  echo "<input type='hidden' class='form-control' name='reservationDate' id='addReservationDate' value='$reservationDate' required>
+  <div class='input-group'>
+  <span class='input-group-addon dog'>Dog Name</span>
+  <select class='form-control' id='addReservationID' name='dogName' required>
+  <option value='' disabled selected>Select Dog</option>";
+  $sql_all_dogs="SELECT dogID, lastName, dogName FROM dogs d JOIN owners o USING (ownerID) WHERE dogID NOT IN (SELECT dogID FROM reservations WHERE reservationDate='$reservationDate') ORDER BY lastName, dogName";
+  $result_all_dogs=$conn->query($sql_all_dogs);
+  while ($row_all_dogs=$result_all_dogs->fetch_assoc()) {
+    $editDogID=htmlspecialchars($row_all_dogs['dogID'], ENT_QUOTES);
+    $editLastName=htmlspecialchars($row_all_dogs['lastName'], ENT_QUOTES);
+    $editDogName=htmlspecialchars($row_all_dogs['dogName'], ENT_QUOTES);
+    echo "<option value='$editDogID'>$editLastName, $editDogName</option>";
+  }
+  echo "</select>
+  </div>";
+}
 ?>

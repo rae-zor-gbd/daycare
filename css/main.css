@@ -690,7 +690,7 @@ nav {
 .vaccine-reminder-notes-text::before {
   padding-right:9px;
 }
-#addReservationButton::before {
+#add-reservation-button::before {
   content:var(--icon-calendar-plus);
 }
 #complete-contract-button {
