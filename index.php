@@ -91,11 +91,36 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         echo "var vaccine$vaccineID=document.getElementById('addVaccine$vaccineID').value;";
       }
       ?>
+      if (document.getElementById('addMondays').checked==true) {
+        var reserveMondays='Yes';
+      } else {
+        var reserveMondays='No';
+      }
+      if (document.getElementById('addTuesdays').checked==true) {
+        var reserveTuesdays='Yes';
+      } else {
+        var reserveTuesdays='No';
+      }
+      if (document.getElementById('addWednesdays').checked==true) {
+        var reserveWednesdays='Yes';
+      } else {
+        var reserveWednesdays='No';
+      }
+      if (document.getElementById('addThursdays').checked==true) {
+        var reserveThursdays='Yes';
+      } else {
+        var reserveThursdays='No';
+      }
+      if (document.getElementById('addFridays').checked==true) {
+        var reserveFridays='Yes';
+      } else {
+        var reserveFridays='No';
+      }
       $.ajax({
         url:'ajax/add-new-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>},
+        data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays},
         success:function(response){
           $('#addDogModal').modal('hide');
           $('#addDogModalBody').empty();
@@ -424,11 +449,36 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         echo "var vaccine$vaccineEditID=document.getElementById('editVaccine$vaccineEditID').value;";
       }
       ?>
+      if (document.getElementById('editMondays').checked==true) {
+        var reserveMondays='Yes';
+      } else {
+        var reserveMondays='No';
+      }
+      if (document.getElementById('editTuesdays').checked==true) {
+        var reserveTuesdays='Yes';
+      } else {
+        var reserveTuesdays='No';
+      }
+      if (document.getElementById('editWednesdays').checked==true) {
+        var reserveWednesdays='Yes';
+      } else {
+        var reserveWednesdays='No';
+      }
+      if (document.getElementById('editThursdays').checked==true) {
+        var reserveThursdays='Yes';
+      } else {
+        var reserveThursdays='No';
+      }
+      if (document.getElementById('editFridays').checked==true) {
+        var reserveFridays='Yes';
+      } else {
+        var reserveFridays='No';
+      }
       $.ajax({
         url:'ajax/edit-dog.php',
         type:'POST',
         cache:false,
-        data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>},
+        data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays},
         success:function(response){
           $('#editDogModal').modal('hide');
           $('#editDogModalBody').empty();
@@ -581,7 +631,9 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <button type='button' class='btn btn-default add-new-owner' data-toggle='modal' data-target='#addNewOwnerModal' data-backdrop='static' >Add New Owner</button>
+  <div class='nav-footer'>
+    <button type='button' class='btn btn-default nav-button add-new-owner' data-toggle='modal' data-target='#addNewOwnerModal' data-backdrop='static' >Add New Owner</button>
+  </div>
   <div class='container-fluid'>
     <form action='' spellcheck='false'>
       <div class='form-group'>

@@ -3,13 +3,18 @@ include '../assets/config.php';
 if (isset($_POST['id']) AND isset($_POST['owner'])) {
   $id=$_POST['id'];
   $owner=$_POST['owner'];
-  $sql_dog_info="SELECT dogName, clientRegistration, daycareContract, vetID FROM dogs WHERE dogID='$id'";
+  $sql_dog_info="SELECT dogName, clientRegistration, daycareContract, vetID, reserveMondays, reserveTuesdays, reserveWednesdays, reserveThursdays, reserveFridays FROM dogs WHERE dogID='$id'";
   $result_dog_info=$conn->query($sql_dog_info);
   $row_dog_info=$result_dog_info->fetch_assoc();
   $editDogName=htmlspecialchars($row_dog_info['dogName'], ENT_QUOTES);
   $editClientRegistration=htmlspecialchars($row_dog_info['clientRegistration'], ENT_QUOTES);
   $editDaycareContract=htmlspecialchars($row_dog_info['daycareContract'], ENT_QUOTES);
   $editVet=$row_dog_info['vetID'];
+  $editMondays=$row_dog_info['reserveMondays'];
+  $editTuesdays=$row_dog_info['reserveTuesdays'];
+  $editWednesdays=$row_dog_info['reserveWednesdays'];
+  $editThursdays=$row_dog_info['reserveThursdays'];
+  $editFridays=$row_dog_info['reserveFridays'];
   echo "<input type='hidden' class='form-control' name='id' id='editDogID' value='$id' required>
   <input type='hidden' class='form-control' name='editDogForOwnerID' id='editDogForOwnerID' value='$owner' required>
   <div class='input-group'>
@@ -85,7 +90,56 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
       echo " value='$dueDate'";
     }
     echo ">
-    </div>";
+    </div>
+    ";
   }
+  echo "<div class='row'>
+  <div class='col-sm-4'>
+  <div class='input-group'>
+  <input type='checkbox' id='editMondays' name='editMondays' value='Yes'";
+  if ($editMondays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editMondays'>Mondays</label>
+  </div>
+  <div class='input-group'>
+  <input type='checkbox' id='editThursdays' name='editThursdays' value='Yes'";
+  if ($editThursdays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editThursdays'>Thursdays</label>
+  </div>
+  </div>
+  <div class='col-sm-4'>
+  <div class='input-group'>
+  <input type='checkbox' id='editTuesdays' name='editTuesdays' value='Yes'";
+  if ($editTuesdays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editTuesdays'>Tuesdays</label>
+  </div>
+  <div class='input-group'>
+  <input type='checkbox' id='editFridays' name='editFridays' value='Yes'";
+  if ($editFridays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editFridays'>Fridays</label>
+  </div>
+  </div>
+  <div class='col-sm-4'>
+  <div class='input-group'>
+  <input type='checkbox' id='editWednesdays' name='editWednesdays' value='Yes'";
+  if ($editWednesdays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editWednesdays'>Wednesdays</label>
+  </div>
+  </div>
+  </div>";
 }
 ?>

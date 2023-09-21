@@ -153,6 +153,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight:var(--font-weight-bold);
   text-transform:uppercase;
 }
+label {
+  display:inline;
+  font-size:16px;
+  font-weight:var(--font-weight-normal);
+  text-transform:uppercase;
+}
 p {
   margin:0;
 }
@@ -182,6 +188,14 @@ button:hover:not(.disabled) {
 button.disabled {
   cursor:not-allowed;
   opacity:0.5;
+}
+input[type=checkbox] {
+  height:calc(var(--spacer)/1.75);
+  margin-right:calc(var(--spacer)/3);
+  margin-top:0;
+  position:relative;
+  top:3px;
+  width:calc(var(--spacer)/1.75);
 }
 input[type=checkbox]:hover {
   cursor:pointer;
@@ -358,7 +372,7 @@ textarea {
   display:table-cell;
   vertical-align:middle;
 }
-nav, .panel-group .panel-owner, .panel-group .panel-vet, .table-container {
+nav, .panel-group .panel-owner, .panel-group .panel-vet, .paperwork-container, .table-container {
   box-shadow:rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
 nav {
@@ -396,11 +410,20 @@ nav {
 .nav-footer form .input-group:last-child {
   margin-bottom:calc(var(--spacer)/2);
 }
-.nav-link#contracts::before, .nav-link#registrations::before {
-  content:var(--icon-contract);
+.nav-header, .nav-links, .panel-body, .panel-footer {
+  border-top:1.5px solid var(--color-06)!important;
+}
+.nav-header {
+  font-weight:var(--font-weight-bold);
+  padding:calc(var(--spacer)/2) 0;
+  text-align:center;
+  text-transform:uppercase;
 }
 .nav-link#packages::before {
   content:var(--icon-calendar-days);
+}
+.nav-link#paperwork::before {
+  content:var(--icon-contract);
 }
 .nav-link#reminders::before {
   content:var(--icon-thumbtack);
@@ -410,9 +433,6 @@ nav {
 }
 .nav-links {
   border-bottom:1.5px solid var(--color-06)!important;
-}
-.nav-links, .panel-body, .panel-footer {
-  border-top:1.5px solid var(--color-06)!important;
 }
 .nav-links a .nav-link::before {
   color:var(--color-01);
@@ -427,7 +447,7 @@ nav {
 .nav-links a .nav-link.active::before {
   color:var(--color-01);
 }
-.nav-link, .panel-group .panel, .table-container {
+.nav-link, .panel-group .panel, .paperwork-container, .table-container {
   border-radius:6px;
 }
 .nav-link {
@@ -456,11 +476,6 @@ nav {
   height:100%;
   width:100%;
 }
-.add-new-owner {
-  bottom:calc(var(--spacer)*(4/3));
-  left:var(--spacer);
-  position:fixed;
-}
 .add-new-owner::before {
   content:var(--icon-plus);
   font-family:var(--icon-font-family);
@@ -470,22 +485,6 @@ nav {
 .collapsed .panel-heading .panel-arrow {
   top:-1px;
   transform:rotate(0deg);
-}
-.contracts-container .panel, .panel-owner .panel-body .panel {
-  display:flex;
-  flex-direction:column;
-  margin-top:0;
-}
-.contracts-container .panel:not(:nth-of-type(4n-3)), .panel-owner .panel-body .panel:not(:nth-of-type(4n-3)) {
-  margin-left:calc(var(--spacer)/2);
-}
-.contracts-container .panel {
-  width:calc((100%/4) - 12px);
-}
-.contracts-container, .panel-owner>.panel-collapse>.panel-body {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:left;
 }
 .dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-heading::before, .dog-notes::before, .dog-reservation::before, .dog-vaccine-status::before, .owner-heading::before, .package-days-left::before, .package-expiration-date::before, .package-heading::before, .package-notes::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before, .vet-heading::before {
   display:inline-block;
@@ -662,6 +661,14 @@ nav {
 .panel-owner .panel-body .panel:nth-of-type(n+5) {
   margin-top:calc(var(--spacer)/2);
 }
+.panel-owner .panel-body .panel, .paperwork-panels .panel {
+  display:flex;
+  flex-direction:column;
+  margin-top:0;
+}
+.panel-owner .panel-body .panel:not(:nth-of-type(4n-3)), .paperwork-panels .panel:not(:nth-of-type(4n-3)) {
+  margin-left:calc(var(--spacer)/2);
+}
 .panel-owner .panel-body .panel {
   width:calc((100%/4) - 12px);
 }
@@ -671,11 +678,26 @@ nav {
 .panel-owner>.panel-collapse>.panel-body, .panel-owner>.panel-collapse>.panel-footer, .panel-vet>.panel-collapse>.panel-body, .panel-vet>.panel-collapse>.panel-footer {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
-.panel-owner, .panel-vet, .table-container {
+.panel-owner>.panel-collapse>.panel-body, .paperwork-panels {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:left;
+}
+.panel-owner, .panel-vet, .paperwork-container, .table-container {
   background-color:var(--color-08);
 }
 .panel-title {
   font-size:var(--font-size);
+}
+.paperwork-container {
+  padding:calc(var(--spacer)/3) var(--spacer);
+}
+.paperwork-header {
+  border-bottom:2px solid;
+  margin-bottom:calc(var(--spacer)/2);
+}
+.paperwork-panels .panel {
+  width:calc((100%/4) - 12px);
 }
 .previous-button {
   float:left;
@@ -693,7 +715,7 @@ nav {
 #add-reservation-button::before {
   content:var(--icon-calendar-plus);
 }
-#complete-contract-button {
+#complete-contract-button, #complete-registration-button {
   float:right;
 }
 #reservation-list .table>thead>tr>th {

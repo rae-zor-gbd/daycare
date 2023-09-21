@@ -1,7 +1,7 @@
 <?php
 include 'assets/config.php';
-if (isset($_GET['search']) AND $_GET['search']!='') {
-  $reservationDate=date('Y-m-d', strtotime($_GET['search']));
+if (isset($_GET['date']) AND $_GET['date']!='') {
+  $reservationDate=date('Y-m-d', strtotime($_GET['date']));
 } else {
   $reservationDate=date('Y-m-d');
 }
@@ -34,7 +34,7 @@ if (isset($_GET['search']) AND $_GET['search']!='') {
   }
   function changeDate(){
     var goToDate=document.getElementById('goToDate').value;
-    window.open('?search='+goToDate, '_self');
+    window.open('/reservations/'+goToDate, '_self');
   }
   $(document).ready(function(){
     $('#reservations').addClass('active');
@@ -42,7 +42,7 @@ if (isset($_GET['search']) AND $_GET['search']!='') {
     $(document).on('click', '#add-reservation-button', function() {
       var addReservationDate=$(this).data('date');
       $.ajax({
-        url:'ajax/load-add-reservation-form.php',
+        url:'/ajax/load-add-reservation-form.php',
         type:'POST',
         cache:false,
         data:{addReservationDate:addReservationDate},
@@ -56,7 +56,7 @@ if (isset($_GET['search']) AND $_GET['search']!='') {
       var dogID=document.getElementById('addReservationID').value;
       var date=document.getElementById('addReservationDate').value;
       $.ajax({
-        url:'ajax/add-reservation.php',
+        url:'/ajax/add-reservation.php',
         type:'POST',
         cache:false,
         data:{dogID:dogID, date:date},
@@ -71,7 +71,7 @@ if (isset($_GET['search']) AND $_GET['search']!='') {
       var id=$(this).data('id');
       var date=$(this).data('date');
       $.ajax({
-        url:'ajax/load-delete-reservation-form.php',
+        url:'/ajax/load-delete-reservation-form.php',
         type:'POST',
         cache:false,
         data:{id:id, date:date},
@@ -85,7 +85,7 @@ if (isset($_GET['search']) AND $_GET['search']!='') {
       var id=document.getElementById('deleteID').value;
       var date=document.getElementById('deleteReservationDate').value;
       $.ajax({
-        url:'ajax/delete-reservation.php',
+        url:'/ajax/delete-reservation.php',
         type:'POST',
         cache:false,
         data:{id:id, date:date},

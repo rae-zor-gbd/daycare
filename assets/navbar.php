@@ -39,6 +39,7 @@
         </svg>
       </div>
     </a>
+    <div class='nav-header'>Daycare</div>
     <div class='nav-links'>
       <a href='/'>
         <div class='nav-link' id='packages'>Packages</div>
@@ -52,11 +53,8 @@
       <a href='/requests'>
         <div class='nav-link' id='requests'>Vet Requests</div>
       </a>
-      <a href='/registrations'>
-        <div class='nav-link' id='registrations'>Registrations</div>
-      </a>
-      <a href='/contracts'>
-        <div class='nav-link' id='contracts'>Contracts</div>
+      <a href='/paperwork'>
+        <div class='nav-link' id='paperwork'>Paperwork</div>
       </a>
     </div>
   </div>

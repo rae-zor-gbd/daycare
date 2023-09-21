@@ -9,12 +9,12 @@ if (isset($_POST['reservationDate'])) {
     <thead>
     <tr>
     <th colspan='3'>
-    <a href='?search=$previousDate'>
+    <a href='/reservations/$previousDate'>
     <button class='previous-button' title='Previous Date'></button>
     </a>";
     echo date('l, F j, Y', strtotime($reservationDate));
     echo " <span class='text-muted'>(<span id='reservation-count'>0</span>)</span>
-    <a href='?search=$nextDate'>
+    <a href='/reservations/$nextDate'>
     <button class='next-button' title='Next Date'></button>
     </a>
     </th>

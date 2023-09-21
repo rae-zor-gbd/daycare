@@ -46,5 +46,33 @@ if (isset($_POST['id'])) {
     <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID'>
     </div>";
   }
+  echo "<div class='row'>
+  <div class='col-sm-4'>
+  <div class='input-group'>
+  <input type='checkbox' id='addMondays' name='addMondays' value='Yes'>
+  <label for='addMondays'>Mondays</label>
+  </div>
+  <div class='input-group'>
+  <input type='checkbox' id='addThursdays' name='addThursdays' value='Yes'>
+  <label for='addThursdays'>Thursdays</label>
+  </div>
+  </div>
+  <div class='col-sm-4'>
+  <div class='input-group'>
+  <input type='checkbox' id='addTuesdays' name='addTuesdays' value='Yes'>
+  <label for='addTuesdays'>Tuesdays</label>
+  </div>
+  <div class='input-group'>
+  <input type='checkbox' id='addFridays' name='addFridays' value='Yes'>
+  <label for='addFridays'>Fridays</label>
+  </div>
+  </div>
+  <div class='col-sm-4'>
+  <div class='input-group'>
+  <input type='checkbox' id='addWednesdays' name='addWednesdays' value='Yes'>
+  <label for='addWednesdays'>Wednesdays</label>
+  </div>
+  </div>
+  </div>";
 }
 ?>
