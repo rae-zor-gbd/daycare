@@ -697,6 +697,7 @@ nav {
   margin-bottom:calc(var(--spacer)/2);
 }
 .paperwork-panels .panel {
+  margin-bottom:calc(var(--spacer)/2);
   width:calc((100%/4) - 12px);
 }
 .previous-button {
