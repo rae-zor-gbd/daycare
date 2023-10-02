@@ -693,8 +693,8 @@ nav {
   padding:calc(var(--spacer)/3) var(--spacer);
 }
 .paperwork-header {
-  border-bottom:2px solid;
   margin-bottom:calc(var(--spacer)/2);
+  margin-top:calc(var(--spacer)/2);
 }
 .paperwork-panels .panel {
   margin-bottom:calc(var(--spacer)/2);

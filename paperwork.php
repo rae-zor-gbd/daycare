@@ -71,6 +71,8 @@ include 'assets/config.php';
   <div class='container-fluid paperwork-container'>
     <h3 class='paperwork-header'>Incomplete Client Registrations</h3>
     <div class='paperwork-panels' id='registrations-panels'></div>
+  </div>
+  <div class='container-fluid paperwork-container'>
     <h3 class='paperwork-header'>Incomplete Daycare Contracts</h3>
     <div class='paperwork-panels' id='contracts-panels'></div>
   </div>
