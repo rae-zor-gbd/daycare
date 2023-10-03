@@ -38,6 +38,10 @@
   --color-06:hsl(var(--base-color), 10%, 93%);
   --color-07:hsl(var(--base-color), 25%, 96%);
   --color-08:hsl(var(--base-color), 10%, 100%);
+  --color-emphasis-01:#FD3A4A;
+  --color-emphasis-02:#FF9933;
+  --color-emphasis-03:#35BDF9;
+  --color-emphasis-04:#FF68B0;
   --font-family:'Proxima Nova', sans-serif;
   --font-size:18px;
   --font-weight-bold:700;
@@ -306,6 +310,18 @@ textarea {
 }
 .input-group-addon.vet::before, .nav-link#requests::before, .vaccine-reminder-vet::before, .vet-heading::before {
   content:var(--icon-hospital);
+}
+.label-danger {
+  background:var(--color-emphasis-01);
+}
+.label-info {
+  background:var(--color-emphasis-04);
+}
+.label-primary {
+  background:var(--color-emphasis-03);
+}
+.label-warning {
+  background:var(--color-emphasis-02);
 }
 .loading-ring {
   display:inline-block;
