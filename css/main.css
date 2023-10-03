@@ -42,6 +42,7 @@
   --color-emphasis-02:#FF9933;
   --color-emphasis-03:#35BDF9;
   --color-emphasis-04:#FF68B0;
+  --color-emphasis-05:#45C545;
   --font-family:'Proxima Nova', sans-serif;
   --font-size:18px;
   --font-weight-bold:700;
@@ -319,6 +320,9 @@ textarea {
 }
 .label-primary {
   background:var(--color-emphasis-03);
+}
+.label-success {
+  background:var(--color-emphasis-05);
 }
 .label-warning {
   background:var(--color-emphasis-02);
