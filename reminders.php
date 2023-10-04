@@ -117,7 +117,7 @@ include 'assets/config.php';
       </table>
     </div>
   </div>
-  <form action='' method='post' spellcheck='false' id='addPackageNotesForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addPackageNotesForm'>
     <div class='modal fade' id='addPackageNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -133,7 +133,7 @@ include 'assets/config.php';
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='addVaccineNotesForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addVaccineNotesForm'>
     <div class='modal fade' id='addVaccineNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>

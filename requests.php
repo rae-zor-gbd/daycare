@@ -92,7 +92,7 @@ include 'assets/config.php';
   <div class='container-fluid'>
     <div class='panel-group' id='panel-vets'></div>
   </div>
-  <form action='' method='post' spellcheck='false' id='addVaccineNotesForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addVaccineNotesForm'>
     <div class='modal fade' id='addVaccineNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>

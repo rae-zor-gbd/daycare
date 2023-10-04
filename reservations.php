@@ -119,7 +119,7 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
 <body>
   <?php include 'assets/navbar.php'; ?>
   <div class='nav-footer'>
-    <form action='' method='post' spellcheck='false' id='goToDateForm' onchange='changeDate()'>
+    <form action='' method='post' spellcheck='false' autocomplete='off' id='goToDateForm' onchange='changeDate()'>
       <div class='input-group'>
         <span class='input-group-addon calendar-day'>Date</span>
         <input type='date' class='form-control' name='go-to-date' id='goToDate' value='<?php echo $reservationDate; ?>' required>
@@ -130,7 +130,7 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
   <div class='container-fluid'>
     <div class='table-container' id='reservation-list'></div>
   </div>
-  <form action='' method='post' spellcheck='false' id='addReservationForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addReservationForm'>
     <div class='modal fade' id='addReservationModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -146,7 +146,7 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='deleteReservationForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='deleteReservationForm'>
     <div class='modal fade' id='deleteReservationModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>

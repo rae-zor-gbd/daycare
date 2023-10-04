@@ -578,7 +578,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
 </head>
 <body>
   <?php include 'assets/navbar.php'; ?>
-  <form action='' method='post' spellcheck='false' id='addNewOwnerForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addNewOwnerForm'>
     <div class='modal fade' id='addNewOwnerModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -635,14 +635,14 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
     <button type='button' class='btn btn-default nav-button add-new-owner' data-toggle='modal' data-target='#addNewOwnerModal' data-backdrop='static' >Add New Owner</button>
   </div>
   <div class='container-fluid'>
-    <form action='' spellcheck='false'>
+    <form action='' spellcheck='false' autocomplete='off'>
       <div class='form-group'>
         <input type='text' name='search' class='form-control search-panel' placeholder='Search'>
       </div>
     </form>
     <div class='panel-group' id='panel-owners'></div>
   </div>
-  <form action='' method='post' spellcheck='false' id='addDogForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addDogForm'>
     <div class='modal fade' id='addDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -658,7 +658,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='addDogNotesForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addDogNotesForm'>
     <div class='modal fade' id='addDogNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -674,7 +674,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='addPackageForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addPackageForm'>
     <div class='modal fade' id='addPackageModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -690,7 +690,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='addPackageNotesForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addPackageNotesForm'>
     <div class='modal fade' id='addPackageNotesModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -706,7 +706,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='addReservationForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='addReservationForm'>
     <div class='modal fade' id='addReservationModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -722,7 +722,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='deleteDogForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='deleteDogForm'>
     <div class='modal fade' id='deleteDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -738,7 +738,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' id='deleteOwnerForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='deleteOwnerForm'>
     <div class='modal fade' id='deleteOwnerModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -754,7 +754,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' id='deletePackageForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='deletePackageForm'>
     <div class='modal fade' id='deletePackageModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -770,7 +770,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='deleteReservationForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='deleteReservationForm'>
     <div class='modal fade' id='deleteReservationModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -786,7 +786,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='editDogForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='editDogForm'>
     <div class='modal fade' id='editDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -802,7 +802,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='editOwnerForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='editOwnerForm'>
     <div class='modal fade' id='editOwnerModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
@@ -818,7 +818,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
       </div>
     </div>
   </form>
-  <form action='' method='post' spellcheck='false' id='editPackageForm'>
+  <form action='' method='post' spellcheck='false' autocomplete='off' id='editPackageForm'>
     <div class='modal fade' id='editPackageModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
       <div class='modal-dialog'>
         <div class='modal-content'>
