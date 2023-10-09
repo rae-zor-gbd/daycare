@@ -151,7 +151,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           var dogID=document.getElementById('addDogNotesID').value;
           var ownerID=document.getElementById('addDogNotesOwnerID').value;
           var dogNotes=document.getElementById('addDogNotesBox').value;
-          if (dogID!='' && ownerID!='' && dogNotes!='') {
+          if (dogID!='' && ownerID!='') {
             $.ajax({
               url:'ajax/add-dog-notes.php',
               type:'POST',
@@ -259,7 +259,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           var packageID=document.getElementById('addPackageNotesID').value;
           var ownerID=document.getElementById('addPackageNotesForOwnerID').value;
           var packageNotes=document.getElementById('addPackageNotesBox').value;
-          if (packageID!='' && ownerID!='' && packageNotes!='') {
+          if (packageID!='' && ownerID!='') {
             $.ajax({
               url:'ajax/add-package-notes.php',
               type:'POST',
