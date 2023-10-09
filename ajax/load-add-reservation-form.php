@@ -32,19 +32,19 @@ if (isset($_POST['addReservationDate'])) {
   <span class='input-group-addon dog'>Dog Name</span>
   <select class='form-control' id='addReservationID' name='dogName' required>
   <option value='' disabled selected>Select Dog</option>";
-  $sql_all_dogs="SELECT dogID, lastName, dogName FROM dogs d JOIN owners o USING (ownerID) WHERE dogID NOT IN (SELECT dogID FROM reservations WHERE reservationDate='$reservationDate') AND dogID NOT IN (SELECT dogID FROM dogs d JOIN owners o USING (ownerID) WHERE";
+  $sql_all_dogs="SELECT dogID, lastName, dogName FROM dogs d JOIN owners o USING (ownerID) WHERE dogID NOT IN (SELECT dogID FROM reservations WHERE reservationDate='$reservationDate')";
   if ($dayOfWeek=='Monday') {
-    $sql_all_dogs.=" reserveMondays='Yes'";
+    $sql_all_dogs.=" AND dogID NOT IN (SELECT dogID FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes')";
   } elseif ($dayOfWeek=='Tuesday') {
-    $sql_all_dogs.=" reserveTuesdays='Yes'";
+    $sql_all_dogs.=" AND dogID NOT IN (SELECT dogID FROM dogs d JOIN owners o USING (ownerID) WHERE reserveTuesdays='Yes')";
   } elseif ($dayOfWeek=='Wednesday') {
-    $sql_all_dogs.=" reserveWednesdays='Yes'";
+    $sql_all_dogs.=" AND dogID NOT IN (SELECT dogID FROM dogs d JOIN owners o USING (ownerID) WHERE reserveWednesdays='Yes')";
   } elseif ($dayOfWeek=='Thursday') {
-    $sql_all_dogs.=" reserveThursdays='Yes'";
+    $sql_all_dogs.=" AND dogID NOT IN (SELECT dogID FROM dogs d JOIN owners o USING (ownerID) WHERE reserveThursdays='Yes')";
   } elseif ($dayOfWeek=='Friday') {
-    $sql_all_dogs.=" reserveFridays='Yes'";
+    $sql_all_dogs.=" AND dogID NOT IN (SELECT dogID FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes')";
   }
-  $sql_all_dogs.=") ORDER BY lastName, dogName";
+  $sql_all_dogs.=" ORDER BY lastName, dogName";
   $result_all_dogs=$conn->query($sql_all_dogs);
   while ($row_all_dogs=$result_all_dogs->fetch_assoc()) {
     $editDogID=htmlspecialchars($row_all_dogs['dogID'], ENT_QUOTES);

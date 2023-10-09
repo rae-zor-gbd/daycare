@@ -28,19 +28,19 @@ if (isset($_POST['reservationDate'])) {
         $pushID=$row_confirmations['dogID'];
         array_push($confirmations, $pushID);
     }
-    $sql_reservations="SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate' UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE";
+    $sql_reservations="SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate'";
     if ($dayOfWeek=='Monday') {
-        $sql_reservations.=" reserveMondays='Yes'";
+        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes'";
     } elseif ($dayOfWeek=='Tuesday') {
-        $sql_reservations.=" reserveTuesdays='Yes'";
+        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveTuesdays='Yes'";
     } elseif ($dayOfWeek=='Wednesday') {
-        $sql_reservations.=" reserveWednesdays='Yes'";
+        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveWednesdays='Yes'";
     } elseif ($dayOfWeek=='Thursday') {
-        $sql_reservations.=" reserveThursdays='Yes'";
+        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveThursdays='Yes'";
     } elseif ($dayOfWeek=='Friday') {
-        $sql_reservations.=" reserveFridays='Yes'";
+        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes'";
     }
-    $sql_reservations.="ORDER BY lastName, dogName";
+    $sql_reservations.=" ORDER BY lastName, dogName";
     $result_reservations=$conn->query($sql_reservations);
     if ($result_reservations->num_rows>0) {
         while ($row_reservations=$result_reservations->fetch_assoc()) {

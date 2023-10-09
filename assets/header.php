@@ -7,8 +7,22 @@
 <?php $mainStylesheetTimestamp=filemtime('css/main.css'); ?>
 <link rel='stylesheet' href='<?php echo "/css/main.css?v=" . $mainStylesheetTimestamp; ?>'>
 <script type='text/javascript'>
-function hideLoader() {
-  $('#loading').hide();
-}
-$(window).ready(hideLoader);
+  function hideLoader() {
+    $('#loading').hide();
+  }
+  function loadIncompleteFormAlert(id){
+    $.ajax({
+      url:'/assets/incomplete-form-alert.php',
+      type:'POST',
+      cache:false,
+      data:{},
+      success:function(data){
+        if (data) {
+          $(id+' .alert').remove();
+          $(id).prepend(data);
+        }
+      }
+    });
+  }
+  $(window).ready(hideLoader);
 </script>
