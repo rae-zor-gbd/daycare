@@ -208,6 +208,12 @@ input[type=checkbox]:hover {
 textarea {
   resize:none;
 }
+td>.vaccine-reminder-notes {
+  margin-top:4px;
+}
+td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
+  margin-top:-3px;
+}
 .alert-danger h4::before {
   content:var(--icon-warning);
   float:left;
@@ -232,6 +238,8 @@ textarea {
 .button-email::before {
   content:var(--icon-envelope);
   padding-left:calc(var(--spacer)/10);
+  position:relative;
+  top:1px;
 }
 .button-decrease::before {
   content:var(--icon-arrow-down);
@@ -646,14 +654,14 @@ nav {
   margin-right:calc(var(--spacer)/10);
   padding-right:calc(var(--spacer)/6);
 }
-.package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before {
+.package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-vet::before {
   padding-right:calc(var(--spacer)/6);
 }
 .package-reminder-notes .label {
-  padding-left:calc(.6em + (var(--spacer)/1.5));
+  padding-left:calc(.6em + (var(--spacer)/2));
 }
 .package-reminder-notes .label::before{
-  right:calc(var(--spacer)/1.5);
+  right:calc(var(--spacer)/2);
   width:0;
 }
 .package-reminder-notes .label, .vaccine-reminder-notes .label {
@@ -662,7 +670,7 @@ nav {
   text-align:left;
   white-space:unset;
 }
-.package-reminder-notes, .vaccine-reminder-notes {
+.package-reminder-notes {
   margin-top:2px;
 }
 .package-status {
@@ -757,10 +765,20 @@ nav {
   content:var(--icon-chevron-left-01);
 }
 .vaccine-reminder:not(:first-of-type) {
-  margin-top:-3px;
+  margin-top:-2px;
 }
-.vaccine-reminder-notes-text::before {
-  padding-right:9px;
+.vaccine-reminder-dog, .vaccine-reminder-notes-text {
+  display:table-cell;
+}
+.vaccine-reminder-due::before {
+  padding:0 calc(var(--spacer)/6);
+}
+.vaccine-reminder-notes-text {
+  padding-left:calc(var(--spacer)/1.3);
+}
+.vaccine-reminder-notes-text::before  {
+  right:calc(var(--spacer)/1.8);
+  width:0;
 }
 #add-reservation-button::before {
   content:var(--icon-calendar-plus);
