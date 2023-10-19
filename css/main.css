@@ -403,6 +403,11 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
 .table-condensed>tbody>tr>td {
   padding:calc(var(--spacer)/3) 5px;
 }
+.table-hover>tbody>tr:hover {
+  transform:translateZ(0);
+  transition-duration:.3s;
+  transition-property:background;
+}
 @keyframes loading-ring {
   0% {
     transform:rotate(0deg);
