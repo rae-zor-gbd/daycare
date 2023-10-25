@@ -187,7 +187,7 @@ button, .nav-link {
   transition-duration:.3s;
   transition-property:color;
 }
-button:hover:not(.disabled) {
+button:hover:not(.disabled):not(.nav-button) {
   color:var(--color-03);
 }
 button.disabled {
