@@ -789,6 +789,7 @@ nav {
   content:var(--icon-calendar-plus);
 }
 #complete-contract-button, #complete-registration-button {
+  display:none;
   float:right;
 }
 #reservation-list .table>thead>tr>th {
