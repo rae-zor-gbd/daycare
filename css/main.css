@@ -769,6 +769,9 @@ nav {
 .previous-button::before {
   content:var(--icon-chevron-left-01);
 }
+.reservation-row td:first-of-type {
+  vertical-align:middle!important;
+}
 .vaccine-reminder:not(:first-of-type) {
   margin-top:-2px;
 }
