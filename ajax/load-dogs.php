@@ -12,16 +12,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     $dogNotes=nl2br($row_dogs['notes']);
     $sql_current_fecal="SELECT * FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines v USING (vaccineID) WHERE ownerID='$ownerID' AND vaccineTitle='Fecal' AND dueDate>=DATE_ADD(DATE(NOW()), INTERVAL (SELECT followUpDueIn FROM follow_ups WHERE service='Daycare') DAY)";
     $result_current_fecal=$conn->query($sql_current_fecal);
-    $sql_flu_waiver="SELECT dueDate FROM dogs_vaccines dv JOIN vaccines v USING (vaccineID) WHERE vaccineTitle='Flu Waiver' AND dogID='$dogID'";
-    $result_flu_waiver=$conn->query($sql_flu_waiver);
-    $row_flu_waiver=$result_flu_waiver->fetch_assoc();
-    if ($result_flu_waiver->num_rows>0) {
-      $fluWaiver=$row_flu_waiver['dueDate'];
-    }
     $sql_vaccines_not_given="SELECT vaccineTitle FROM vaccines WHERE requirementStatus='Required'";
-    if (isset($fluWaiver) AND $fluWaiver!='') {
-      $sql_vaccines_not_given.=" AND vaccineTitle!='Flu'";
-    }
     if ($result_current_fecal->num_rows>0) {
       $sql_vaccines_not_given.=" AND vaccineTitle!='Fecal'";
     }
