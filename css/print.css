@@ -5,6 +5,9 @@
 nav {
   display:none;
 }
+td:has(.label) {
+  text-align:right;
+}
 th a {
   display:none;
 }
@@ -16,4 +19,10 @@ th a {
 }
 .reservation-row td:last-of-type {
   display:none;
+}
+.table-condensed>tbody>tr>td {
+  padding:calc(var(--spacer)/6) 5px;
+}
+.table-container {
+  padding:0;
 }
