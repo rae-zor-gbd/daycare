@@ -1,0 +1,19 @@
+@page {
+  margin:0.25in;
+  size:letter portrait;
+}
+nav {
+  display:none;
+}
+th a {
+  display:none;
+}
+.container-fluid {
+  margin:0;
+}
+.nav-footer {
+  display:none;
+}
+.reservation-row td:last-of-type {
+  display:none;
+}

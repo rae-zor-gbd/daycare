@@ -6,6 +6,8 @@
 <script type='text/javascript' src='/js/bootstrap.min.js'></script>
 <?php $mainStylesheetTimestamp=filemtime('css/main.css'); ?>
 <link rel='stylesheet' href='<?php echo "/css/main.css?v=" . $mainStylesheetTimestamp; ?>'>
+<?php $printStylesheetTimestamp=filemtime('css/print.css'); ?>
+<link rel='stylesheet' media='print' href='<?php echo "/css/print.css?v=" . $printStylesheetTimestamp; ?>'>
 <script type='text/javascript'>
   function hideLoader() {
     $('#loading').hide();
