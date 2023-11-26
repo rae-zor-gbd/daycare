@@ -12,7 +12,7 @@ if (isset($_POST['id'])) {
   <select class='form-control' id='addClientRegistration' name='clientRegistration' required>
   <option value='' disabled selected>Select Status</option>
   <option value='Incomplete'>Incomplete</option>
-  <option value='Completed'>Completed</option>
+  <option value='Complete'>Complete</option>
   </select>
   </div>
   <div class='input-group'>
@@ -20,7 +20,7 @@ if (isset($_POST['id'])) {
   <select class='form-control' id='addDaycareContract' name='daycareContract' required>
   <option value='' disabled selected>Select Status</option>
   <option value='Incomplete'>Incomplete</option>
-  <option value='Completed'>Completed</option>
+  <option value='Complete'>Complete</option>
   </select>
   </div>
   <div class='input-group'>

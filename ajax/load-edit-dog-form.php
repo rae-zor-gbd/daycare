@@ -30,11 +30,11 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     echo " selected";
   }
   echo ">Incomplete</option>
-  <option value='Completed'";
-  if ($editClientRegistration==='Completed') {
+  <option value='Complete'";
+  if ($editClientRegistration==='Complete') {
     echo " selected";
   }
-  echo ">Completed</option>
+  echo ">Complete</option>
   </select>
   </div>
   <div class='input-group'>
@@ -46,11 +46,11 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     echo " selected";
   }
   echo ">Incomplete</option>
-  <option value='Completed'";
-  if ($editDaycareContract==='Completed') {
+  <option value='Complete'";
+  if ($editDaycareContract==='Complete') {
     echo " selected";
   }
-  echo ">Completed</option>
+  echo ">Complete</option>
   </select>
   </div>
   <div class='input-group'>
