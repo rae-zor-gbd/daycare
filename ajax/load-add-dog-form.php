@@ -13,6 +13,7 @@ if (isset($_POST['id'])) {
   <option value='' disabled selected>Select Status</option>
   <option value='Incomplete'>Incomplete</option>
   <option value='Complete'>Complete</option>
+  <option value='Exempt'>Exempt</option>
   </select>
   </div>
   <div class='input-group'>
@@ -21,6 +22,7 @@ if (isset($_POST['id'])) {
   <option value='' disabled selected>Select Status</option>
   <option value='Incomplete'>Incomplete</option>
   <option value='Complete'>Complete</option>
+  <option value='Exempt'>Exempt</option>
   </select>
   </div>
   <div class='input-group'>

@@ -35,6 +35,11 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     echo " selected";
   }
   echo ">Complete</option>
+  <option value='Exempt'";
+  if ($editClientRegistration==='Exempt') {
+    echo " selected";
+  }
+  echo ">Exempt</option>
   </select>
   </div>
   <div class='input-group'>
@@ -51,6 +56,11 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     echo " selected";
   }
   echo ">Complete</option>
+  <option value='Exempt'";
+  if ($editDaycareContract==='Exempt') {
+    echo " selected";
+  }
+  echo ">Exempt</option>
   </select>
   </div>
   <div class='input-group'>
