@@ -182,10 +182,10 @@ button {
   border:0;
   position:relative;
 }
-button, .nav-link {
+button, .btn, .nav-link, .table-hover>tbody>tr {
   transform:translateZ(0);
   transition-duration:.3s;
-  transition-property:color;
+  transition-property:all;
 }
 button:hover:not(.disabled):not(.nav-button) {
   color:var(--color-03);
@@ -219,11 +219,6 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
   float:left;
   font-family:var(--icon-font-family);
   margin-right:calc(var(--spacer)/2);
-}
-.btn {
-  transform:translateZ(0);
-  transition-duration:.3s;
-  transition-property:background;
 }
 .button-check::before, .button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before, .button-reservation::before {
   font-family:var(--icon-font-family);
@@ -402,11 +397,6 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
 }
 .table-condensed>tbody>tr>td {
   padding:calc(var(--spacer)/3) 5px;
-}
-.table-hover>tbody>tr:hover {
-  transform:translateZ(0);
-  transition-duration:.3s;
-  transition-property:background;
 }
 @keyframes loading-ring {
   0% {
