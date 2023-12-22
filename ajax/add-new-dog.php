@@ -2,7 +2,7 @@
 include '../assets/config.php';
 if (isset($_POST['id']) AND isset($_POST['dogName']) AND isset($_POST['clientRegistration']) AND isset($_POST['daycareContract']) AND isset($_POST['vetID']) AND isset($_POST['reserveMondays']) AND isset($_POST['reserveTuesdays']) AND isset($_POST['reserveWednesdays']) AND isset($_POST['reserveThursdays']) AND isset($_POST['reserveFridays'])) {
   $ownerID=$_POST['id'];
-  $dogName=mysqli_real_escape_string($conn, $_POST['dogName']);
+  $dogName=mysqli_real_escape_string($conn, trim($_POST['dogName']));
   $clientRegistration=mysqli_real_escape_string($conn, $_POST['clientRegistration']);
   $daycareContract=mysqli_real_escape_string($conn, $_POST['daycareContract']);
   $vetID=$_POST['vetID'];
