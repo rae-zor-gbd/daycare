@@ -38,14 +38,16 @@ if (isset($_POST['id'])) {
   }
   echo "</select>
   </div>";
-  $sql_vaccines="SELECT vaccineID, vaccineTitle FROM vaccines ORDER BY vaccineTitle";
+  $sql_vaccines="SELECT vaccineID, vaccineTitle, maxMonthsAhead FROM vaccines ORDER BY vaccineTitle";
   $result_vaccines=$conn->query($sql_vaccines);
   while ($row_vaccines=$result_vaccines->fetch_assoc()) {
     $vaccineID=$row_vaccines['vaccineID'];
     $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccines['vaccineTitle']);
+    $maxMonthsAhead=$row_vaccines['maxMonthsAhead'];
+    $maxDueDate=date('Y-m-d', strtotime('today + ' . $maxMonthsAhead . ' months'));
     echo "<div class='input-group'>
     <span class='input-group-addon vaccine'>$vaccineTitle</span>
-    <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID'>
+    <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID' max='$maxDueDate'>
     </div>";
   }
   echo "<div class='row'>

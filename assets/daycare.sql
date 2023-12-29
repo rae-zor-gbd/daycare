@@ -29,7 +29,8 @@ CREATE TABLE packages (
   packageID INT(11) NOT NULL AUTO_INCREMENT,
   packageTitle VARCHAR(50) NOT NULL UNIQUE,
   totalDays INT(11) NOT NULL,
-  duration INT(11) NOT NULL,
+  durationDays INT(11) NOT NULL,
+  durationMonths INT(11) NOT NULL,
   daysLeftWarning INT(11) NOT NULL,
   expirationWarning INT(11) NOT NULL,
   sortOrder INT(11) NOT NULL DEFAULT '0',
@@ -82,6 +83,7 @@ CREATE TABLE vaccines (
   vaccineID INT(11) NOT NULL AUTO_INCREMENT,
   vaccineTitle VARCHAR(255) NOT NULL UNIQUE,
   requirementStatus ENUM('Required', 'Not Required') NOT NULL DEFAULT 'Required',
+  maxMonthsAhead INT(11) NOT NULL,
   vaccineDeadline INT(11) NOT NULL DEFAULT '0',
   sendReminder INT(11) NOT NULL DEFAULT '14',
   PRIMARY KEY (vaccineID)

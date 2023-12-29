@@ -80,11 +80,13 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   }
   echo "</select>
   </div>";
-  $sql_all_vaccines="SELECT vaccineID, vaccineTitle FROM vaccines ORDER BY vaccineTitle";
+  $sql_all_vaccines="SELECT vaccineID, vaccineTitle, maxMonthsAhead FROM vaccines ORDER BY vaccineTitle";
   $result_all_vaccines=$conn->query($sql_all_vaccines);
   while ($row_all_vaccines=$result_all_vaccines->fetch_assoc()) {
     $vaccineID=$row_all_vaccines['vaccineID'];
     $vaccineTitle=mysqli_real_escape_string($conn, $row_all_vaccines['vaccineTitle']);
+    $maxMonthsAhead=$row_all_vaccines['maxMonthsAhead'];
+    $maxDueDate=date('Y-m-d', strtotime('today + ' . $maxMonthsAhead . ' months'));
     $sql_all_vaccines_given="SELECT dueDate FROM dogs_vaccines dv JOIN vaccines v USING (vaccineID) WHERE dogID='$id' AND vaccineID='$vaccineID'";
     $result_all_vaccines_given=$conn->query($sql_all_vaccines_given);
     $row_all_vaccines_given=$result_all_vaccines_given->fetch_assoc();
@@ -95,7 +97,7 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     }
     echo "<div class='input-group'>
     <span class='input-group-addon vaccine'>$vaccineTitle</span>
-    <input type='date' class='form-control' name='vaccine$vaccineID' id='editVaccine$vaccineID'";
+    <input type='date' class='form-control' name='vaccine$vaccineID' id='editVaccine$vaccineID' max='$maxDueDate'";
     if (isset($dueDate) AND $dueDate!='') {
       echo " value='$dueDate'";
     }

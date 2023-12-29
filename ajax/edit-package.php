@@ -11,21 +11,29 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStat
   $sql_edit_package="UPDATE owners_packages SET status='$status' WHERE ownerPackageID='$packageID'";
   $conn->query($sql_edit_package);
   if ($currentStatus==='Not Started' AND $status==='Active') {
-    $sql_package_info="SELECT totalDays, duration FROM packages p JOIN owners_packages op USING (packageID) WHERE ownerPackageID='$packageID'";
+    $sql_package_info="SELECT totalDays, durationDays, durationMonths FROM packages p JOIN owners_packages op USING (packageID) WHERE ownerPackageID='$packageID'";
     $result_package_info=$conn->query($sql_package_info);
     $row_package_info=$result_package_info->fetch_assoc();
     if ($row_package_info['totalDays']>0) {
       $daysLeft=$row_package_info['totalDays'];
-      $duration=$row_package_info['duration'];
+      $durationDays=$row_package_info['durationDays'];
+      $durationMonths=$row_package_info['durationMonths'];
     } else {
       $daysLeft=NULL;
-      $duration=NULL;
+      $durationDays=NULL;
+      $durationMonths=NULL;
     }
-    if (isset($startDate) AND $startDate!='' AND $duration>0) {
+    if (isset($startDate) AND $startDate!='' AND $durationDays>0 AND $durationMonths>0) {
       $startDate=$_POST['startDate'];
       if ($currentStatus==='Not Started' AND $status==='Active') {
-        if ($duration>0) {
-          $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
+        if ($durationDays>0 AND $durationMonths>0) {
+          $expirationDateDays=date('Y-m-d', strtotime($startDate . ' + ' . $durationDays . ' days'));
+          $expirationDateMonths=date('Y-m-d', strtotime($startDate . ' + ' . $durationMonths . ' months'));
+          if ($expirationDateMonths>=$expirationDateDays) {
+            $expirationDate=$expirationDateMonths;
+          } elseif ($expirationDateDays>$expirationDateMonths) {
+            $expirationDate=$expirationDateDays;
+          }
         } else {
           $expirationDate=NULL;
         }

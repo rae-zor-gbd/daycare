@@ -7,21 +7,29 @@ if (isset($_POST['ownerID']) AND isset($_POST['packageID'])) {
   $result_next_package_id=$conn->query($sql_next_package_id);
   $row_next_package_id=$result_next_package_id->fetch_assoc();
   $ownerPackageID=$row_next_package_id['nextPackageID'];
-  $sql_package_info="SELECT totalDays, duration FROM packages WHERE packageID='$packageID'";
+  $sql_package_info="SELECT totalDays, durationDays, durationMonths FROM packages WHERE packageID='$packageID'";
   $result_package_info=$conn->query($sql_package_info);
   $row_package_info=$result_package_info->fetch_assoc();
   if ($row_package_info['totalDays']>0) {
     $daysLeft=$row_package_info['totalDays'];
-    $duration=$row_package_info['duration'];
+    $durationDays=$row_package_info['durationDays'];
+    $durationMonths=$row_package_info['durationMonths'];
   } else {
     $daysLeft=NULL;
-    $duration=NULL;
+    $durationDays=NULL;
+    $durationMonths=NULL;
   }
   if (isset($_POST['startDate']) AND $_POST['startDate']!='') {
     $startDate=date('Y-m-d', strtotime($_POST['startDate']));
     $status='Active';
-    if ($duration>0) {
-      $expirationDate=date('Y-m-d', strtotime($startDate . ' + ' . $duration . ' days'));
+    if ($durationDays>0 AND $durationMonths>0) {
+      $expirationDateDays=date('Y-m-d', strtotime($startDate . ' + ' . $durationDays . ' days'));
+      $expirationDateMonths=date('Y-m-d', strtotime($startDate . ' + ' . $durationMonths . ' months'));
+      if ($expirationDateMonths>=$expirationDateDays) {
+        $expirationDate=$expirationDateMonths;
+      } elseif ($expirationDateDays>$expirationDateMonths) {
+        $expirationDate=$expirationDateDays;
+      }
     } else {
       $expirationDate=NULL;
     }
