@@ -51,32 +51,38 @@ if (isset($_POST['id'])) {
     </div>";
   }
   echo "<div class='row'>
-  <div class='col-sm-4'>
+  <div class='col-sm-1'></div>
+  <div class='col-sm-2'>
   <div class='input-group'>
   <input type='checkbox' id='addMondays' name='addMondays' value='Yes'>
-  <label for='addMondays'>Mondays</label>
-  </div>
-  <div class='input-group'>
-  <input type='checkbox' id='addThursdays' name='addThursdays' value='Yes'>
-  <label for='addThursdays'>Thursdays</label>
+  <label for='addMondays'>Mon</label>
   </div>
   </div>
-  <div class='col-sm-4'>
+  <div class='col-sm-2'>
   <div class='input-group'>
   <input type='checkbox' id='addTuesdays' name='addTuesdays' value='Yes'>
-  <label for='addTuesdays'>Tuesdays</label>
-  </div>
-  <div class='input-group'>
-  <input type='checkbox' id='addFridays' name='addFridays' value='Yes'>
-  <label for='addFridays'>Fridays</label>
+  <label for='addTuesdays'>Tue</label>
   </div>
   </div>
-  <div class='col-sm-4'>
+  <div class='col-sm-2'>
   <div class='input-group'>
   <input type='checkbox' id='addWednesdays' name='addWednesdays' value='Yes'>
-  <label for='addWednesdays'>Wednesdays</label>
+  <label for='addWednesdays'>Wed</label>
   </div>
   </div>
+  <div class='col-sm-2'>
+  <div class='input-group'>
+  <input type='checkbox' id='addThursdays' name='addThursdays' value='Yes'>
+  <label for='addThursdays'>Thu</label>
+  </div>
+  </div>
+  <div class='col-sm-2'>
+  <div class='input-group'>
+  <input type='checkbox' id='addFridays' name='addFridays' value='Yes'>
+  <label for='addFridays'>Fri</label>
+  </div>
+  </div>
+  <div class='col-sm-1'></div>
   </div>";
 }
 ?>
