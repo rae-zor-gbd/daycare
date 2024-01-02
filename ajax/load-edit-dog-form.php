@@ -64,6 +64,63 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   </select>
   </div>
   <div class='input-group'>
+  <span class='input-group-addon day'>Preferred Days</span>
+  <div class='preferred-days'>
+  <div class='row'>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='editMondays' name='editMondays' value='Yes'";
+  if ($editMondays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editMondays'>Mondays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='editTuesdays' name='editTuesdays' value='Yes'";
+  if ($editTuesdays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editTuesdays'>Tuesdays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='editWednesdays' name='editWednesdays' value='Yes'";
+  if ($editWednesdays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editWednesdays'>Wednesdays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='editThursdays' name='editThursdays' value='Yes'";
+  if ($editThursdays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editThursdays'>Thursdays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='editFridays' name='editFridays' value='Yes'";
+  if ($editFridays=='Yes') {
+    echo " checked";
+  }
+  echo ">
+  <label for='editFridays'>Fridays</label>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class='input-group'>
   <span class='input-group-addon vet'>Vet</span>
   <select class='form-control' name='editVet' id='editVet' required>
   <option value='' disabled>Select Vet</option>";
@@ -105,59 +162,5 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     </div>
     ";
   }
-  echo "<div class='row'>
-  <div class='col-sm-1'></div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='editMondays' name='editMondays' value='Yes'";
-  if ($editMondays=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editMondays'>Mon</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='editTuesdays' name='editTuesdays' value='Yes'";
-  if ($editTuesdays=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editTuesdays'>Tue</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='editWednesdays' name='editWednesdays' value='Yes'";
-  if ($editWednesdays=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editWednesdays'>Wed</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='editThursdays' name='editThursdays' value='Yes'";
-  if ($editThursdays=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editThursdays'>Thu</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='editFridays' name='editFridays' value='Yes'";
-  if ($editFridays=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editFridays'>Fri</label>
-  </div>
-  </div>
-  <div class='col-sm-1'></div>
-  </div>";
 }
 ?>

@@ -26,6 +26,43 @@ if (isset($_POST['id'])) {
   </select>
   </div>
   <div class='input-group'>
+  <span class='input-group-addon day'>Preferred Days</span>
+  <div class='preferred-days'>
+  <div class='row'>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='addMondays' name='addMondays' value='Yes'>
+  <label for='addMondays'>Mondays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='addTuesdays' name='addTuesdays' value='Yes'>
+  <label for='addTuesdays'>Tuesdays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='addWednesdays' name='addWednesdays' value='Yes'>
+  <label for='addWednesdays'>Wednesdays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='addThursdays' name='addThursdays' value='Yes'>
+  <label for='addThursdays'>Thursdays</label>
+  </div>
+  </div>
+  <div class='col-sm-6'>
+  <div class='input-group'>
+  <input type='checkbox' id='addFridays' name='addFridays' value='Yes'>
+  <label for='addFridays'>Fridays</label>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class='input-group'>
   <span class='input-group-addon vet'>Vet</span>
   <select class='form-control' name='vet' id='addVet' required>
   <option value='' selected disabled>Select Vet</option>";
@@ -50,39 +87,5 @@ if (isset($_POST['id'])) {
     <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID' max='$maxDueDate'>
     </div>";
   }
-  echo "<div class='row'>
-  <div class='col-sm-1'></div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='addMondays' name='addMondays' value='Yes'>
-  <label for='addMondays'>Mon</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='addTuesdays' name='addTuesdays' value='Yes'>
-  <label for='addTuesdays'>Tue</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='addWednesdays' name='addWednesdays' value='Yes'>
-  <label for='addWednesdays'>Wed</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='addThursdays' name='addThursdays' value='Yes'>
-  <label for='addThursdays'>Thu</label>
-  </div>
-  </div>
-  <div class='col-sm-2'>
-  <div class='input-group'>
-  <input type='checkbox' id='addFridays' name='addFridays' value='Yes'>
-  <label for='addFridays'>Fri</label>
-  </div>
-  </div>
-  <div class='col-sm-1'></div>
-  </div>";
 }
 ?>
