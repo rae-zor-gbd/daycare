@@ -24,8 +24,8 @@
         loadReminders();
         $(document).on('click', '.button-email', function() {
           var email=$(this).data('email');
-          const textarea = document.createElement('textarea');
-          textarea.textContent = email;
+          const textarea=document.createElement('textarea');
+          textarea.textContent=email;
           document.body.appendChild(textarea);
           textarea.select();
           document.execCommand('copy');
