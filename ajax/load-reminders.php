@@ -41,7 +41,7 @@ if ($result_reminders->num_rows>0) {
           if ($daysLeft!=1) {
             echo "s";
           }
-          echo "</span>
+          echo " left</span>
           <span class='package-reminder-expiration'>";
           if (isset($expirationDate) AND $expirationDate!='') {
             echo date('D n/j', $expirationDate);
