@@ -54,6 +54,13 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStat
     $conn->query($sql_edit_package_start);
   }
   if (isset($_POST['expirationDate']) AND $_POST['expirationDate']!='') {
+    $sql_expiration_exception="SELECT expirationException FROM owners WHERE ownerID='$ownerID'";
+    $result_expiration_exception=$conn->query($sql_expiration_exception);
+    $row_expiration_exception=$result_expiration_exception->fetch_assoc();
+    $expirationException=$row_expiration_exception['expirationException'];
+    if ($expirationException=='Yes') {
+      $expirationDate=NULL;
+    }
     $sql_edit_package_expiration="UPDATE owners_packages SET expirationDate='$expirationDate' WHERE ownerPackageID='$packageID'";
     $conn->query($sql_edit_package_expiration);
   }

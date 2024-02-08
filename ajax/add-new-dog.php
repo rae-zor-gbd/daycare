@@ -11,12 +11,12 @@ if (isset($_POST['id']) AND isset($_POST['dogName']) AND isset($_POST['clientReg
   $reserveWednesdays=$_POST['reserveWednesdays'];
   $reserveThursdays=$_POST['reserveThursdays'];
   $reserveFridays=$_POST['reserveFridays'];
-  $sql_next_dog_id="SELECT AUTO_INCREMENT AS nextDogID FROM information_schema.TABLES WHERE TABLE_SCHEMA='daycare' AND TABLE_NAME='dogs'";
+  $sql_add_dog="INSERT INTO dogs (dogName, ownerID, clientRegistration, daycareContract, vetID, reserveMondays, reserveTuesdays, reserveWednesdays, reserveThursdays, reserveFridays) VALUES ('$dogName', '$ownerID', '$clientRegistration', '$daycareContract', '$vetID', '$reserveMondays', '$reserveTuesdays', '$reserveWednesdays', '$reserveThursdays', '$reserveFridays')";
+  $conn->query($sql_add_dog);
+  $sql_next_dog_id="SELECT dogID FROM dogs WHERE dogName='$dogName' AND ownerID='$ownerID' ORDER BY dogID DESC LIMIT 1";
   $result_next_dog_id=$conn->query($sql_next_dog_id);
   $row_next_dog_id=$result_next_dog_id->fetch_assoc();
-  $dogID=$row_next_dog_id['nextDogID'];
-  $sql_add_dog="INSERT INTO dogs (dogID, dogName, ownerID, clientRegistration, daycareContract, vetID, reserveMondays, reserveTuesdays, reserveWednesdays, reserveThursdays, reserveFridays) VALUES ('$dogID', '$dogName', '$ownerID', '$clientRegistration', '$daycareContract', '$vetID', '$reserveMondays', '$reserveTuesdays', '$reserveWednesdays', '$reserveThursdays', '$reserveFridays')";
-  $conn->query($sql_add_dog);
+  $dogID=$row_next_dog_id['dogID'];
   $sql_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
   $result_vaccines=$conn->query($sql_vaccines);
   while ($row_vaccines=$result_vaccines->fetch_assoc()) {

@@ -13,6 +13,7 @@ CREATE TABLE owners (
   primaryCell CHAR(12) DEFAULT NULL,
   secondaryCell CHAR(12) DEFAULT NULL,
   homePhone CHAR(12) DEFAULT NULL,
+  expirationException ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
   lastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ownerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
