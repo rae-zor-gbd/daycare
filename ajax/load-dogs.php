@@ -2,7 +2,7 @@
 include '../assets/config.php';
 if (isset($_POST['owner']) AND $_POST['owner']!='') {
   $ownerID=$_POST['owner'];
-  $sql_dogs="SELECT dogID, dogName, clientRegistration, daycareContract, notes FROM dogs WHERE ownerID='$ownerID' ORDER BY dogName";
+  $sql_dogs="SELECT dogID, dogName, clientRegistration, daycareContract, notes, assessmentDayReportCard, firstDayReportCard, secondDayReportCard, thirdDayReportCard FROM dogs WHERE ownerID='$ownerID' ORDER BY dogName";
   $result_dogs=$conn->query($sql_dogs);
   while ($row_dogs=$result_dogs->fetch_assoc()) {
     $dogID=$row_dogs['dogID'];
@@ -10,6 +10,10 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     $clientRegistration=mysqli_real_escape_string($conn, $row_dogs['clientRegistration']);
     $daycareContract=mysqli_real_escape_string($conn, $row_dogs['daycareContract']);
     $dogNotes=nl2br($row_dogs['notes']);
+    $assessmentDayReportCard=$row_dogs['assessmentDayReportCard'];
+    $firstDayReportCard=$row_dogs['firstDayReportCard'];
+    $secondDayReportCard=$row_dogs['secondDayReportCard'];
+    $thirdDayReportCard=$row_dogs['thirdDayReportCard'];
     $sql_current_fecal="SELECT * FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines v USING (vaccineID) WHERE ownerID='$ownerID' AND vaccineTitle='Fecal' AND dueDate>=DATE_ADD(DATE(NOW()), INTERVAL sendReminder DAY)";
     $result_current_fecal=$conn->query($sql_current_fecal);
     $sql_vaccines_not_given="SELECT vaccineTitle FROM vaccines WHERE requirementStatus='Required'";
@@ -53,6 +57,15 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     }
     if (stripslashes($daycareContract)==='Incomplete') {
       echo "<div class='panel-body dog-daycare-contract-status text-danger'>Incomplete Daycare Contract</div>";
+    }
+    if ($assessmentDayReportCard=='No' AND $firstDayReportCard=='No' AND $secondDayReportCard=='No' AND $thirdDayReportCard=='No') {
+      echo "<div class='panel-body dog-report-card text-danger'>Assessment-Day Report Card</div>";
+    } elseif ($firstDayReportCard=='No' AND $secondDayReportCard=='No' AND $thirdDayReportCard=='No') {
+      echo "<div class='panel-body dog-report-card text-danger'>First-Day Report Card</div>";
+    } elseif ($secondDayReportCard=='No' AND $thirdDayReportCard=='No') {
+      echo "<div class='panel-body dog-report-card text-danger'>Second-Day Report Card</div>";
+    } elseif ($thirdDayReportCard=='No') {
+      echo "<div class='panel-body dog-report-card text-danger'>Third-Day Report Card</div>";
     }
     if ($result_vaccines_not_given->num_rows>0) {
       while ($row_vaccines_not_given=$result_vaccines_not_given->fetch_assoc()) {
