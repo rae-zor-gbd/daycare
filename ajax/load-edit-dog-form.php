@@ -167,7 +167,7 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     ";
   }
   echo "<div class='input-group'>
-  <span class='input-group-addon day'>Report Cards</span>
+  <span class='input-group-addon report-card'>Report Cards</span>
   <div class='report-cards'>
   <div class='row'>
   <div class='col-sm-6'>

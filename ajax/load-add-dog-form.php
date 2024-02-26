@@ -88,31 +88,31 @@ if (isset($_POST['id'])) {
     </div>";
   }
   echo "<div class='input-group'>
-  <span class='input-group-addon day'>Report Cards</span>
+  <span class='input-group-addon report-card'>Report Cards</span>
   <div class='report-cards'>
   <div class='row'>
   <div class='col-sm-6'>
   <div class='input-group'>
-  <input type='checkbox' id='assessmentDayReportCard' name='assessmentDayReportCard' value='Yes'>
-  <label for='assessmentDayReportCard'>Assessment Day</label>
+  <input type='checkbox' id='addAssessmentDayReportCard' name='assessmentDayReportCard' value='Yes'>
+  <label for='addAssessmentDayReportCard'>Assessment Day</label>
   </div>
   </div>
   <div class='col-sm-6'>
   <div class='input-group'>
-  <input type='checkbox' id='firstDayReportCard' name='firstDayReportCard' value='Yes'>
-  <label for='firstDayReportCard'>First Day</label>
+  <input type='checkbox' id='addFirstDayReportCard' name='firstDayReportCard' value='Yes'>
+  <label for='addFirstDayReportCard'>First Day</label>
   </div>
   </div>
   <div class='col-sm-6'>
   <div class='input-group'>
-  <input type='checkbox' id='secondDayReportCard' name='secondDayReportCard' value='Yes'>
-  <label for='secondDayReportCard'>Second Day</label>
+  <input type='checkbox' id='addSecondDayReportCard' name='secondDayReportCard' value='Yes'>
+  <label for='addSecondDayReportCard'>Second Day</label>
   </div>
   </div>
   <div class='col-sm-6'>
   <div class='input-group'>
-  <input type='checkbox' id='thirdDayReportCard' name='thirdDayReportCard' value='Yes'>
-  <label for='thirdDayReportCard'>Third Day</label>
+  <input type='checkbox' id='addThirdDayReportCard' name='thirdDayReportCard' value='Yes'>
+  <label for='addThirdDayReportCard'>Third Day</label>
   </div>
   </div>
   </div>

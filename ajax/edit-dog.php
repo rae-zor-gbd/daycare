@@ -1,6 +1,6 @@
 <?php
 include '../assets/config.php';
-if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['dogName']) AND isset($_POST['clientRegistration']) AND isset($_POST['daycareContract']) AND isset($_POST['vetID']) AND isset($_POST['reserveMondays']) AND isset($_POST['reserveTuesdays']) AND isset($_POST['reserveWednesdays']) AND isset($_POST['reserveThursdays']) AND isset($_POST['reserveFridays'])) {
+if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['dogName']) AND isset($_POST['clientRegistration']) AND isset($_POST['daycareContract']) AND isset($_POST['vetID']) AND isset($_POST['reserveMondays']) AND isset($_POST['reserveTuesdays']) AND isset($_POST['reserveWednesdays']) AND isset($_POST['reserveThursdays']) AND isset($_POST['reserveFridays']) AND isset($_POST['assessmentDayReportCard']) AND isset($_POST['firstDayReportCard']) AND isset($_POST['secondDayReportCard']) AND isset($_POST['thirdDayReportCard'])) {
   $dogID=$_POST['id'];
   $ownerID=$_POST['owner'];
   $dogName=mysqli_real_escape_string($conn, trim($_POST['dogName']));
@@ -12,7 +12,11 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['dogName']) 
   $reserveWednesdays=$_POST['reserveWednesdays'];
   $reserveThursdays=$_POST['reserveThursdays'];
   $reserveFridays=$_POST['reserveFridays'];
-  $sql_edit_dog="UPDATE dogs SET dogName='$dogName', clientRegistration='$clientRegistration', daycareContract='$daycareContract', vetID='$vetID', reserveMondays='$reserveMondays', reserveTuesdays='$reserveTuesdays', reserveWednesdays='$reserveWednesdays', reserveThursdays='$reserveThursdays', reserveFridays='$reserveFridays' WHERE dogID='$dogID'";
+  $assessmentDayReportCard=$_POST['assessmentDayReportCard'];
+  $firstDayReportCard=$_POST['firstDayReportCard'];
+  $secondDayReportCard=$_POST['secondDayReportCard'];
+  $thirdDayReportCard=$_POST['thirdDayReportCard'];
+  $sql_edit_dog="UPDATE dogs SET dogName='$dogName', clientRegistration='$clientRegistration', daycareContract='$daycareContract', vetID='$vetID', reserveMondays='$reserveMondays', reserveTuesdays='$reserveTuesdays', reserveWednesdays='$reserveWednesdays', reserveThursdays='$reserveThursdays', reserveFridays='$reserveFridays', assessmentDayReportCard='$assessmentDayReportCard', firstDayReportCard='$firstDayReportCard', secondDayReportCard='$secondDayReportCard', thirdDayReportCard='$thirdDayReportCard' WHERE dogID='$dogID'";
   $conn->query($sql_edit_dog);
   $sql_remove_vaccines="DELETE FROM dogs_vaccines WHERE dogID='$dogID'";
   $conn->query($sql_remove_vaccines);

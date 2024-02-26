@@ -10,6 +10,8 @@ RewriteRule ^paperwork paperwork.php [NC,L]
 
 RewriteRule ^reminders reminders.php [NC,L]
 
+RewriteRule ^report-cards report-cards.php [NC,L]
+
 RewriteRule ^requests requests.php [NC,L]
 
 RewriteRule ^reservations/([^/]+) reservations.php?date=$1 [L,QSA]
