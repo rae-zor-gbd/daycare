@@ -463,9 +463,6 @@ nav {
 .nav-footer form .input-group .input-group-addon {
   min-width:calc(var(--spacer)*4);
 }
-.nav-footer form .input-group:last-child {
-  margin-bottom:calc(var(--spacer)/2);
-}
 .nav-footer form .input-group .input-group-addon::after {
   content:''!important;
 }
