@@ -779,6 +779,14 @@ nav {
 .previous-button::before {
   content:var(--icon-chevron-left-01);
 }
+.reminder-dog-name:not(:first-of-type)::before {
+  content:", ";
+}
+.reminder-dog-name-container {
+  font-size:85%;
+  font-style:italic;
+  margin-left:calc(var(--spacer)/2);
+}
 .reservation-row td:first-of-type {
   vertical-align:middle!important;
 }

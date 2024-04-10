@@ -22,6 +22,16 @@ if ($result_reminders->num_rows>0) {
       } else {
         echo "<button type='button' class='button-email disabled' title='No Email on File' disabled></button>";
       }
+      $sql_dogs="SELECT dogName FROM dogs WHERE ownerID='$ownerID' ORDER BY dogName";
+      $result_dogs=$conn->query($sql_dogs);
+      if ($result_dogs->num_rows>0) {
+        echo "<div class='reminder-dog-name-container'>";
+        while ($row_dogs=$result_dogs->fetch_assoc()) {
+          $dogName=mysqli_real_escape_string($conn, $row_dogs['dogName']);
+          echo "<span class='reminder-dog-name'>$dogName</span>";
+        }
+        echo "</div>";
+      }
       echo "</td>
       <td>";
       if ($dateToday=='Friday') {

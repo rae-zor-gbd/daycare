@@ -114,7 +114,7 @@
         <table class='table table-hover table-condensed'>
           <thead>
             <tr>
-              <th>Owner</th>
+              <th>Owners & Dogs</th>
               <th>Package Reminders</th>
               <th>Vaccine Reminders</th>
             </tr>
