@@ -8,6 +8,10 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStat
   $daysLeft=$_POST['daysLeft'];
   $startDate=date('Y-m-d', strtotime($_POST['startDate']));
   $expirationDate=date('Y-m-d', strtotime($_POST['expirationDate']));
+  $sql_expiration_exception="SELECT expirationException FROM owners WHERE ownerID='$ownerID'";
+  $result_expiration_exception=$conn->query($sql_expiration_exception);
+  $row_expiration_exception=$result_expiration_exception->fetch_assoc();
+  $expirationException=$row_expiration_exception['expirationException'];
   $sql_edit_package="UPDATE owners_packages SET status='$status' WHERE ownerPackageID='$packageID'";
   $conn->query($sql_edit_package);
   if ($currentStatus==='Not Started' AND $status==='Active') {
@@ -25,17 +29,21 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStat
     }
     if (isset($startDate) AND $startDate!='' AND $durationDays>0 AND $durationMonths>0) {
       $startDate=$_POST['startDate'];
-      if ($currentStatus==='Not Started' AND $status==='Active') {
-        if ($durationDays>0 AND $durationMonths>0) {
-          $expirationDateDays=date('Y-m-d', strtotime($startDate . ' + ' . $durationDays . ' days'));
-          $expirationDateMonths=date('Y-m-d', strtotime($startDate . ' + ' . $durationMonths . ' months'));
-          if ($expirationDateMonths>=$expirationDateDays) {
-            $expirationDate=$expirationDateMonths;
-          } elseif ($expirationDateDays>$expirationDateMonths) {
-            $expirationDate=$expirationDateDays;
+      if ($expirationException=='Yes') {
+        $expirationDate=NULL;
+      } else {
+        if ($currentStatus==='Not Started' AND $status==='Active') {
+          if ($durationDays>0 AND $durationMonths>0) {
+            $expirationDateDays=date('Y-m-d', strtotime($startDate . ' + ' . $durationDays . ' days'));
+            $expirationDateMonths=date('Y-m-d', strtotime($startDate . ' + ' . $durationMonths . ' months'));
+            if ($expirationDateMonths>=$expirationDateDays) {
+              $expirationDate=$expirationDateMonths;
+            } elseif ($expirationDateDays>$expirationDateMonths) {
+              $expirationDate=$expirationDateDays;
+            }
+          } else {
+            $expirationDate=NULL;
           }
-        } else {
-          $expirationDate=NULL;
         }
       }
     } else {
@@ -53,16 +61,7 @@ if (isset($_POST['id']) AND isset($_POST['owner']) AND isset($_POST['currentStat
     $sql_edit_package_start="UPDATE owners_packages SET startDate='$startDate' WHERE ownerPackageID='$packageID'";
     $conn->query($sql_edit_package_start);
   }
-  if (isset($_POST['expirationDate']) AND $_POST['expirationDate']!='') {
-    $sql_expiration_exception="SELECT expirationException FROM owners WHERE ownerID='$ownerID'";
-    $result_expiration_exception=$conn->query($sql_expiration_exception);
-    $row_expiration_exception=$result_expiration_exception->fetch_assoc();
-    $expirationException=$row_expiration_exception['expirationException'];
-    if ($expirationException=='Yes') {
-      $expirationDate=NULL;
-    }
-    $sql_edit_package_expiration="UPDATE owners_packages SET expirationDate='$expirationDate' WHERE ownerPackageID='$packageID'";
-    $conn->query($sql_edit_package_expiration);
-  }
+  $sql_edit_package_expiration="UPDATE owners_packages SET expirationDate='$expirationDate' WHERE ownerPackageID='$packageID'";
+  $conn->query($sql_edit_package_expiration);
 }
 ?>
