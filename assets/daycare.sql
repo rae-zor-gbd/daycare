@@ -104,6 +104,11 @@ CREATE TABLE dogs_vaccines (
   FOREIGN KEY (vaccineID) REFERENCES vaccines(vaccineID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE holidays (
+  holidayDate DATE NOT NULL,
+  PRIMARY KEY (holidayDate)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE reservations (
   dogID INT(11) NOT NULL,
   reservationDate DATE NOT NULL,
