@@ -782,6 +782,9 @@ nav {
 .reminder-dog-name:not(:first-of-type)::before {
   content:", ";
 }
+.reminder-dog-name:not(:first-of-type):last-of-type::before {
+  content:" & ";
+}
 .reminder-dog-name-container {
   font-size:85%;
   font-style:italic;
