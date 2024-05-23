@@ -117,6 +117,14 @@ CREATE TABLE reservations (
   FOREIGN KEY (dogID) REFERENCES dogs(dogID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE winners (
+  dogID INT(11) NOT NULL,
+  winningDate DATE NOT NULL,
+  PRIMARY KEY (dogID, winningDate),
+  FOREIGN KEY (dogID) REFERENCES dogs(dogID) ON DELETE CASCADE ON UPDATE CASCADE,
+  UNIQUE (winningDate)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE INDEX indDogsVaccinesDueDate ON dogs_vaccines(dueDate) USING BTREE;
 
 SET FOREIGN_KEY_CHECKS=1;
