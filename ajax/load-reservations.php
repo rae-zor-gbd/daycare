@@ -28,17 +28,26 @@ if (isset($_POST['reservationDate'])) {
         $pushID=$row_confirmations['dogID'];
         array_push($confirmations, $pushID);
     }
+    $sql_holidays="SELECT holidayDate FROM holidays ORDER BY holidayDate";
+    $result_holidays=$conn->query($sql_holidays);
+    $holidays=array();
+    while ($row_holidays=$result_holidays->fetch_assoc()) {
+        $holidayDate=$row_holidays['holidayDate'];
+        array_push($holidays, $holidayDate);
+    }
     $sql_reservations="SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate'";
-    if ($dayOfWeek=='Monday') {
-        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes'";
-    } elseif ($dayOfWeek=='Tuesday') {
-        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveTuesdays='Yes'";
-    } elseif ($dayOfWeek=='Wednesday') {
-        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveWednesdays='Yes'";
-    } elseif ($dayOfWeek=='Thursday') {
-        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveThursdays='Yes'";
-    } elseif ($dayOfWeek=='Friday') {
-        $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes'";
+    if (!in_array($reservationDate, $holidays)) {
+        if ($dayOfWeek=='Monday') {
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes'";
+        } elseif ($dayOfWeek=='Tuesday') {
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveTuesdays='Yes'";
+        } elseif ($dayOfWeek=='Wednesday') {
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveWednesdays='Yes'";
+        } elseif ($dayOfWeek=='Thursday') {
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveThursdays='Yes'";
+        } elseif ($dayOfWeek=='Friday') {
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes'";
+        }
     }
     $sql_reservations.=" ORDER BY lastName, dogName";
     $result_reservations=$conn->query($sql_reservations);
