@@ -42,6 +42,15 @@ if (isset($_GET['filter']) AND $_GET['filter']!='') {
         var goToDate=document.getElementById('goToDate').value;
         window.open('/reservations/'+goToDate, '_self');
       }
+      function toggleClienteleType() {
+        if (document.getElementById('regularClientele').checked){
+          document.getElementById('toggleRegularClientele').style.display='block';
+          document.getElementById('toggleWriteInClientele').style.display='none';
+        } else if (document.getElementById('writeInClientele').checked){
+          document.getElementById('toggleRegularClientele').style.display='none';
+          document.getElementById('toggleWriteInClientele').style.display='block';
+        }
+      }
       $(document).ready(function(){
         $('#reservations').addClass('active');
         loadReservations('<?php echo "$reservationDate"; ?>');
@@ -59,32 +68,54 @@ if (isset($_GET['filter']) AND $_GET['filter']!='') {
         });
         $('#addReservation').click(function (e) {
           e.preventDefault();
-          var dogID=document.getElementById('addReservationID').value;
           var date=document.getElementById('addReservationDate').value;
-          if (dogID!='' && date!='') {
-            $.ajax({
-              url:'/ajax/add-reservation.php',
-              type:'POST',
-              cache:false,
-              data:{dogID:dogID, date:date},
-              success:function(response){
-                $('#addReservationModal').modal('hide');
-                $('#addReservationModalBody').empty();
-                loadReservations(date);
-              }
-            });
-          } else {
-            loadIncompleteFormAlert('#addReservationModalBody');
-          } 
+          if (document.getElementById('regularClientele').checked==true) {
+            var dogID=document.getElementById('addReservationID').value;
+            if (dogID!='' && date!='') {
+              $.ajax({
+                url:'/ajax/add-reservation.php',
+                type:'POST',
+                cache:false,
+                data:{dogID:dogID, date:date},
+                success:function(response){
+                  $('#addReservationModal').modal('hide');
+                  $('#addReservationModalBody').empty();
+                  loadReservations(date);
+                }
+              });
+            } else {
+              loadIncompleteFormAlert('#addReservationModalBody');
+            }
+          }
+          if (document.getElementById('writeInClientele').checked==true) {
+            var dogName=document.getElementById('addDogName').value;
+            var lastName=document.getElementById('addLastName').value;
+            if (dogName!='' && lastName!='' && date!='') {
+              $.ajax({
+                url:'/ajax/add-reservation.php',
+                type:'POST',
+                cache:false,
+                data:{dogName:dogName, lastName:lastName, date:date},
+                success:function(response){
+                  $('#addReservationModal').modal('hide');
+                  $('#addReservationModalBody').empty();
+                  loadReservations(date);
+                }
+              });
+            } else {
+              loadIncompleteFormAlert('#addReservationModalBody');
+            }
+          }
         });
         $(document).on('click', '#delete-reservation-button', function() {
           var id=$(this).data('id');
           var date=$(this).data('date');
+          var type=$(this).data('type');
           $.ajax({
             url:'/ajax/load-delete-reservation-form.php',
             type:'POST',
             cache:false,
-            data:{id:id, date:date},
+            data:{id:id, date:date, type:type},
             success:function(response){
               $('#deleteReservationModalBody').append(response);
             }
@@ -94,11 +125,12 @@ if (isset($_GET['filter']) AND $_GET['filter']!='') {
           e.preventDefault();
           var id=document.getElementById('deleteID').value;
           var date=document.getElementById('deleteReservationDate').value;
+          var type=document.getElementById('deleteType').value;
           $.ajax({
             url:'/ajax/delete-reservation.php',
             type:'POST',
             cache:false,
-            data:{id:id, date:date},
+            data:{id:id, date:date, type:type},
             success:function(response){
               $('#deleteReservationModal').modal('hide');
               $('#deleteReservationModalBody').empty();

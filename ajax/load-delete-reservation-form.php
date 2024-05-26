@@ -3,7 +3,13 @@ include '../assets/config.php';
 if (isset($_POST['id']) AND isset($_POST['date'])) {
   $id=$_POST['id'];
   $date=$_POST['date'];
-  $sql_reservation_info="SELECT lastName, dogName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE dogID='$id' AND reservationDate='$date'";
+  if ($_POST['type']=='writeIn') {
+    echo "<input type='hidden' class='form-control' name='type' id='deleteType' value='writeIn' required>";
+    $sql_reservation_info="SELECT lastName, dogName FROM reservations_write_ins WHERE writeInID='$id' AND reservationDate='$date'";
+  } else {
+    echo "<input type='hidden' class='form-control' name='type' id='deleteType' value='regular' required>";
+    $sql_reservation_info="SELECT lastName, dogName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE dogID='$id' AND reservationDate='$date'";
+  }
   $result_reservation_info=$conn->query($sql_reservation_info);
   $row_reservation_info=$result_reservation_info->fetch_assoc();
   $lastName=htmlspecialchars($row_reservation_info['lastName'], ENT_QUOTES);

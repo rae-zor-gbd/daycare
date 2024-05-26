@@ -799,6 +799,11 @@ nav {
   font-style:italic;
   margin-left:calc(var(--spacer)/2);
 }
+.reservation-clientele-type {
+  display:flex;
+  justify-content:space-evenly;
+  margin-bottom:calc(var(--spacer)/2);
+}
 .reservation-row td:first-of-type {
   vertical-align:middle!important;
 }

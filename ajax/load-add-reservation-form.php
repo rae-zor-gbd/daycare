@@ -28,9 +28,20 @@ if (isset($_POST['addReservationDate'])) {
   $reservationDate=$_POST['addReservationDate'];
   $dayOfWeek=date('l', strtotime($reservationDate));
   echo "<input type='hidden' class='form-control' name='reservationDate' id='addReservationDate' value='$reservationDate' required>
-  <div class='input-group'>
+  <div class='reservation-clientele-type'>
+  <div>
+  <input type='radio' id='regularClientele' name='type' value='regularClientele' onchange='toggleClienteleType()' checked>
+  <label for='regularClientele'>Regular Daycare Clientele</label>
+  </div>
+  <div>
+  <input type='radio' id='writeInClientele' name='type' value='writeInClientele' onchange='toggleClienteleType()'>
+  <label for='writeInClientele'>Write-In Clientele</label>
+  </div>
+  </div>
+  <div id='toggleRegularClientele'>";
+  echo "<div class='input-group'>
   <span class='input-group-addon dog'>Dog Name</span>
-  <select class='form-control' id='addReservationID' name='dogName' required>
+  <select class='form-control' id='addReservationID' name='dogNameRegular' required>
   <option value='' disabled selected>Select Dog</option>";
   $sql_all_dogs="SELECT dogID, lastName, dogName FROM dogs d JOIN owners o USING (ownerID) WHERE dogID NOT IN (SELECT dogID FROM reservations WHERE reservationDate='$reservationDate')";
   if ($dayOfWeek=='Monday') {
@@ -53,6 +64,17 @@ if (isset($_POST['addReservationDate'])) {
     echo "<option value='$editDogID'>$editLastName, $editDogName</option>";
   }
   echo "</select>
+  </div>";
+  echo "</div>
+  <div id='toggleWriteInClientele' style='display:none;'>
+  <div class='input-group'>
+  <span class='input-group-addon dog'>Dog Name</span>
+  <input type='text' class='form-control' name='dogNameWriteIn' maxlength='255' id='addDogName' required>
+  </div>
+  <div class='input-group'>
+  <span class='input-group-addon owner'>Last Name</span>
+  <input type='text' class='form-control' name='lastNameWriteIn' maxlength='255' id='addLastName' required>
+  </div>
   </div>";
 }
 ?>

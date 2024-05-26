@@ -54,32 +54,33 @@ if (isset($_POST['reservationDate'])) {
         $holidayDate=$row_holidays['holidayDate'];
         array_push($holidays, $holidayDate);
     }
-    $sql_reservations="SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate'";
+    $sql_reservations="SELECT dogID, dogName, lastName, 'regular' AS type FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate'";
     if (!in_array($reservationDate, $holidays) AND $reservationFilter=='all') {
         if ($dayOfWeek=='Monday') {
-            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes'";
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName, 'regular' AS type FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes'";
         } elseif ($dayOfWeek=='Tuesday') {
-            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveTuesdays='Yes'";
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName, 'regular' AS type FROM dogs d JOIN owners o USING (ownerID) WHERE reserveTuesdays='Yes'";
         } elseif ($dayOfWeek=='Wednesday') {
-            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveWednesdays='Yes'";
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName, 'regular' AS type FROM dogs d JOIN owners o USING (ownerID) WHERE reserveWednesdays='Yes'";
         } elseif ($dayOfWeek=='Thursday') {
-            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveThursdays='Yes'";
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName, 'regular' AS type FROM dogs d JOIN owners o USING (ownerID) WHERE reserveThursdays='Yes'";
         } elseif ($dayOfWeek=='Friday') {
-            $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes'";
+            $sql_reservations.="UNION SELECT dogID, dogName, lastName, 'regular' AS type FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes'";
         }
     }
-    $sql_reservations.="AND dogID NOT IN (SELECT dogID FROM reservations_blockoffs WHERE blockoffDate='$reservationDate') ORDER BY lastName, dogName";
+    $sql_reservations.="AND dogID NOT IN (SELECT dogID FROM reservations_blockoffs WHERE blockoffDate='$reservationDate') UNION SELECT writeInID AS dogID, dogName, lastName, 'writeIn' AS type FROM reservations_write_ins WHERE reservationDate='$reservationDate' ORDER BY lastName, dogName";
     $result_reservations=$conn->query($sql_reservations);
     if ($result_reservations->num_rows>0) {
         while ($row_reservations=$result_reservations->fetch_assoc()) {
             $dogID=$row_reservations['dogID'];
             $dogName=mysqli_real_escape_string($conn, $row_reservations['dogName']);
             $lastName=mysqli_real_escape_string($conn, $row_reservations['lastName']);
+            $type=$row_reservations['type'];
             echo "<tr class='reservation-row'>
             <td>$lastName, <strong>$dogName</strong></td>
             <td>";
             if ($confirmations!=NULL) {
-                if (in_array($dogID, $confirmations)) {
+                if (in_array($dogID, $confirmations) OR $type=='writeIn') {
                     echo "<span class='label label-success'>Confirmed</span>";
                 }
             }
@@ -87,11 +88,13 @@ if (isset($_POST['reservationDate'])) {
             <td style='text-align:right; width:75px;'>";
             if ($confirmations!=NULL) {
                 if (in_array($dogID, $confirmations)) {
-                    echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button>";
+                    echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-type='regular' data-backdrop='static' title='Delete Reservation'></button>";
+                } elseif ($type=='writeIn') {
+                    echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-type='writeIn' data-backdrop='static' title='Delete Reservation'></button>";
                 } else {
                     echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#confirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
                 }
-            } else {
+            } elseif ($type!='writeIn') {
                 echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#confirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
             }
             echo "</td>
