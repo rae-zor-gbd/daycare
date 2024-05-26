@@ -227,9 +227,12 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
   font-family:var(--icon-font-family);
   margin-right:calc(var(--spacer)/2);
 }
-.button-check::before, .button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before, .button-reservation::before {
+.button-blockoff::before, .button-check::before, .button-complete::before, .button-email::before, .button-decrease::before, .button-delete::before, .button-dog::before, .button-edit::before, .button-journal::before, .button-notes::before, .button-package::before, .button-reservation::before {
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
+}
+.button-blockoff::before {
+  content:var(--icon-calendar-x);
 }
 .button-check::before {
   content:var(--icon-check);
@@ -545,18 +548,21 @@ nav {
   top:-1px;
   transform:rotate(0deg);
 }
-.dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-heading::before, .dog-notes::before, .dog-report-card::before, .dog-reservation::before, .dog-vaccine-status::before, .owner-heading::before, .package-days-left::before, .package-expiration-date::before, .package-heading::before, .package-notes::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before, .vet-heading::before {
+.dog-blockoff::before, .dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-heading::before, .dog-notes::before, .dog-report-card::before, .dog-reservation::before, .dog-vaccine-status::before, .owner-heading::before, .package-days-left::before, .package-expiration-date::before, .package-heading::before, .package-notes::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before, .vet-heading::before {
   display:inline-block;
   font-family:var(--icon-font-family);
   font-weight:var(--font-weight-regular);
   text-align:left;
 }
-.dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-notes::before, .dog-report-card::before, .dog-reservation::before, .dog-vaccine-status::before, .package-days-left::before, .package-expiration-date::before, .package-notes::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before {
+.dog-blockoff::before, .dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-notes::before, .dog-report-card::before, .dog-reservation::before, .dog-vaccine-status::before, .package-days-left::before, .package-expiration-date::before, .package-notes::before, .package-reminder-notes .label::before, .package-reminder-days::before, .package-reminder-expiration::before, .package-reminder-title::before, .vaccine-reminder-dog::before, .vaccine-reminder-due::before, .vaccine-reminder-notes .label::before, .vaccine-reminder-notes-text::before, .vaccine-reminder-vet::before {
   position:relative;
   top:1px;
 }
-.dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-heading::before, .dog-report-card::before, .dog-reservation::before, .dog-vaccine-status::before, .owner-heading::before, .package-days-left::before, .package-expiration-date::before, .package-heading::before, .vet-heading::before {
+.dog-blockoff::before, .dog-client-registration-status::before, .dog-daycare-contract-status::before, .dog-heading::before, .dog-report-card::before, .dog-reservation::before, .dog-vaccine-status::before, .owner-heading::before, .package-days-left::before, .package-expiration-date::before, .package-heading::before, .vet-heading::before {
   width:var(--spacer);
+}
+.dog-blockoff::before {
+  content:var(--icon-ban);
 }
 .dog-client-registration-status::before, .dog-daycare-contract-status::before {
   content:var(--icon-contract);

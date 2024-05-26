@@ -330,6 +330,40 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
             loadIncompleteFormAlert('#addReservationModalBody');
           }
         });
+        $(document).on('click', '#add-dog-blockoff-button', function() {
+          var id=$(this).data('id');
+          $.ajax({
+            url:'ajax/load-add-blockoff-form.php',
+            type:'POST',
+            cache:false,
+            data:{id:id},
+            success:function(response){
+              $('#addBlockoffModalBody').append(response);
+            }
+          });
+        });
+        $('#addBlockoff').click(function (e) {
+          e.preventDefault();
+          var dogID=document.getElementById('addBlockoffID').value;
+          var ownerID=document.getElementById('addBlockoffOwnerID').value;
+          var date=document.getElementById('addBlockoffDate').value;
+          if (dogID!='' && ownerID!='' && date!='') {
+            $.ajax({
+              url:'ajax/add-blockoff.php',
+              type:'POST',
+              cache:false,
+              data:{dogID:dogID, date:date},
+              success:function(response){
+                $('#addBlockoffModal').modal('hide');
+                $('#addBlockoffModalBody').empty();
+                $('#dogs-'+ownerID).empty();
+                $('#dogs-'+ownerID).append(loadDogs(ownerID));
+              }
+            });
+          } else {
+            loadIncompleteFormAlert('#addBlockoffModalBody');
+          }
+        });
         $(document).on('click', '.button-decrease', function() {
           var id=$(this).data('id');
           var daysLeft=$(this).data('days');
@@ -470,6 +504,35 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
               $('#deleteReservationModal').modal('hide');
               $('#deleteReservationModalBody').empty();
               $('#reservation-'+id+'-'+date).remove();
+            }
+          });
+        });
+        $(document).on('click', '#delete-blockoff-button', function() {
+          var id=$(this).data('id');
+          var date=$(this).data('date');
+          $.ajax({
+            url:'ajax/load-delete-blockoff-form.php',
+            type:'POST',
+            cache:false,
+            data:{id:id, date:date},
+            success:function(response){
+              $('#deleteBlockoffModalBody').append(response);
+            }
+          });
+        });
+        $('#deleteBlockoff').click(function (e) {
+          e.preventDefault();
+          var id=document.getElementById('deleteID').value;
+          var date=document.getElementById('deleteBlockoffDate').value;
+          $.ajax({
+            url:'ajax/delete-blockoff.php',
+            type:'POST',
+            cache:false,
+            data:{id:id, date:date},
+            success:function(response){
+              $('#deleteBlockoffModal').modal('hide');
+              $('#deleteBlockoffModalBody').empty();
+              $('#blockoff-'+id+'-'+date).remove();
             }
           });
         });
@@ -647,12 +710,14 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           }
         });
         $('.modal').on('hidden.bs.modal', function(){
+          $('#addBlockoffModalBody').empty();
           $('#addDogModalBody').empty();
           $('#addDogNotesModalBody').empty();
           $('#addOwnerModalBody').empty();
           $('#addPackageModalBody').empty();
           $('#addPackageNotesModalBody').empty();
           $('#addReservationModalBody').empty();
+          $('#deleteBlockoffModalBody').empty();
           $('#deleteDogModalBody').empty();
           $('#deleteOwnerModalBody').empty();
           $('#deletePackageModalBody').empty();
@@ -779,6 +844,23 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
         </div>
       </div>
     </form>
+    <form action='' method='post' spellcheck='false' autocomplete='off' id='addBlockoffForm'>
+      <div class='modal fade' id='addBlockoffModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'></button>
+              <h4 class='modal-title'>Add Blockoff</h4>
+            </div>
+            <div class='modal-body' id='addBlockoffModalBody'></div>
+            <div class='modal-footer'>
+              <button type='submit' class='btn btn-primary' id='addBlockoff'>Submit</button>
+              <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
     <form action='' method='post' spellcheck='false' autocomplete='off' id='deleteDogForm'>
       <div class='modal fade' id='deleteDogModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
         <div class='modal-dialog'>
@@ -841,6 +923,23 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
             <div class='modal-body' id='deleteReservationModalBody'></div>
             <div class='modal-footer'>
               <button type='submit' class='btn btn-danger' id='deleteReservation'>Delete</button>
+              <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form action='' method='post' spellcheck='false' autocomplete='off' id='deleteBlockoffForm'>
+      <div class='modal fade' id='deleteBlockoffModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <button type='button' class='close' data-dismiss='modal'></button>
+              <h4 class='modal-title'>Delete Blockoff</h4>
+            </div>
+            <div class='modal-body' id='deleteBlockoffModalBody'></div>
+            <div class='modal-footer'>
+              <button type='submit' class='btn btn-danger' id='deleteBlockoff'>Delete</button>
               <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
             </div>
           </div>

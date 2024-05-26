@@ -86,11 +86,16 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
         echo "'>" . stripslashes($vaccineTitle) . " due " . date('D n/j', $dueDate) . "</div>";
       }
     }
-    $sql_reservations="SELECT reservationDate FROM reservations r JOIN dogs d USING (dogID) WHERE dogID='$dogID' AND reservationDate>=DATE(NOW()) ORDER BY reservationDate";
+    $sql_reservations="SELECT reservationDate AS date, 'reservation' AS type FROM reservations r JOIN dogs d USING (dogID) WHERE dogID='$dogID' AND reservationDate>=DATE(NOW()) UNION SELECT blockoffDate AS date, 'blockoff' AS type FROM reservations_blockoffs b JOIN dogs d USING (dogID) WHERE dogID='$dogID' AND blockoffDate>=DATE(NOW()) ORDER BY date";
     $result_reservations=$conn->query($sql_reservations);
     while ($row_reservations=$result_reservations->fetch_assoc()) {
-      $reservationDate=date('Y-m-d', strtotime($row_reservations['reservationDate']));
-      echo "<div class='panel-body dog-reservation' id='reservation-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-reservation-button' style='float:right;' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button></div>";
+      $reservationDate=date('Y-m-d', strtotime($row_reservations['date']));
+      $reservationType=$row_reservations['type'];
+      if ($reservationType=='reservation') {
+        echo "<div class='panel-body dog-reservation' id='reservation-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-reservation-button' style='float:right;' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button></div>";
+      } elseif ($reservationType=='blockoff') {
+        echo "<div class='panel-body dog-blockoff' id='blockoff-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-blockoff-button' style='float:right;' data-toggle='modal' data-target='#deleteBlockoffModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Blockoff'></button></div>";
+      }
     }
     if (isset($dogNotes) AND $dogNotes!=='') {
       echo "<div class='panel-body dog-notes'>" . stripslashes($dogNotes) . "</div>";
@@ -101,6 +106,7 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     <button type='button' class='button-notes' id='add-dog-notes-button' data-toggle='modal' data-target='#addDogNotesModal' data-id='$dogID' data-owner='$ownerID' data-backdrop='static' title='Add Note'></button>
     <a href='/journal/$dogID' target='_blank'><button type='button' class='button-journal' id='enrichment-journal-button' title='Print Enrichment Journal Entry'></button></a>
     <button type='button' class='button-reservation' id='add-dog-reservation-button' data-toggle='modal' data-target='#addReservationModal' data-id='$dogID' data-backdrop='static' title='Add Reservation'></button>
+    <button type='button' class='button-blockoff' id='add-dog-blockoff-button' data-toggle='modal' data-target='#addBlockoffModal' data-id='$dogID' data-backdrop='static' title='Add Blockoff'></button>
     </div>
     </div>";
   }

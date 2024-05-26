@@ -68,7 +68,7 @@ if (isset($_POST['reservationDate'])) {
             $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveFridays='Yes'";
         }
     }
-    $sql_reservations.=" ORDER BY lastName, dogName";
+    $sql_reservations.="AND dogID NOT IN (SELECT dogID FROM reservations_blockoffs WHERE blockoffDate='$reservationDate') ORDER BY lastName, dogName";
     $result_reservations=$conn->query($sql_reservations);
     if ($result_reservations->num_rows>0) {
         while ($row_reservations=$result_reservations->fetch_assoc()) {
