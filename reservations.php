@@ -5,6 +5,11 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
 } else {
   $reservationDate=date('Y-m-d');
 }
+if (isset($_GET['filter']) AND $_GET['filter']!='') {
+  $reservationFilter=$_GET['filter'];
+} else {
+  $reservationFilter='all';
+}
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -18,11 +23,12 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
         $('#reservation-count').append(reservationCount);
       }
       function loadReservations(reservationDate){
+        var reservationFilter='<?php echo $reservationFilter; ?>';
         $.ajax({
           url:'/ajax/load-reservations.php',
           type:'POST',
           cache:false,
-          data:{reservationDate:reservationDate},
+          data:{reservationDate:reservationDate, reservationFilter:reservationFilter},
           success:function(data){
             if (data) {
               $('#reservation-list').empty();
@@ -129,6 +135,12 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
           <input type='date' class='form-control' name='go-to-date' id='goToDate' value='<?php echo $reservationDate; ?>' required>
         </div>
       </form>
+      <a href='?filter=all'>
+        <button type='button' class='btn btn-default nav-button' id='filter-reservations-all' title='Display All Reservations'>All Reservations</button>
+      </a>
+      <a href='?filter=confirmed'>
+        <button type='button' class='btn btn-default nav-button' id='filter-reservations-confirmed' title='Display Confirmed Reservations Only'>Confirmed Reservations</button>
+      </a>
       <button type='button' class='btn btn-default nav-button' id='add-reservation-button' data-toggle='modal' data-target='#addReservationModal' data-backdrop='static' data-date='<?php echo $reservationDate; ?>' title='Add Reservation'>Add Reservation</button>
     </div>
     <div class='container-fluid'>

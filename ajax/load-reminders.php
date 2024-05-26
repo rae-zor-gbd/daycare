@@ -51,8 +51,10 @@ if ($result_reminders->num_rows>0) {
           <span class='label label-";
           if (isset($expirationDate) AND $expirationDate!='' AND ($expirationDate<$today OR $daysLeft==0)) {
             echo "danger";
-          } else {
+          } elseif (isset($expirationDate) AND $expirationDate!='') {
             echo "warning";
+          } else {
+            echo "info";
           }
           echo "'>
           <span class='package-reminder-title'>$packageTitle</span>

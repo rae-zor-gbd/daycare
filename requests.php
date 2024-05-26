@@ -35,7 +35,7 @@
         });
       }
       $(document).ready(function(){
-        $('#requests').addClass('active');
+        $('#reminders').addClass('active');
         loadVets();
         $(document).on('click', '.button-email', function() {
           var email=$(this).data('email');
@@ -91,6 +91,11 @@
   </head>
   <body>
     <?php include 'assets/navbar.php'; ?>
+    <div class='nav-footer'>
+      <a href='/requests'>
+        <button type='button' class='btn btn-default nav-button active' id='filter-vet-requests' title='Vet Requests'>Vet Requests</button>
+      </a>
+    </div>
     <div class='container-fluid'>
       <div class='panel-group' id='panel-vets'></div>
     </div>

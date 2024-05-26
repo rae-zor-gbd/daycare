@@ -2,7 +2,7 @@
   font-family:'Icons';
   font-style:normal;
   font-weight:400;
-  src:url(/fonts/Icons-Regular.woff?v=2) format('woff');
+  src:url(/fonts/Icons-Regular.woff?v=3) format('woff');
 }
 @font-face {
   font-family:'Proxima Nova';
@@ -56,6 +56,7 @@
   --icon-arrow-up:'\e906';
   --icon-asterisk:'\e955';
   --icon-at:'\e907';
+  --icon-ban:'\e95c';
   --icon-bars:'\e908';
   --icon-bell:'\e909';
   --icon-bone:'\e90a';
@@ -65,6 +66,7 @@
   --icon-calendar-day:'\e90d';
   --icon-calendar-days:'\e90e';
   --icon-calendar-plus:'\e90f';
+  --icon-calendar-x:'\e95d';
   --icon-check:'\e911';
   --icon-chevron-down-01:'\e912';
   --icon-chevron-down-02:'\e913';
@@ -99,6 +101,7 @@
   --icon-expand-04:'\e92e';
   --icon-expand-05:'\e92f';
   --icon-eye:'\e930';
+  --icon-filter:'\e95e';
   --icon-folder:'\e933';
   --icon-folders:'\e934';
   --icon-font-family:'Icons';
@@ -815,6 +818,12 @@ nav {
 #complete-contract-button, #complete-registration-button {
   display:none;
   float:right;
+}
+#filter-reservations-all::before, #filter-reservations-confirmed::before {
+  content:var(--icon-filter);
+}
+#filter-vet-requests::before {
+  content:var(--icon-hospital);
 }
 #reservation-list .table>thead>tr>th {
   text-align:center;

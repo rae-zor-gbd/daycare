@@ -1,5 +1,24 @@
 <?php
 include '../assets/config.php';
+if (isset($_POST['reservationFilter'])) {
+    $reservationFilter=$_POST['reservationFilter'];
+} else {
+    $reservationFilter='all';
+}
+if ($reservationFilter=='all') {
+    echo "<script>
+    $(document).ready(function(){
+        $('#filter-reservations-all').addClass('active');
+    });
+    </script>";
+}
+if ($reservationFilter=='confirmed') {
+    echo "<script>
+    $(document).ready(function(){
+        $('#filter-reservations-confirmed').addClass('active');
+    });
+    </script>";
+}
 if (isset($_POST['reservationDate'])) {
     $reservationDate=date('Y-m-d', strtotime($_POST['reservationDate']));
     $dayOfWeek=date('l', strtotime($reservationDate));
@@ -36,7 +55,7 @@ if (isset($_POST['reservationDate'])) {
         array_push($holidays, $holidayDate);
     }
     $sql_reservations="SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) JOIN reservations r USING (dogID) WHERE reservationDate='$reservationDate'";
-    if (!in_array($reservationDate, $holidays)) {
+    if (!in_array($reservationDate, $holidays) AND $reservationFilter=='all') {
         if ($dayOfWeek=='Monday') {
             $sql_reservations.="UNION SELECT dogID, dogName, lastName FROM dogs d JOIN owners o USING (ownerID) WHERE reserveMondays='Yes'";
         } elseif ($dayOfWeek=='Tuesday') {

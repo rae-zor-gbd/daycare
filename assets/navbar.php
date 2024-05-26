@@ -50,9 +50,6 @@
       <a href='/reminders'>
         <div class='nav-link' id='reminders'>Reminders</div>
       </a>
-      <a href='/requests'>
-        <div class='nav-link' id='requests'>Vet Requests</div>
-      </a>
       <a href='/paperwork'>
         <div class='nav-link' id='paperwork'>Paperwork</div>
       </a>
