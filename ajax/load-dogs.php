@@ -92,9 +92,9 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
       $reservationDate=date('Y-m-d', strtotime($row_reservations['date']));
       $reservationType=$row_reservations['type'];
       if ($reservationType=='reservation') {
-        echo "<div class='panel-body dog-reservation' id='reservation-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-reservation-button' style='float:right;' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button></div>";
+        echo "<div class='panel-body dog-reservation text-success' id='reservation-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-reservation-button' style='float:right;' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Reservation'></button></div>";
       } elseif ($reservationType=='blockoff') {
-        echo "<div class='panel-body dog-blockoff' id='blockoff-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-blockoff-button' style='float:right;' data-toggle='modal' data-target='#deleteBlockoffModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Blockoff'></button></div>";
+        echo "<div class='panel-body dog-blockoff text-danger' id='blockoff-$dogID-$reservationDate'>" . date('l, F j', strtotime($reservationDate)) . "<button type='button' class='button-delete' id='delete-blockoff-button' style='float:right;' data-toggle='modal' data-target='#deleteBlockoffModal' data-id='$dogID' data-date='$reservationDate' data-backdrop='static' title='Delete Blockoff'></button></div>";
       }
     }
     if (isset($dogNotes) AND $dogNotes!=='') {

@@ -63,6 +63,7 @@
   --icon-box:'\e90b';
   --icon-bullhorn:'\e90c';
   --icon-calendar:'\e910';
+  --icon-calendar-check:'\e95f';
   --icon-calendar-day:'\e90d';
   --icon-calendar-days:'\e90e';
   --icon-calendar-plus:'\e90f';
@@ -271,7 +272,7 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
   content:var(--icon-calendar-days);
 }
 .button-reservation::before {
-  content:var(--icon-calendar-plus);
+  content:var(--icon-calendar-check);
 }
 .container, .container-fluid {
   padding:0;
@@ -562,7 +563,7 @@ nav {
   width:var(--spacer);
 }
 .dog-blockoff::before {
-  content:var(--icon-ban);
+  content:var(--icon-circle-x);
 }
 .dog-client-registration-status::before, .dog-daycare-contract-status::before {
   content:var(--icon-contract);
@@ -581,7 +582,7 @@ nav {
   width:0;
 }
 .dog-reservation::before {
-  content:var(--icon-calendar-day);
+  content:var(--icon-circle-check);
 }
 .dog-vaccine-status::before, .vaccine-reminder-due::before {
   content:var(--icon-vaccine);
@@ -739,7 +740,7 @@ nav {
 .panel-owner .panel-body .panel {
   width:calc((100%/4) - 12px);
 }
-.panel-owner>a>.panel-heading, .panel-vet>a>.panel-heading, .table-container {
+.panel-owner>a>.panel-heading, .panel-vet>a>.panel-heading {
   padding:calc(var(--spacer)/1.5) var(--spacer);
 }
 .panel-owner>.panel-collapse>.panel-body, .panel-owner>.panel-collapse>.panel-footer, .panel-vet>.panel-collapse>.panel-body, .panel-vet>.panel-collapse>.panel-footer {
@@ -806,6 +807,9 @@ nav {
 }
 .reservation-row td:first-of-type {
   vertical-align:middle!important;
+}
+.table-container {
+  padding:calc(var(--spacer)/1.5) var(--spacer) calc(var(--spacer)/3);
 }
 .vaccine-reminder:not(:first-of-type) {
   margin-top:-2px;
