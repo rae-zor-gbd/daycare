@@ -494,9 +494,6 @@ nav {
 .nav-link#reservations::before {
   content:var(--icon-list-02);
 }
-.nav-links {
-  border-bottom:1.5px solid var(--color-06)!important;
-}
 .nav-links a .nav-link::before {
   color:var(--color-01);
   display:inline-block;
