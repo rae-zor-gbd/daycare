@@ -79,21 +79,15 @@ if (isset($_POST['reservationDate'])) {
             echo "<tr class='reservation-row'>
             <td>$lastName, <strong>$dogName</strong></td>
             <td>";
-            if ($confirmations!=NULL) {
-                if (in_array($dogID, $confirmations) OR $type=='writeIn') {
-                    echo "<span class='label label-success'>Confirmed</span>";
-                }
+            if (in_array($dogID, $confirmations) OR $type=='writeIn') {
+                echo "<span class='label label-success'>Confirmed</span>";
             }
             echo "</td>
             <td style='text-align:right; width:75px;'>";
-            if ($confirmations!=NULL) {
-                if (in_array($dogID, $confirmations)) {
-                    echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-type='regular' data-backdrop='static' title='Delete Reservation'></button>";
-                } elseif ($type=='writeIn') {
-                    echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-type='writeIn' data-backdrop='static' title='Delete Reservation'></button>";
-                } else {
-                    echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#confirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
-                }
+            if (in_array($dogID, $confirmations)) {
+                echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-type='regular' data-backdrop='static' title='Delete Reservation'></button>";
+            } elseif ($type=='writeIn') {
+                echo "<button type='button' class='button-delete' id='delete-reservation-button' data-toggle='modal' data-target='#deleteReservationModal' data-id='$dogID' data-date='$reservationDate' data-type='writeIn' data-backdrop='static' title='Delete Reservation'></button>";
             } elseif ($type!='writeIn') {
                 echo "<button type='button' class='button-check' id='confirm-reservation-button' data-toggle='modal' data-target='#confirmReservationModal' data-id='$dogID' data-backdrop='static' title='Confirm Reservation'></button>";
             }
