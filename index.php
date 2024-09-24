@@ -709,6 +709,16 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
             loadIncompleteFormAlert('#editPackageModalBody');
           }
         });
+        $(document).on('click', '.button-email', function() {
+          var email=$(this).data('email');
+          const textarea=document.createElement('textarea');
+          textarea.textContent=email;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          alert("Copied owner emails to clipboard: " + email);
+        });
         $('.modal').on('hidden.bs.modal', function(){
           $('#addBlockoffModalBody').empty();
           $('#addDogModalBody').empty();

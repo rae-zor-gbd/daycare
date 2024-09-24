@@ -216,6 +216,11 @@ input[type=checkbox]:hover, .input-group:has(input[type=checkbox]) label:hover {
 textarea {
   resize:none;
 }
+td>.button-email::before {
+  padding-left:calc(var(--spacer)/10);
+  position:relative;
+  top:1px;
+}
 td>.vaccine-reminder-notes {
   margin-top:4px;
 }
@@ -241,12 +246,6 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
 .button-complete::before {
   content:var(--icon-circle-check);
 }
-.button-email::before {
-  content:var(--icon-envelope);
-  padding-left:calc(var(--spacer)/10);
-  position:relative;
-  top:1px;
-}
 .button-decrease::before {
   content:var(--icon-arrow-down);
 }
@@ -255,6 +254,9 @@ td>.vaccine-reminder-notes ~.vaccine-reminder-notes {
 }
 .button-dog::before {
   content:var(--icon-dog);
+}
+.button-email::before {
+  content:var(--icon-envelope);
 }
 .button-edit::before {
   content:var(--icon-edit);
@@ -715,6 +717,9 @@ nav {
 }
 .panel-footer button:first-of-type {
   padding-left:0;
+}
+.panel-footer button:last-of-type {
+  padding-left:calc(var(--spacer)/2.5);
 }
 .panel-group .panel-owner, .panel-group .panel-vet {
   border:0;

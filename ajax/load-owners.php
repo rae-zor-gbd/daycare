@@ -53,8 +53,17 @@ if ($result_owners->num_rows>0) {
     <button type='button' class='button-delete' id='delete-owner-button' data-toggle='modal' data-target='#deleteOwnerModal' data-id='$ownerID' data-backdrop='static' title='Delete Owner'></button>
     <button type='button' class='button-edit' id='edit-owner-button' data-toggle='modal' data-target='#editOwnerModal' data-id='$ownerID' data-backdrop='static' title='Edit Owner'></button>
     <button type='button' class='button-dog' id='add-dog-button' data-toggle='modal' data-target='#addDogModal' data-id='$ownerID' data-backdrop='static' title='Add New Dog'></button>
-    <button type='button' class='button-package' id='add-package-button' data-toggle='modal' data-target='#addPackageModal' data-id='$ownerID' data-backdrop='static' title='Add New Package'></button>
-    </div>
+    <button type='button' class='button-package' id='add-package-button' data-toggle='modal' data-target='#addPackageModal' data-id='$ownerID' data-backdrop='static' title='Add New Package'></button>";
+    $sql_emails="SELECT GROUP_CONCAT(email) AS email FROM emails WHERE ownerID='$ownerID'";
+    $result_emails=$conn->query($sql_emails);
+    $row_emails=$result_emails->fetch_assoc();
+    $ownerEmail=mysqli_real_escape_string($conn, $row_emails['email']);
+    if (isset($ownerEmail) AND $ownerEmail!='') {
+      echo "<button type='button' class='button-email' id='owner-email-button' data-email='$ownerEmail' title='Copy All Email Addresses to Clipboard'></button>";
+    } else {
+      echo "<button type='button' class='button-email disabled' title='No Email on File' disabled></button>";
+    }
+    echo "</div>
     </div>
     </div>";
   }
