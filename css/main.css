@@ -710,6 +710,9 @@ nav {
 .panel-collapse>.panel-body>.panel>.panel-body {
   flex:1 1 auto;
 }
+.panel-collapse>.panel-footer button:last-of-type {
+  padding-left:calc(var(--spacer)/2.5);
+}
 .panel-footer {
   background-color:var(--color-08);
   border-bottom-left-radius:6px;
@@ -717,9 +720,6 @@ nav {
 }
 .panel-footer button:first-of-type {
   padding-left:0;
-}
-.panel-footer button:last-of-type {
-  padding-left:calc(var(--spacer)/2.5);
 }
 .panel-group .panel-owner, .panel-group .panel-vet {
   border:0;
