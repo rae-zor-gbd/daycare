@@ -8,6 +8,8 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 
 RewriteRule ^paperwork paperwork.php [NC,L]
 
+RewriteRule ^reminders/([^/]+) reminders.php?date=$1 [L,QSA]
+
 RewriteRule ^reminders reminders.php [NC,L]
 
 RewriteRule ^report-cards report-cards.php [NC,L]

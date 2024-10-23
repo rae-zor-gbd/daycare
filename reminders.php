@@ -1,16 +1,27 @@
-<?php include 'assets/config.php'; ?>
+<?php
+include 'assets/config.php';
+if (isset($_GET['date']) AND $_GET['date']!='') {
+  $followUpDate=date('Y-m-d', strtotime($_GET['date']));
+} else {
+  $followUpDate=date('Y-m-d');
+}
+?>
 <!DOCTYPE html>
 <html lang='en'>
   <head>
     <title>Daycare Reminders</title>
     <?php include 'assets/header.php'; ?>
     <script type='text/javascript'>
-      function loadReminders(){
+      function changeDate(){
+        var goToDate=document.getElementById('goToDate').value;
+        window.open('/reminders/'+goToDate, '_self');
+      }
+      function loadReminders(followUpDate){
         $.ajax({
           url:'/ajax/load-reminders.php',
           type:'POST',
           cache:false,
-          data:{},
+          data:{followUpDate:followUpDate},
           success:function(data){
             if (data) {
               $('#table-reminders').empty();
@@ -21,7 +32,7 @@
       }
       $(document).ready(function(){
         $('#reminders').addClass('active');
-        loadReminders();
+        loadReminders('<?php echo $followUpDate; ?>');
         $(document).on('click', '.button-email', function() {
           var email=$(this).data('email');
           const textarea=document.createElement('textarea');
@@ -36,7 +47,7 @@
           var id=$(this).data('id');
           var owner=$(this).data('owner');
           $.ajax({
-            url:'ajax/load-add-package-notes-form.php',
+            url:'/ajax/load-add-package-notes-form.php',
             type:'POST',
             cache:false,
             data:{id:id, owner:owner},
@@ -52,14 +63,14 @@
           var packageNotes=document.getElementById('addPackageNotesBox').value;
           if (packageID!='' && ownerID!='' && packageNotes!='') {
             $.ajax({
-              url:'ajax/add-package-notes.php',
+              url:'/ajax/add-package-notes.php',
               type:'POST',
               cache:false,
               data:{packageID:packageID, ownerID:ownerID, packageNotes:packageNotes},
               success:function(response){
                 $('#addPackageNotesModal').modal('hide');
                 $('#addPackageNotesModalBody').empty();
-                loadReminders();
+                loadReminders('<?php echo $followUpDate; ?>');
               }
             });
           } else {
@@ -70,7 +81,7 @@
           var id=$(this).data('id');
           var owner=$(this).data('owner');
           $.ajax({
-            url:'ajax/load-add-dog-notes-form.php',
+            url:'/ajax/load-add-dog-notes-form.php',
             type:'POST',
             cache:false,
             data:{id:id, owner:owner},
@@ -86,14 +97,14 @@
           var dogNotes=document.getElementById('addDogNotesBox').value;
           if (dogID!='' && ownerID!='' && dogNotes!='') {
             $.ajax({
-              url:'ajax/add-dog-notes.php',
+              url:'/ajax/add-dog-notes.php',
               type:'POST',
               cache:false,
               data:{dogID:dogID, dogNotes:dogNotes},
               success:function(response){
                 $('#addVaccineNotesModal').modal('hide');
                 $('#addVaccineNotesModalBody').empty();
-                loadReminders();
+                loadReminders('<?php echo $followUpDate; ?>');
               }
             });
           } else {
@@ -110,6 +121,12 @@
   <body>
     <?php include 'assets/navbar.php'; ?>
     <div class='nav-footer'>
+      <form action='' method='post' spellcheck='false' autocomplete='off' id='goToDateForm' onchange='changeDate()'>
+        <div class='input-group'>
+          <span class='input-group-addon calendar-day'>Date</span>
+          <input type='date' class='form-control' name='go-to-date' id='goToDate' min='<?php echo date('Y-m-d', $today); ?>' value='<?php echo $followUpDate; ?>' required>
+        </div>
+      </form>
       <a href='/requests'>
         <button type='button' class='btn btn-default nav-button' id='filter-vet-requests' title='Vet Requests'>Vet Requests</button>
       </a>
