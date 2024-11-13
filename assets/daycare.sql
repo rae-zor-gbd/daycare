@@ -31,7 +31,7 @@ CREATE TABLE packages (
   packageTitle VARCHAR(50) NOT NULL UNIQUE,
   totalDays INT(11) NOT NULL,
   durationDays INT(11) NOT NULL,
-  durationMonths INT(11) NOT NULL,
+  durationMonths FLOAT NOT NULL,
   daysLeftWarning INT(11) NOT NULL,
   expirationWarning INT(11) NOT NULL,
   sortOrder INT(11) NOT NULL DEFAULT '0',
