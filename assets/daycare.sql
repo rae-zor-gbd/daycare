@@ -10,9 +10,6 @@ CREATE TABLE owners (
   lastName VARCHAR(255) NOT NULL,
   primaryOwner VARCHAR(255) NOT NULL,
   secondaryOwner VARCHAR(255) DEFAULT NULL,
-  primaryCell CHAR(12) DEFAULT NULL,
-  secondaryCell CHAR(12) DEFAULT NULL,
-  homePhone CHAR(12) DEFAULT NULL,
   expirationException ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
   lastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (ownerID)

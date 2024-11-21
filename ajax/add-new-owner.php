@@ -1,16 +1,13 @@
 <?php
 include '../assets/config.php';
-if (isset($_POST['lastName']) AND isset($_POST['primaryOwner']) AND isset($_POST['secondaryOwner']) AND isset($_POST['primaryCell']) AND isset($_POST['secondaryCell']) AND isset($_POST['homePhone']) AND isset($_POST['primaryEmail']) AND isset($_POST['secondaryEmail']) AND isset($_POST['tertiaryEmail'])) {
+if (isset($_POST['lastName']) AND isset($_POST['primaryOwner']) AND isset($_POST['secondaryOwner']) AND isset($_POST['primaryEmail']) AND isset($_POST['secondaryEmail']) AND isset($_POST['tertiaryEmail'])) {
   $lastName=mysqli_real_escape_string($conn, trim($_POST['lastName']));
   $primaryOwner=mysqli_real_escape_string($conn, trim($_POST['primaryOwner']));
   $secondaryOwner=mysqli_real_escape_string($conn, trim($_POST['secondaryOwner']));
-  $primaryCell=trim($_POST['primaryCell']);
-  $secondaryCell=trim($_POST['secondaryCell']);
-  $homePhone=trim($_POST['homePhone']);
   $primaryEmail=mysqli_real_escape_string($conn, trim($_POST['primaryEmail']));
   $secondaryEmail=mysqli_real_escape_string($conn, trim($_POST['secondaryEmail']));
   $tertiaryEmail=mysqli_real_escape_string($conn, trim($_POST['tertiaryEmail']));
-  $sql_add_owner="INSERT INTO owners (lastName, primaryOwner, secondaryOwner, primaryCell, secondaryCell, homePhone) VALUES ('$lastName', '$primaryOwner', '$secondaryOwner', '$primaryCell', '$secondaryCell', '$homePhone')";
+  $sql_add_owner="INSERT INTO owners (lastName, primaryOwner, secondaryOwner) VALUES ('$lastName', '$primaryOwner', '$secondaryOwner')";
   $conn->query($sql_add_owner);
   $sql_next_owner_id="SELECT ownerID FROM owners WHERE lastName='$lastName' AND primaryOwner='$primaryOwner' ORDER BY ownerID DESC LIMIT 1";
   $result_next_owner_id=$conn->query($sql_next_owner_id);

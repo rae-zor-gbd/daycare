@@ -127,9 +127,6 @@ if (isset($_GET['date']) AND $_GET['date']!='') {
           <input type='date' class='form-control' name='go-to-date' id='goToDate' min='<?php echo date('Y-m-d', $today); ?>' value='<?php echo $followUpDate; ?>' required>
         </div>
       </form>
-      <a href='/requests'>
-        <button type='button' class='btn btn-default nav-button' id='filter-vet-requests' title='Vet Requests'>Vet Requests</button>
-      </a>
     </div>
     <div class='container-fluid'>
       <div class='table-container'>

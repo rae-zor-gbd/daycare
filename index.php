@@ -204,9 +204,6 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           var lastName=document.getElementById('newLastName').value;
           var primaryOwner=document.getElementById('newPrimaryOwner').value;
           var secondaryOwner=document.getElementById('newSecondaryOwner').value;
-          var primaryCell=document.getElementById('newPrimaryCell').value;
-          var secondaryCell=document.getElementById('newSecondaryCell').value;
-          var homePhone=document.getElementById('newHomePhone').value;
           var primaryEmail=document.getElementById('newPrimaryEmail').value;
           var secondaryEmail=document.getElementById('newSecondaryEmail').value;
           var tertiaryEmail=document.getElementById('newTertiaryEmail').value;
@@ -215,7 +212,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
               url:'ajax/add-new-owner.php',
               type:'POST',
               cache:false,
-              data:{lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryCell:primaryCell, secondaryCell:secondaryCell, homePhone:homePhone, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
+              data:{lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
               success:function(response){
                 $('#panel-owners').empty();
                 loadOwners();
@@ -647,9 +644,6 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           var lastName=document.getElementById('editLastName').value;
           var primaryOwner=document.getElementById('editPrimaryOwner').value;
           var secondaryOwner=document.getElementById('editSecondaryOwner').value;
-          var primaryCell=document.getElementById('editPrimaryCell').value;
-          var secondaryCell=document.getElementById('editSecondaryCell').value;
-          var homePhone=document.getElementById('editHomePhone').value;
           var primaryEmail=document.getElementById('editPrimaryEmail').value;
           var secondaryEmail=document.getElementById('editSecondaryEmail').value;
           var tertiaryEmail=document.getElementById('editTertiaryEmail').value;
@@ -658,7 +652,7 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
               url:'ajax/edit-owner.php',
               type:'POST',
               cache:false,
-              data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryCell:primaryCell, secondaryCell:secondaryCell, homePhone:homePhone, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
+              data:{id:id, lastName:lastName, primaryOwner:primaryOwner, secondaryOwner:secondaryOwner, primaryEmail:primaryEmail, secondaryEmail:secondaryEmail, tertiaryEmail:tertiaryEmail},
               success:function(response){
                 $('#editOwnerModal').modal('hide');
                 $('#editOwnerModalBody').empty();
