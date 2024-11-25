@@ -1,6 +1,6 @@
 <?php
 include 'assets/config.php';
-$sql_registrations_emails="SELECT email FROM dogs d JOIN owners o USING (ownerID) JOIN emails e USING (ownerID) WHERE clientRegistration='Incomplete' AND daycareContract IN ('Complete', 'Exempt') GROUP BY lastName, primaryOwner, email ORDER BY lastName, primaryOwner, email";
+$sql_registrations_emails="SELECT email FROM dogs d JOIN owners o USING (ownerID) JOIN emails e USING (ownerID) WHERE clientRegistration='Incomplete' GROUP BY lastName, primaryOwner, email ORDER BY lastName, primaryOwner, email";
 $result_registrations_emails=$conn->query($sql_registrations_emails);
 if ($result_registrations_emails->num_rows>0) {
   $registrationsEmails=array();
