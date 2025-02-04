@@ -32,6 +32,7 @@ CREATE TABLE packages (
   daysLeftWarning INT(11) NOT NULL,
   expirationWarning INT(11) NOT NULL,
   sortOrder INT(11) NOT NULL DEFAULT '0',
+  activeStatus ENUM('Active', 'Inactive') NOT NULL DEFAULT 'Active',
   PRIMARY KEY (packageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
