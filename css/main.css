@@ -455,7 +455,7 @@ nav {
   padding-right:25px;
 }
 .nav-button {
-  margin-top:calc(var(--spacer)/2);
+  margin-top:calc(var(--spacer)/3);
   width:100%;
 }
 .nav-button::before {
@@ -495,6 +495,9 @@ nav {
 }
 .nav-link#reservations::before {
   content:var(--icon-list-02);
+}
+.nav-links {
+  border-bottom:1.5px solid var(--color-06);
 }
 .nav-links a .nav-link::before {
   color:var(--color-01);
