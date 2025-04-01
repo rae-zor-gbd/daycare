@@ -104,7 +104,6 @@ if (isset($_POST['owner']) AND $_POST['owner']!='') {
     <button type='button' class='button-delete' id='delete-dog-button' data-toggle='modal' data-target='#deleteDogModal' data-id='$dogID' data-backdrop='static' title='Delete Dog'></button>
     <button type='button' class='button-edit' id='edit-dog-button' data-toggle='modal' data-target='#editDogModal' data-id='$dogID' data-owner='$ownerID' data-backdrop='static' title='Edit Dog'></button>
     <button type='button' class='button-notes' id='add-dog-notes-button' data-toggle='modal' data-target='#addDogNotesModal' data-id='$dogID' data-owner='$ownerID' data-backdrop='static' title='Add Note'></button>
-    <a href='/journal/$dogID' target='_blank'><button type='button' class='button-journal' id='enrichment-journal-button' title='Print Enrichment Journal Entry'></button></a>
     <button type='button' class='button-reservation' id='add-dog-reservation-button' data-toggle='modal' data-target='#addReservationModal' data-id='$dogID' data-backdrop='static' title='Add Reservation'></button>
     <button type='button' class='button-blockoff' id='add-dog-blockoff-button' data-toggle='modal' data-target='#addBlockoffModal' data-id='$dogID' data-backdrop='static' title='Add Blockoff'></button>
     </div>

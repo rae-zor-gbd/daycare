@@ -80,7 +80,6 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           var dogName=document.getElementById('addDogName').value;
           var clientRegistration=document.getElementById('addClientRegistration').value;
           var daycareContract=document.getElementById('addDaycareContract').value;
-          var vetID=document.getElementById('addVet').value;
           <?php
           $sql_all_vaccines="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
           $result_all_vaccines=$conn->query($sql_all_vaccines);
@@ -136,12 +135,12 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           } else {
             var thirdDayReportCard='No';
           }
-          if (id!='' && dogName!='' && clientRegistration!='' && daycareContract!='' && vetID!='') {
+          if (id!='' && dogName!='' && clientRegistration!='' && daycareContract!='') {
             $.ajax({
               url:'ajax/add-new-dog.php',
               type:'POST',
               cache:false,
-              data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays, assessmentDayReportCard:assessmentDayReportCard, firstDayReportCard:firstDayReportCard, secondDayReportCard:secondDayReportCard, thirdDayReportCard:thirdDayReportCard},
+              data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract <?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays, assessmentDayReportCard:assessmentDayReportCard, firstDayReportCard:firstDayReportCard, secondDayReportCard:secondDayReportCard, thirdDayReportCard:thirdDayReportCard},
               success:function(response){
                 $('#addDogModal').modal('hide');
                 $('#addDogModalBody').empty();
@@ -553,7 +552,6 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           var dogName=document.getElementById('editDogName').value;
           var clientRegistration=document.getElementById('editClientRegistration').value;
           var daycareContract=document.getElementById('editDaycareContract').value;
-          var vetID=document.getElementById('editVet').value;
           <?php
           $sql_all_vaccines_edit="SELECT vaccineID FROM vaccines ORDER BY vaccineID";
           $result_all_vaccines_edit=$conn->query($sql_all_vaccines_edit);
@@ -609,12 +607,12 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           } else {
             var thirdDayReportCard='No';
           }
-          if (id!='' && owner!='' && dogName!='' && clientRegistration!='' && daycareContract!='' && vetID!='') {
+          if (id!='' && owner!='' && dogName!='' && clientRegistration!='' && daycareContract!='') {
             $.ajax({
               url:'ajax/edit-dog.php',
               type:'POST',
               cache:false,
-              data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract, vetID:vetID<?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays, assessmentDayReportCard:assessmentDayReportCard, firstDayReportCard:firstDayReportCard, secondDayReportCard:secondDayReportCard, thirdDayReportCard:thirdDayReportCard},
+              data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract <?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays, assessmentDayReportCard:assessmentDayReportCard, firstDayReportCard:firstDayReportCard, secondDayReportCard:secondDayReportCard, thirdDayReportCard:thirdDayReportCard},
               success:function(response){
                 $('#editDogModal').modal('hide');
                 $('#editDogModalBody').empty();

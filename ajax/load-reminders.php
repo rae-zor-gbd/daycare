@@ -88,7 +88,7 @@ if (isset($_POST['followUpDate'])) {
         }
         echo "</td>
         <td>";
-        $sql_vaccine_reminders="SELECT dogID, dogName, vaccineTitle, dueDate, vetName FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines vx USING (vaccineID) JOIN vets v USING (vetID) WHERE ownerID='$ownerID' AND requirementStatus='Required' AND dueDate<=DATE_ADD(NOW(), INTERVAL sendReminder+$addDays DAY) ORDER BY dueDate";
+        $sql_vaccine_reminders="SELECT dogID, dogName, vaccineTitle, dueDate FROM dogs d JOIN dogs_vaccines dv USING (dogID) JOIN vaccines vx USING (vaccineID) WHERE ownerID='$ownerID' AND requirementStatus='Required' AND dueDate<=DATE_ADD(NOW(), INTERVAL sendReminder+$addDays DAY) ORDER BY dueDate";
         $result_vaccine_reminders=$conn->query($sql_vaccine_reminders);
         if ($result_vaccine_reminders->num_rows>0) {
           while ($row_vaccine_reminders=$result_vaccine_reminders->fetch_assoc()) {
@@ -96,7 +96,6 @@ if (isset($_POST['followUpDate'])) {
             $dogName=mysqli_real_escape_string($conn, $row_vaccine_reminders['dogName']);
             $vaccineTitle=mysqli_real_escape_string($conn, $row_vaccine_reminders['vaccineTitle']);
             $vaccineDueDate=strtotime($row_vaccine_reminders['dueDate']);
-            $vetName=mysqli_real_escape_string($conn, $row_vaccine_reminders['vetName']);
             echo "<div class='vaccine-reminder'>
             <span class='label label-";
             if ($vaccineDueDate<$today) {

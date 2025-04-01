@@ -20,10 +20,6 @@ RewriteRule ^reservations/([^/]+) reservations.php?date=$1 [L,QSA]
 
 RewriteRule ^reservations reservations.php [NC,L]
 
-RewriteRule ^journal/(.*) journal.php?id=$1 [NC,L]
-
-RewriteRule ^journal journal.php [NC,L]
-
 RewriteCond %{REQUEST_FILENAME} !-f
 
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)(\.gz)?$">

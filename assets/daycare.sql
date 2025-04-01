@@ -62,10 +62,8 @@ CREATE TABLE dogs (
   dogID INT(11) NOT NULL AUTO_INCREMENT,
   dogName VARCHAR(255) NOT NULL,
   ownerID INT(11) NOT NULL,
-  vetID INT(11) NOT NULL,
   clientRegistration ENUM('Incomplete', 'Complete', 'Exempt') NOT NULL DEFAULT 'Incomplete',
   daycareContract ENUM('Incomplete', 'Complete', 'Exempt') NOT NULL DEFAULT 'Incomplete',
-  journalEntry ENUM('Yes', 'No') NOT NULL DEFAULT 'Yes',
   reserveMondays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
   reserveTuesdays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
   reserveWednesdays ENUM('Yes', 'No') NOT NULL DEFAULT 'No',
@@ -78,8 +76,7 @@ CREATE TABLE dogs (
   notes TEXT DEFAULT NULL,
   lastUpdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (dogID),
-  FOREIGN KEY (ownerID) REFERENCES owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (vetID) REFERENCES vets(vetID) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (ownerID) REFERENCES owners(ownerID) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE vaccines (
