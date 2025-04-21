@@ -33,7 +33,7 @@ if (isset($_POST['reservationDate'])) {
     </a>";
     echo date('l, F j, Y', strtotime($reservationDate));
     echo " <span class='text-muted'>(<span id='reservation-count'>0</span>)</span>
-    <a href='/reservations/$nextDate'>
+    <a href='/reservations/$nextDate?filter=$reservationFilter'>
     <button class='next-button' title='Next Date'></button>
     </a>
     </th>
