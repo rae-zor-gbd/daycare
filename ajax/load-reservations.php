@@ -28,7 +28,7 @@ if (isset($_POST['reservationDate'])) {
     <thead>
     <tr>
     <th colspan='3'>
-    <a href='/reservations/$previousDate'>
+    <a href='/reservations/$previousDate?filter=$reservationFilter'>
     <button class='previous-button' title='Previous Date'></button>
     </a>";
     echo date('l, F j, Y', strtotime($reservationDate));
