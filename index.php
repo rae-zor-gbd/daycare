@@ -115,32 +115,12 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           } else {
             var reserveFridays='No';
           }
-          if (document.getElementById('addAssessmentDayReportCard').checked==true) {
-            var assessmentDayReportCard='Yes';
-          } else {
-            var assessmentDayReportCard='No';
-          }
-          if (document.getElementById('addFirstDayReportCard').checked==true) {
-            var firstDayReportCard='Yes';
-          } else {
-            var firstDayReportCard='No';
-          }
-          if (document.getElementById('addSecondDayReportCard').checked==true) {
-            var secondDayReportCard='Yes';
-          } else {
-            var secondDayReportCard='No';
-          }
-          if (document.getElementById('addThirdDayReportCard').checked==true) {
-            var thirdDayReportCard='Yes';
-          } else {
-            var thirdDayReportCard='No';
-          }
           if (id!='' && dogName!='' && clientRegistration!='' && daycareContract!='') {
             $.ajax({
               url:'ajax/add-new-dog.php',
               type:'POST',
               cache:false,
-              data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract <?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays, assessmentDayReportCard:assessmentDayReportCard, firstDayReportCard:firstDayReportCard, secondDayReportCard:secondDayReportCard, thirdDayReportCard:thirdDayReportCard},
+              data:{id:id, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract <?php foreach ($vaccines as $vaccineDate) { echo ", $vaccineDate:$vaccineDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays},
               success:function(response){
                 $('#addDogModal').modal('hide');
                 $('#addDogModalBody').empty();
@@ -587,32 +567,12 @@ if (isset($_GET['search']) AND $_GET['search']!=='') {
           } else {
             var reserveFridays='No';
           }
-          if (document.getElementById('editAssessmentDayReportCard').checked==true) {
-            var assessmentDayReportCard='Yes';
-          } else {
-            var assessmentDayReportCard='No';
-          }
-          if (document.getElementById('editFirstDayReportCard').checked==true) {
-            var firstDayReportCard='Yes';
-          } else {
-            var firstDayReportCard='No';
-          }
-          if (document.getElementById('editSecondDayReportCard').checked==true) {
-            var secondDayReportCard='Yes';
-          } else {
-            var secondDayReportCard='No';
-          }
-          if (document.getElementById('editThirdDayReportCard').checked==true) {
-            var thirdDayReportCard='Yes';
-          } else {
-            var thirdDayReportCard='No';
-          }
           if (id!='' && owner!='' && dogName!='' && clientRegistration!='' && daycareContract!='') {
             $.ajax({
               url:'ajax/edit-dog.php',
               type:'POST',
               cache:false,
-              data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract <?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays, assessmentDayReportCard:assessmentDayReportCard, firstDayReportCard:firstDayReportCard, secondDayReportCard:secondDayReportCard, thirdDayReportCard:thirdDayReportCard},
+              data:{id:id, owner:owner, dogName:dogName, clientRegistration:clientRegistration, daycareContract:daycareContract <?php foreach ($vaccines_edit as $vaccineEditDate) { echo ", $vaccineEditDate:$vaccineEditDate"; }?>, reserveMondays:reserveMondays, reserveTuesdays:reserveTuesdays, reserveWednesdays:reserveWednesdays, reserveThursdays:reserveThursdays, reserveFridays:reserveFridays},
               success:function(response){
                 $('#editDogModal').modal('hide');
                 $('#editDogModalBody').empty();

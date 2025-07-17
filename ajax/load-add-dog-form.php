@@ -74,36 +74,5 @@ if (isset($_POST['id'])) {
     <input type='date' class='form-control' name='vaccine$vaccineID' id='addVaccine$vaccineID' max='$maxDueDate'>
     </div>";
   }
-  echo "<div class='input-group'>
-  <span class='input-group-addon report-card'>Report Cards</span>
-  <div class='report-cards'>
-  <div class='row'>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='addAssessmentDayReportCard' name='assessmentDayReportCard' value='Yes'>
-  <label for='addAssessmentDayReportCard'>Assessment Day</label>
-  </div>
-  </div>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='addFirstDayReportCard' name='firstDayReportCard' value='Yes'>
-  <label for='addFirstDayReportCard'>First Day</label>
-  </div>
-  </div>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='addSecondDayReportCard' name='secondDayReportCard' value='Yes'>
-  <label for='addSecondDayReportCard'>Second Day</label>
-  </div>
-  </div>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='addThirdDayReportCard' name='thirdDayReportCard' value='Yes'>
-  <label for='addThirdDayReportCard'>Third Day</label>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>";
 }
 ?>

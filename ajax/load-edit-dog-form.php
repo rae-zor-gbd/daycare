@@ -3,7 +3,7 @@ include '../assets/config.php';
 if (isset($_POST['id']) AND isset($_POST['owner'])) {
   $id=$_POST['id'];
   $owner=$_POST['owner'];
-  $sql_dog_info="SELECT dogName, clientRegistration, daycareContract, reserveMondays, reserveTuesdays, reserveWednesdays, reserveThursdays, reserveFridays, assessmentDayReportCard, firstDayReportCard, secondDayReportCard, thirdDayReportCard FROM dogs WHERE dogID='$id'";
+  $sql_dog_info="SELECT dogName, clientRegistration, daycareContract, reserveMondays, reserveTuesdays, reserveWednesdays, reserveThursdays, reserveFridays FROM dogs WHERE dogID='$id'";
   $result_dog_info=$conn->query($sql_dog_info);
   $row_dog_info=$result_dog_info->fetch_assoc();
   $editDogName=htmlspecialchars($row_dog_info['dogName'], ENT_QUOTES);
@@ -14,10 +14,6 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
   $editWednesdays=$row_dog_info['reserveWednesdays'];
   $editThursdays=$row_dog_info['reserveThursdays'];
   $editFridays=$row_dog_info['reserveFridays'];
-  $editAssessmentDayReportCard=$row_dog_info['assessmentDayReportCard'];
-  $editFirstDayReportCard=$row_dog_info['firstDayReportCard'];
-  $editSecondDayReportCard=$row_dog_info['secondDayReportCard'];
-  $editThirdDayReportCard=$row_dog_info['thirdDayReportCard'];
   echo "<input type='hidden' class='form-control' name='id' id='editDogID' value='$id' required>
   <input type='hidden' class='form-control' name='editDogForOwnerID' id='editDogForOwnerID' value='$owner' required>
   <div class='input-group'>
@@ -148,52 +144,5 @@ if (isset($_POST['id']) AND isset($_POST['owner'])) {
     </div>
     ";
   }
-  echo "<div class='input-group'>
-  <span class='input-group-addon report-card'>Report Cards</span>
-  <div class='report-cards'>
-  <div class='row'>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='editAssessmentDayReportCard' name='editAssessmentDayReportCard' value='Yes'";
-  if ($editAssessmentDayReportCard=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editAssessmentDayReportCard'>Assessment Day</label>
-  </div>
-  </div>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='editFirstDayReportCard' name='editFirstDayReportCard' value='Yes'";
-  if ($editFirstDayReportCard=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editFirstDayReportCard'>First Day</label>
-  </div>
-  </div>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='editSecondDayReportCard' name='editSecondDayReportCard' value='Yes'";
-  if ($editSecondDayReportCard=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editSecondDayReportCard'>Second Day</label>
-  </div>
-  </div>
-  <div class='col-sm-6'>
-  <div class='input-group'>
-  <input type='checkbox' id='editThirdDayReportCard' name='editThirdDayReportCard' value='Yes'";
-  if ($editThirdDayReportCard=='Yes') {
-    echo " checked";
-  }
-  echo ">
-  <label for='editThirdDayReportCard'>Third Day</label>
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>";
 }
 ?>

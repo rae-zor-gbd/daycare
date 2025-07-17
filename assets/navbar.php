@@ -53,9 +53,6 @@
       <a href='/paperwork'>
         <div class='nav-link' id='paperwork'>Paperwork</div>
       </a>
-      <a href='/report-cards'>
-        <div class='nav-link' id='report-cards'>Report Cards</div>
-      </a>
     </div>
   </div>
 </nav>
